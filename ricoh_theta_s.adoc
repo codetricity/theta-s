@@ -1,4 +1,6 @@
 = Unofficial Guide to Hacking RICOH THETA S API
+:icons: font
+:toc:
 Craig Oda
 
 == Unofficial and Unauthorized
