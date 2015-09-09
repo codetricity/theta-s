@@ -83,4 +83,7 @@ link:https://developers.theta360.com/en/docs/v2/api_reference/[API Reference on 
 site.
 
 include::take_picture.adoc[]
+
+include::google.adoc[]
+
 include::resources.adoc[]

@@ -15,8 +15,8 @@ IMPORTANT: The THETA S requires a new app.  The older app will not work.
 
 ==== Third-Party Recommended Viewers
 * https://play.google.com/store/apps/details?id=jp.co.taosoftware.android.sphericalviewer&hl=en[Tao360] for Android
-* KIRORU 360 for iOS (not tested)
+* https://itunes.apple.com/us/app/kiroru-360/id954157416?mt=8[KIRORU 360 for iOS (not tested)]
 
-=== Sites
-* https://www.google.com/intl/en_us/maps/streetview/[Google Street View]
-* https://www.youtube.com/channel/UCzuqhhs6NWbgTzMuM09WKDQ[#360Video on YouTube]
+
+=== YouTube 360 degree Videos
+* https://www.youtube.com/360[#360Video on YouTube]
