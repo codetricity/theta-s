@@ -14,7 +14,8 @@ Modify the code in the previous example to allow running as a library.
       main()
 
 The previous code is called `thetaPythonTest.py` and is in the same directory
-as my new program.
+as my new program.  The full program has two graphics purely for decoration.
+You don't need those portions and can ignore them.
 
 === Full Program
   import pygame, sys
