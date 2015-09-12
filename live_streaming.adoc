@@ -29,3 +29,33 @@ image::img/video/usb_live_streaming.png[role="thumb" title="Live video streaming
 
 [[img-hdmi_live_streaming]]
 image::img/video/hdmi_live_streaming.jpg[role="thumb" title="Live video streaming from RICOH THETA S to a TV with HDMI"]
+
+=== API Testing
+
+`POST` to `http://192.168.1.1/osc/commands/execute`
+
+  {"name": "camera.getOptions",
+      "parameters":
+  	{
+      	"sessionId": "SID_0003",
+      	"optionNames": [
+              "captureMode"
+      	]
+  	}
+  }
+
+NOTE: Remember to set your sessionId correctly
+
+The response:
+
+  {
+    "name": "camera.getOptions",
+    "state": "done",
+    "results":{
+      "options":{
+        "iso": 0,
+        "isoSupport":[],
+        "captureMode": "_liveStreaming"
+        }
+      }
+  }
