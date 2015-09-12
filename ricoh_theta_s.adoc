@@ -88,6 +88,8 @@ include::python_tests.adoc[]
 
 include::python_desktop.adoc[]
 
+include::live_streaming.adoc[]
+
 include::google.adoc[]
 
 include::resources.adoc[]
