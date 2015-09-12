@@ -373,6 +373,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_test_commands_from_computer_to_camera">Test Commands From Computer to Camera</a></li>
 <li><a href="#_taking_pictures">Taking Pictures</a></li>
 <li><a href="#_testing_theta_s_api_with_python">Testing THETA S API with Python</a></li>
+<li><a href="#_python_desktop_application_example">Python Desktop Application Example</a></li>
+<li>
+<ul class="sectlevel2">
+<li><a href="#_full_program">Full Program</a></li>
+<li><a href="#_code_walkthrough">Code Walkthrough</a></li>
+</ul>
+</li>
 <li><a href="#_google_maps_street_view_constellations_photos">Google Maps, Street View, Constellations, Photos</a></li>
 <li>
 <ul class="sectlevel2">
@@ -831,6 +838,199 @@ takePicture - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_python_desktop_application_example">Python Desktop Application Example</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="img/desktop/desktop_app.png" alt="desktop app">
+</div>
+</div>
+<div class="paragraph">
+<p>This example uses the same Python code from the previous command line
+example and runs it from a GUI.  The example uses <a href="http://www.pygame.org/download.shtml">Pygame</a>
+due to the ease with which a GUI can be built. The application can
+also be <a href="https://github.com/renpytom/rapt-pygame-example">modified to run on Android phones</a>.
+The source code is available on <a href="https://github.com/codetricity/theta-s-api-tests">GitHub</a>.</p>
+</div>
+<div class="paragraph">
+<p>Modify the code in the previous example to allow running as a library.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if __name__ == '__main__':
+    main()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous code is called <code>thetaPythonTest.py</code> and is in the same directly
+as my new program.</p>
+</div>
+<div class="sect2">
+<h3 id="_full_program">Full Program</h3>
+<div class="literalblock">
+<div class="content">
+<pre>import pygame, sys
+import requests
+import json
+from thetaPythonTest import startSession, takePicture</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>WHITE = (255,255,255)
+GRAY = (230, 230, 230)
+GREEN = (100, 200, 50)
+DARK = (64, 64, 64)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pygame.init()
+SCREENSIZE = (800, 600)
+SCREEN = pygame.display.set_mode(SCREENSIZE)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>button = pygame.Rect(100, 120, 140, 80)
+font = pygame.font.Font("fnt/Lato-Thin.ttf", 20)
+button_text = font.render("Take Picture", True, DARK)
+text_box = (button.left + 15, button.top + 23)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>theta = pygame.image.load("img/ricoh-theta-s.png")
+theta_rect = theta.get_rect()
+theta_rect.right = SCREENSIZE[0] - 50
+theta_rect.top = 60</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>developers_logo = pygame.image.load("img/theta_developers.png")</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+            if button.collidepoint(mouse_pos):
+                sid = startSession()
+                takePicture(sid)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>SCREEN.fill(WHITE)
+pygame.draw.rect(SCREEN,GRAY, button)
+pygame.draw.rect(SCREEN, DARK, button, 1)
+SCREEN.blit(button_text, text_box)
+SCREEN.blit(theta, theta_rect)
+SCREEN.blit(developers_logo, (10, 10))</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pygame.display.update()</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_code_walkthrough">Code Walkthrough</h3>
+<div class="paragraph">
+<p>Import the <code>pygame</code> and <code>sys</code> libraries and set up a blank window.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>import pygame, sys</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>pygame.init()
+SCREENSIZE = (800, 600)
+SCREEN = pygame.display.set_mode(SCREENSIZE)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    pygame.display.update()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Load your fonts and colors above the main <code>while</code> loop.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>WHITE = (255,255,255)
+GRAY = (230, 230, 230)
+GREEN = (100, 200, 50)
+DARK = (64, 64, 64)
+font = pygame.font.Font("fnt/Lato-Thin.ttf", 20)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Build the button to press to take a picture.  This code also goes above
+the main <code>while</code> loop.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>button = pygame.Rect(100, 120, 140, 80)
+button_text = font.render("Take Picture", True, DARK)
+text_box = (button.left + 15, button.top + 23)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Import your previous functions, close to the top of your program.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>from thetaPythonTest import startSession, takePicture</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Draw the button inside of the main <code>while</code> loop above the <code>display.update</code>
+statement.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>SCREEN.fill(WHITE)
+pygame.draw.rect(SCREEN,GRAY, button)
+pygame.draw.rect(SCREEN, DARK, button, 1)
+SCREEN.blit(button_text, text_box)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the event queue loop, check for a button press. If there is a button
+press, then start a new camera session and take the picture. The button press is
+detected by first checking for an event <code>MOUSEBUTTONDOWN</code>.  If the mouse or
+touchscreen is down, then get the position of the mouse or finger. If the
+point of the mouse is inside of the button, then take the picture.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if event.type == pygame.MOUSEBUTTONDOWN:
+    mouse_pos = pygame.mouse.get_pos()
+    if button.collidepoint(mouse_pos):
+        sid = startSession()
+        takePicture(sid)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_google_maps_street_view_constellations_photos">Google Maps, Street View, Constellations, Photos</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -971,7 +1171,7 @@ to inject 360 Video Metadata into the video
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-11 17:35:39 PDT
+Last updated 2015-09-11 21:10:21 PDT
 </div>
 </div>
 </body>
