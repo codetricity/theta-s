@@ -372,6 +372,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_connect_computer_to_theta_s">Connect Computer to THETA S</a></li>
 <li><a href="#_test_commands_from_computer_to_camera">Test Commands From Computer to Camera</a></li>
 <li><a href="#_taking_pictures">Taking Pictures</a></li>
+<li><a href="#_testing_theta_s_api_with_python">Testing THETA S API with Python</a></li>
 <li><a href="#_google_maps_street_view_constellations_photos">Google Maps, Street View, Constellations, Photos</a></li>
 <li>
 <ul class="sectlevel2">
@@ -617,6 +618,219 @@ time.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_testing_theta_s_api_with_python">Testing THETA S API with Python</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/codetricity/theta-s-api-tests">Sample code</a>
+is available on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>I am using the Python <a href="http://docs.python-requests.org/en/latest/"><code>requests</code></a>
+library for <code>HTTP</code> requests.  While you can use
+<a href="https://docs.python.org/2/howto/urllib2.html"><code>urllib2</code></a>,
+<code>requests</code> is easier for mere mortals.  Although I&#8217;m doing the testing
+on Windows 10, I am running the python scripts in a VirtualBox VM with default
+<code>NAT</code> network settings. The Python program is able to connect from the VM through
+the Windows 10 WiFi adapter and to the THETA S. I&#8217;m assuming that Python
+will work fine on Windows 10, but it&#8217;s easier for me to use Linux.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>import requests, json, pprint</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def request(url_request):
+    url_base = "http://192.168.1.1/osc/"
+    url = url_base + url_request
+    return url</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def basic_info():
+    protocols = [
+        "state",
+        "info"
+    ]
+    for protocol in protocols:
+        print(60 * "=")
+        print(protocol + " - Testing RICOH THETA API v2\n")
+        url = request(protocol)
+        if protocol == "info":
+            req = requests.get(url)
+        else:
+            req = requests.post(url)
+        pprint.pprint(req.json())</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def main():
+  basic_info()</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>main()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is what I get:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ricoh@odapolis:~/Development/viewer$ python theta-python-test.py
+============================================================
+state - Testing RICOH THETA API v2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{u'fingerprint': u'FIG_0002',
+ u'state': {u'_batteryState': u'disconnect',
+            u'_captureStatus': u'idle',
+            u'_latestFileUri': u'',
+            u'_recordableTime': 0,
+            u'_recordedTime': 0,
+            u'batteryLevel': 0.67,
+            u'sessionId': u'SID_0028',
+            u'storageChanged': False}}
+============================================================
+info - Testing RICOH THETA API v2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{u'api': [u'/osc/info',
+          u'/osc/state',
+          u'/osc/checkForUpdates',
+          u'/osc/commands/execute',
+          u'/osc/commands/status'],
+ u'endpoints': {u'httpPort': 80, u'httpUpdatesPort': 80},
+ u'firmwareVersion': u'01.11',
+ u'gps': False,
+ u'gyro': False,
+ u'manufacturer': u'RICOH',
+ u'model': u'RICOH THETA S',
+ u'serialNumber': u'00001221',
+ u'supportUrl': u'https://theta360.com/en/support/',
+ u'uptime': 3081}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we want to take a picture. We&#8217;ll take a still image in this example,
+but it&#8217;s almost as easy to start a video capture and end it. Unfortunately,
+as of September 11, 2015, I have not been able to get the video streaming
+option to work.  I believe video streaming using a HDMI or
+USB cable will be implemented in a future firmware upgrade.</p>
+</div>
+<div class="paragraph">
+<p>First you need to start a session and
+grab the session ID (SID).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def startSession():
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.startSession",
+         "parameters": {}
+         })
+    req = requests.post(url, data=body)
+    response = req.json()
+    print(60 * "=")
+    print("startSession - Testing RICOH THETA API v2\n")
+    pprint.pprint(response)
+    sid = (response["results"]["sessionId"])
+    print sid
+    return sid</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point I still think it&#8217;s cool, to output the response to the console.
+Also, it will give you a better idea of how to pull the <code>sessionId</code> or
+<code>timeout</code> values into your program.  In the example above, I grab
+the response from the request.  I then get the <code>results</code> key from the
+dictionary.  The <code>results</code> value is another dictionary.  I use the
+key <code>sessionId</code> to grab the value I need to take a picture.</p>
+</div>
+<div class="paragraph">
+<p>My <code>main()</code> function now looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def main():
+    basic_info()
+    sid = startSession() #grab session ID</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of to the console looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>startSession - Testing RICOH THETA API v2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{u'name': u'camera.startSession',
+ u'results': {u'sessionId': u'SID_0029', u'timeout': 180},
+ u'state': u'done'}
+SID_0029</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, it&#8217;s the exciting part.  We can take the picture!</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def takePicture(sid):
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.takePicture",
+         "parameters": {
+            "sessionId": sid
+         }
+         })
+    req = requests.post(url, data=body)
+    response = req.json()
+    print(60 * "=")
+    print("takePicture - Testing RICOH THETA API v2\n")
+    pprint.pprint(response)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the function to <code>main()</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def main():
+    basic_info()
+    sid = startSession() #grab session ID
+    takePicture(sid) #still image</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run it and celebrate!</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>============================================================
+takePicture - Testing RICOH THETA API v2</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{u'id': u'1',
+ u'name': u'camera.takePicture',
+ u'progress': {u'completion': 0.0},
+ u'state': u'inProgress'}</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_google_maps_street_view_constellations_photos">Google Maps, Street View, Constellations, Photos</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -733,7 +947,23 @@ The THETA S requires a new app.  The older app will not work.
 <li>
 <p><a href="https://www.youtube.com/360">#360Video on YouTube</a></p>
 </li>
+<li>
+<p><a href="https://support.google.com/youtube/answer/6178631?hl=en">Upload 360 degree videos to YouTube</a></p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+I needed to use a <a href="https://github.com/google/spatial-media/tree/master/360-Videos-Metadata">tool</a>
+to inject 360 Video Metadata into the video
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -741,7 +971,7 @@ The THETA S requires a new app.  The older app will not work.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-09 09:09:33 PDT
+Last updated 2015-09-11 17:35:39 PDT
 </div>
 </div>
 </body>

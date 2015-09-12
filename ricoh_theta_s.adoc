@@ -84,6 +84,8 @@ site.
 
 include::take_picture.adoc[]
 
+include::python_tests.adoc[]
+
 include::google.adoc[]
 
 include::resources.adoc[]
