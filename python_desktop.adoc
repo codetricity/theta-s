@@ -13,7 +13,7 @@ Modify the code in the previous example to allow running as a library.
   if __name__ == '__main__':
       main()
 
-The previous code is called `thetaPythonTest.py` and is in the same directly
+The previous code is called `thetaPythonTest.py` and is in the same directory
 as my new program.
 
 === Full Program
