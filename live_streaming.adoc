@@ -6,7 +6,6 @@ In the future,
 RICOH will provide real-time stitching software as an
 USB driver for laptops and also API.
 
-
 image::img/video/thetas_livestreaming.jpg[role="thumb" title="Set Live streaming video mode on RICOH THETA S"]
 
 
