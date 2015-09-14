@@ -380,6 +380,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_code_walkthrough">Code Walkthrough</a></li>
 </ul>
 </li>
+<li><a href="#_kivy_example">Kivy Example</a></li>
+<li>
+<ul class="sectlevel2">
+<li><a href="#_full_program_listing_of_code_main_py_code">Full program listing of <code>main.py</code></a></li>
+<li><a href="#__code_ping_kv_code_full_listing"><code>ping.kv</code> Full Listing</a></li>
+</ul>
+</li>
 <li><a href="#_live_streaming">Live Streaming</a></li>
 <li>
 <ul class="sectlevel2">
@@ -1037,6 +1044,118 @@ point of the mouse is inside of the button, then take the picture.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_kivy_example">Kivy Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://kivy.org/#home">Kivy</a> is a popular Python library similar to Pygame.
+It has support for Linux, Windows, OS X, Android and iOS.  The biggest
+advantage over Pygame is multitouch support. The buttons and other widgets
+also look nicer. Though, in this example, I haven&#8217;t used those nice
+features.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/kivy/theta_kivy_example.png" alt="theta kivy example">
+</div>
+</div>
+<div class="paragraph">
+<p>Kivy using both a Python file as well as a Kivy design language file.
+Syntax highlighting and auto-completion work with both the Python libraries
+and the Kivy design language using the information
+<a href="https://github.com/kivy/kivy/wiki/Setting-Up-Kivy-with-various-popular-IDE&#8217;s">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>On Linux, I followed these instructions to get syntax and auto-completion
+to work with PyCharm.</p>
+</div>
+<div class="paragraph">
+<p>To install:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Download this file <a href="https://github.com/Zen-CODE/kivybits/blob/master/IDE/PyCharm_kv_completion.jar?raw=true">https://github.com/Zen-CODE/kivybits/blob/master/IDE/PyCharm_kv_completion.jar?raw=true</a></p>
+</li>
+<li>
+<p>On PyCharm’s main menu, click "File"&#8594; "Import" (or Import Settings)</p>
+</li>
+<li>
+<p>Select this file and PyCharm will present a dialog with filetypes ticked. Click OK.</p>
+</li>
+<li>
+<p>You are done. Restart PyCharm.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is a minimal example, using the same command line program used in the
+previous example with Pygame.</p>
+</div>
+<div class="sect2">
+<h3 id="_full_program_listing_of_code_main_py_code">Full program listing of <code>main.py</code></h3>
+<div class="literalblock">
+<div class="content">
+<pre>from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from thetaPythonTest import startSession, takePicture</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>class takePictureBtn(Button):
+    def on_press(self):
+        print("Take Picture button pressed")
+        sid = startSession()
+        takePicture(sid)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>class Ping(Widget):
+     pass</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>class PingApp(App):
+    def build(self):
+        return Ping()</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>PingApp().run()</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__code_ping_kv_code_full_listing"><code>ping.kv</code> Full Listing</h3>
+<div class="literalblock">
+<div class="content">
+<pre>#:kivy 1.9</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;Ping&gt;:
+    Label:
+        font_size: 30
+        text: "RICOH THETA S API v2 \nPython Example with Kivy"
+        pos: 200, root.top - 100</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>takePictureBtn:
+    text: "Take Picture"
+    pos: 150, root.top - 250</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_live_streaming">Live Streaming</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1288,7 +1407,7 @@ to inject 360 Video Metadata into the video
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-12 09:41:22 PDT
+Last updated 2015-09-13 19:34:20 PDT
 </div>
 </div>
 </body>
