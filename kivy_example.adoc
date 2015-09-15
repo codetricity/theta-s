@@ -8,7 +8,7 @@ features.
 
 image::img/kivy/theta_kivy_example.png[]
 
-Kivy using both a Python file as well as a Kivy design language file.
+Kivy uses both a Python file as well as a Kivy design language file.
 Syntax highlighting and auto-completion work with both the Python libraries
 and the Kivy design language using the information
 https://github.com/kivy/kivy/wiki/Setting-Up-Kivy-with-various-popular-IDE's[here].

@@ -387,6 +387,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#__code_ping_kv_code_full_listing"><code>ping.kv</code> Full Listing</a></li>
 </ul>
 </li>
+<li><a href="#_transferring_files_from_the_theta">Transferring Files from the THETA</a></li>
 <li><a href="#_live_streaming">Live Streaming</a></li>
 <li>
 <ul class="sectlevel2">
@@ -1059,7 +1060,7 @@ features.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Kivy using both a Python file as well as a Kivy design language file.
+<p>Kivy uses both a Python file as well as a Kivy design language file.
 Syntax highlighting and auto-completion work with both the Python libraries
 and the Kivy design language using the information
 <a href="https://github.com/kivy/kivy/wiki/Setting-Up-Kivy-with-various-popular-IDE&#8217;s">here</a>.</p>
@@ -1151,6 +1152,46 @@ from thetaPythonTest import startSession, takePicture</pre>
     text: "Take Picture"
     pos: 150, root.top - 250</pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transferring_files_from_the_theta">Transferring Files from the THETA</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s an example of getting the file from the camera to a computer
+or Android phone.  There&#8217;s easier ways to get the file from the camera,
+but this method works with the <code>requests</code> library.</p>
+</div>
+<div class="paragraph">
+<p>There are two functions.  The first one grabs the latest file URI from the
+camera.  The second function transfers the file over and saves it to
+<code>output.jpg</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def latestFileUri():
+    state_data = state()["state"]
+    latestFileUri = state_data["_latestFileUri"]
+    return latestFileUri</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def getImage(fileUri):
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.getImage",
+         "parameters": {
+            "fileUri": fileUri,
+#            "_type": "thumb"
+            "_type": "image"
+         }
+         })
+    with open('output.jpg', 'wb') as handle:
+        response = requests.post(url, data=body, stream=True)
+        for block in response.iter_content(1024):
+            handle.write(block)</pre>
 </div>
 </div>
 </div>
@@ -1407,7 +1448,7 @@ to inject 360 Video Metadata into the video
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-13 19:34:20 PDT
+Last updated 2015-09-15 00:12:25 PDT
 </div>
 </div>
 </body>

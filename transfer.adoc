@@ -1,0 +1,28 @@
+== Transferring Files from the THETA
+
+Here's an example of getting the file from the camera to a computer
+or Android phone.  There's easier ways to get the file from the camera,
+but this method works with the `requests` library.
+
+There are two functions.  The first one grabs the latest file URI from the
+camera.  The second function transfers the file over and saves it to
+`output.jpg`
+
+  def latestFileUri():
+      state_data = state()["state"]
+      latestFileUri = state_data["_latestFileUri"]
+      return latestFileUri
+
+  def getImage(fileUri):
+      url = request("commands/execute")
+      body = json.dumps({"name": "camera.getImage",
+           "parameters": {
+              "fileUri": fileUri,
+  #            "_type": "thumb"
+              "_type": "image"
+           }
+           })
+      with open('output.jpg', 'wb') as handle:
+          response = requests.post(url, data=body, stream=True)
+          for block in response.iter_content(1024):
+              handle.write(block)
