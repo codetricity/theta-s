@@ -1165,9 +1165,37 @@ or Android phone.  There&#8217;s easier ways to get the file from the camera,
 but this method works with the <code>requests</code> library.</p>
 </div>
 <div class="paragraph">
-<p>There are two functions.  The first one grabs the latest file URI from the
-camera.  The second function transfers the file over and saves it to
+<p>There are two main parts. First grab the latest file URI from the
+camera.  The second part is to transfer the file over and save it to
 <code>output.jpg</code></p>
+</div>
+<div class="paragraph">
+<p>Set up the URL base.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def request(url_request):
+    url_base = "http://192.168.1.1/osc/"
+    url = url_base + url_request
+    return url</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Grab the state information from the camera.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def state():
+    url = request("state")
+    req = requests.post(url)
+    response = req.json()
+    return response</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assuming that you&#8217;ve just taken a picture, the camera will have the
+attribute <code>_latestFileUri</code>.  If you haven&#8217;t taken a picture in
+the session, take a picture now for this test.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1176,6 +1204,10 @@ camera.  The second function transfers the file over and saves it to
     latestFileUri = state_data["_latestFileUri"]
     return latestFileUri</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Once you know the URI, you can grab the file and write it to
+your local storage.</p>
 </div>
 <div class="literalblock">
 <div class="content">
