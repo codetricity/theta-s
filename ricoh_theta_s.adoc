@@ -113,6 +113,8 @@ include::transfer.adoc[]
 
 include::live_streaming.adoc[]
 
+include::video_conversion.adoc[]
+
 include::google.adoc[]
 
 include::resources.adoc[]
