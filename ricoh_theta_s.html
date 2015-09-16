@@ -412,6 +412,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_youtube_360_degree_videos">YouTube 360 degree Videos</a></li>
 </ul>
 </li>
+<li><a href="#_before_you_hack">Before You Hack</a></li>
 </ul>
 </div>
 </div>
@@ -1477,10 +1478,70 @@ to inject 360 Video Metadata into the video
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_before_you_hack">Before You Hack</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The camera should be plugged into a 1,500 mA power source.  I don&#8217;t think
+it will charge from your laptop USB cable.  At least that was my experience.
+If you have it plugged into your laptop, the WiFi, and thus the API access,
+most likely won&#8217;t work.  I have used it plugged into a wall charger with the
+WiFi working.</p>
+</li>
+<li>
+<p>The THETA can connect to only one device at a time.  It can connect
+to a phone or a computer, but not at the same time.  You can connect to
+the THETA, but your team mate will not be able to connect to it at the same time.</p>
+</li>
+<li>
+<p>There are multiple THETAs at the hackathon with similar SSID access point
+serial numbers. Make sure you connect to the right THETA.  The access point
+is the serial number.</p>
+</li>
+<li>
+<p>By default, the WiFi password for the THETA S models at the hackathon
+is the last eight digits of the serial number.</p>
+</li>
+<li>
+<p>You can&#8217;t change <code>captureMode</code> option to <code>_liveStreaming</code> with the API.
+At least, no one has gotten it to work this way.  Live streaming
+does work manually.  You can change capture mode to <code>image</code> or <code>_video</code> with
+no problem.  The lack of <code>_liveStreaming</code> switching with the API is not obvious
+from reading the API documentation.</p>
+</li>
+<li>
+<p>Live streaming is only in dual fish-eye mode.  It can&#8217;t be switched to
+output equirectangular video. If you need this, you will need to write your
+own code to stitch it. (as of Sept 15, 2015)</p>
+</li>
+<li>
+<p>Live streaming won&#8217;t work over WiFi.</p>
+</li>
+<li>
+<p>We don&#8217;t have example code to de-fish the spherical image. Sorry, we ran
+out of time.  :-(</p>
+</li>
+<li>
+<p>The WiFi signal is not strong.  Test the distance and signal strength before
+you build your app.  I suggest you test a file download at different distances
+so you can get a sense for how the distance affects transfer speeds.</p>
+</li>
+<li>
+<p>If you are using Google Maps APIs and want the end-user to use Streetview
+to upload images, note that Streetview is a new app for
+Android.  I think it needs Android KitKat or higher to work.
+I have not tested it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-15 00:12:25 PDT
+Last updated 2015-09-15 19:00:44 PDT
 </div>
 </div>
 </body>

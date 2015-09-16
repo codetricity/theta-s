@@ -97,3 +97,5 @@ include::live_streaming.adoc[]
 include::google.adoc[]
 
 include::resources.adoc[]
+
+include::hackathon_tips.adoc[]
