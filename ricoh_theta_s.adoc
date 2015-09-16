@@ -84,6 +84,10 @@ Read the
 link:https://developers.theta360.com/en/docs/v2/api_reference/[API Reference on the RICOH]
 site.
 
+
+include::take_picture.adoc[]
+
+
 TIP: For quick testing, save the individual commands into your testing tool.
 
 In this example, I've saved it into DHC.
@@ -96,8 +100,6 @@ results prior to running your program or test script.
 NOTE: I have not been able to get a mock server running that supports the full
 RICOH THETA API v2.  In my tests, I needed to connect to the actual device.  If you
 build a functional mock server, send it to me. :-)
-
-include::take_picture.adoc[]
 
 include::python_tests.adoc[]
 
