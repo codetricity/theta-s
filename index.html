@@ -372,6 +372,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_connect_computer_to_theta_s">Connect Computer to THETA S</a></li>
 <li><a href="#_test_commands_from_computer_to_camera">Test Commands From Computer to Camera</a></li>
 <li><a href="#_taking_pictures">Taking Pictures</a></li>
+<li><a href="#_testing_workflow_using_a_http_browser_tool">Testing Workflow Using a HTTP Browser Tool</a></li>
 <li><a href="#_testing_theta_s_api_with_python">Testing THETA S API with Python</a></li>
 <li><a href="#_python_desktop_application_example">Python Desktop Application Example</a></li>
 <li>
@@ -644,6 +645,11 @@ time.
 <img src="img/beach.png" alt="beach">
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testing_workflow_using_a_http_browser_tool">Testing Workflow Using a HTTP Browser Tool</h2>
+<div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -700,6 +706,16 @@ on Windows 10, I am running the python scripts in a VirtualBox VM with default
 <code>NAT</code> network settings. The Python program is able to connect from the VM through
 the Windows 10 WiFi adapter and to the THETA S. I&#8217;m assuming that Python
 will work fine on Windows 10, but it&#8217;s easier for me to use Linux.</p>
+</div>
+<div class="paragraph">
+<p>To test with Python, I first started by simply writing out individual
+commands in the script, similar to browser testing.  I then
+moved the THETA API v2 commands into a library and wrote a command line
+tool to accept arguments and test each command.</p>
+</div>
+<div class="paragraph">
+<p>The first step to learn the API is to grab some basic information
+from the camera and print it to your console.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -891,6 +907,10 @@ takePicture - Testing RICOH THETA API v2</pre>
  u'progress': {u'completion': 0.0},
  u'state': u'inProgress'}</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>In the next few sections, I&#8217;ll show how easy it is to build
+an interface to access the Python library we&#8217;re building.</p>
 </div>
 </div>
 </div>
@@ -1584,7 +1604,7 @@ I have not tested it.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-16 08:34:07 PDT
+Last updated 2015-09-16 08:36:59 PDT
 </div>
 </div>
 </body>

@@ -12,6 +12,14 @@ on Windows 10, I am running the python scripts in a VirtualBox VM with default
 the Windows 10 WiFi adapter and to the THETA S. I'm assuming that Python
 will work fine on Windows 10, but it's easier for me to use Linux.
 
+To test with Python, I first started by simply writing out individual
+commands in the script, similar to browser testing.  I then
+moved the THETA API v2 commands into a library and wrote a command line
+tool to accept arguments and test each command.
+
+The first step to learn the API is to grab some basic information
+from the camera and print it to your console.
+
   import requests, json, pprint
 
   def request(url_request):
@@ -74,7 +82,7 @@ This is what I get:
 
 
 Now, we want to take a picture. We'll take a still image in this example,
-but it's almost as easy to start a video capture and end it. 
+but it's almost as easy to start a video capture and end it.
 
 First you need to start a session and
 grab the session ID (SID).
@@ -146,3 +154,6 @@ Run it and celebrate!
    u'name': u'camera.takePicture',
    u'progress': {u'completion': 0.0},
    u'state': u'inProgress'}
+
+In the next few sections, I'll show how easy it is to build
+an interface to access the Python library we're building.

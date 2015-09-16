@@ -87,6 +87,7 @@ site.
 
 include::take_picture.adoc[]
 
+== Testing Workflow Using a HTTP Browser Tool
 
 TIP: For quick testing, save the individual commands into your testing tool.
 
