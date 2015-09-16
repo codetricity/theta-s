@@ -36,7 +36,7 @@ Many people use
 link:http://curl.haxx.se/[curl], a web browser, or
 link:https://www.getpostman.com/[Postman].  In this example, I
 am using
-link:https://chrome.google.com/webstore/detail/dhc-resthttp-api-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en[DHC].
+link:https://chrome.google.com/webstore/detail/dhc-resthttp-api-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en[DHC by Restlet].
 It is available for free as a Chrome Extension.
 
 image::img/tools/dhc_client.png[]
@@ -91,7 +91,8 @@ include::take_picture.adoc[]
 
 TIP: For quick testing, save the individual commands into your testing tool.
 
-In this example, I've saved it into DHC.
+In this example, I've saved it into
+link:http://restlet.com/products/dhc/[DHC by Restlet].
 
 image::img/tools/dhc_workflow.png[]
 
