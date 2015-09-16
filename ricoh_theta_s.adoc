@@ -39,6 +39,8 @@ am using
 link:https://chrome.google.com/webstore/detail/dhc-resthttp-api-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en[DHC].
 It is available for free as a Chrome Extension.
 
+image::img/tools/dhc_client.png[]
+
 `POST` to `http://192.168.1.1/osc/commands/execute`
 
 image::img/http_request.png[]
@@ -81,6 +83,19 @@ of most computers.
 Read the
 link:https://developers.theta360.com/en/docs/v2/api_reference/[API Reference on the RICOH]
 site.
+
+TIP: For quick testing, save the individual commands into your testing tool.
+
+In this example, I've saved it into DHC.
+
+image::img/tools/dhc_workflow.png[]
+
+With this type of tool, you can quickly test indvidual commands and see the
+results prior to running your program or test script.
+
+NOTE: I have not been able to get a mock server running that supports the full
+RICOH THETA API v2.  In my tests, I needed to connect to the actual device.  If you
+build a functional mock server, send it to me. :-)
 
 include::take_picture.adoc[]
 
