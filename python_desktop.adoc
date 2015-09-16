@@ -17,6 +17,13 @@ The previous code is called `thetaPythonTest.py` and is in the same directory
 as my new program.  The full program has two graphics purely for decoration.
 You don't need those portions and can ignore them.
 
+IMPORTANT: I've changed the library name to thetapylib.py, but I have not updated
+the code example below.  Suggest you look at pyTHETA.py command line tool.
+The older test library thetaPythonTest.py should still be there and work.
+deskTHETA.py now has more examples to start and stop video capture.  I'll
+try and get some of the file listing and transfer commands working with the
+GUI prior to the Hackathon, but we're in crunch time.
+
 === Full Program
   import pygame, sys
   import requests
