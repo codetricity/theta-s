@@ -18,7 +18,7 @@ Both the input and output are `.mp4` format videos.
 
 image::img/video/dual_fish_eye.png[role="thumb" title="dual fish eye video format"]
 
-The Dualfish Blender program will convert it to equirectangular.
+The program will convert it to equirectangular.
 
 image::img/video/equirectangular_video.png[role="thumb" title="equirectangular video format"]
 
