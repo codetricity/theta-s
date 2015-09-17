@@ -3,6 +3,8 @@
 :toc:
 Craig Oda
 
+image::img/desktop/dev_app.png[]
+
 == Unofficial and Unauthorized
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
@@ -107,7 +109,9 @@ include::python_tests.adoc[]
 
 include::python_desktop.adoc[]
 
+////
 include::kivy_example.adoc[]
+////
 
 include::transfer.adoc[]
 
