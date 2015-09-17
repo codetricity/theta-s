@@ -409,6 +409,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="#_before_you_hack">Before You Hack</a></li>
 <li><a href="#_thetapylib">thetapylib</a></li>
+<li><a href="#_next_steps">Next Steps</a></li>
 </ul>
 </div>
 </div>
@@ -1791,10 +1792,59 @@ elif sys.argv[1] == "stopCapture":
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_next_steps">Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By using a library I was able to quickly prototype applications
+with a number of interfaces.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Python command line</strong>: this is the easiest to implement. It still
+needs to handle errors.</p>
+</li>
+<li>
+<p><strong>Pygame library</strong>: This is also quite easy to implement.  The most
+time-consuming thing is making buttons.  It also has no error checking. <code>:-(</code>
+Pygame is cross-platform on Windows, Mac, Linux, Android.  I have not
+tested the code on Android and it will need minor modification.
+I may have it by the time of the hackathon.</p>
+</li>
+<li>
+<p><strong>Kivy Python library</strong>: This Python library runs on everything Pygame runs on
+and runs on iOS.  It also has multi-touch and swipe support.</p>
+</li>
+<li>
+<p><strong>Hardware remote</strong>: I was planning to use <a href="https://flirc.tv/">FLIRC</a> to send IR
+commands to a Raspberry Pi for the demo.  It&#8217;s easy to do since the FLIRC
+USB dongle simply translates keyboard commands.  It would be easy to
+use Pygame to capture keyboard presses.  Unfortunately, I ran out of time.
+Both Kivy and Pygame work with the Raspberry Pi.  I have not tested this yet.</p>
+</li>
+<li>
+<p><strong>External sensors</strong>: By using a Raspberry Pi with external sensors, it would
+be easy to trigger the camera to take pictures with some input, such as
+a motion detector or movement.</p>
+</li>
+<li>
+<p><strong>Javascript</strong>: I tried this for about 30 minutes using an jQuery.ajax
+ and ran into a
+permissions error. As I only had a few days,
+I made the strategic decision to give up Javascript testing
+and decided to prioritize Python testing first
+to provide a quick overview of the API commands.  Hopefully, someone
+will get Javascript to work and share it back.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-17 07:31:49 PDT
+Last updated 2015-09-17 08:13:27 PDT
 </div>
 </div>
 </body>
