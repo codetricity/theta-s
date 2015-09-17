@@ -21,6 +21,3 @@ IMPORTANT: The THETA S requires a new app.  The older app will not work.
 === YouTube 360 degree Videos
 * https://www.youtube.com/360[#360Video on YouTube]
 * https://support.google.com/youtube/answer/6178631?hl=en[Upload 360 degree videos to YouTube]
-
-NOTE: I needed to use a https://github.com/google/spatial-media/tree/master/360-Videos-Metadata[tool] 
-to inject 360 Video Metadata into the video

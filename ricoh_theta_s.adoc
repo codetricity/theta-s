@@ -124,3 +124,5 @@ include::google.adoc[]
 include::resources.adoc[]
 
 include::hackathon_tips.adoc[]
+
+include::thetapylib.adoc[]

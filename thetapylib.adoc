@@ -8,92 +8,133 @@ Documentation is included below so that you can quickly get an overview
 of using some of the
 commands before you build your own library.
 
-++++
+  thetapylib
+  /home/ricoh/Development/viewer/thetapylib.py
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module thetapylib</title>
-<meta charset="utf-8">
-</head><body bgcolor="#f0f0f8">
+  Example library for RICOH THETA S hacking with Python.  The new
+  API is compliant with the Open Spherical Camera specification.
+  This is intended to show how the THETA S API works.  It is
+  not intended for use in your program.  There is no error
+  checking and this example library only handles a handful
+  of commands.
 
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>thetapylib</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/ricoh/Development/viewer/thetapylib.py">/home/ricoh/Development/viewer/thetapylib.py</a></font></td></tr></table>
-    <p><tt>Example&nbsp;library&nbsp;for&nbsp;RICOH&nbsp;THETA&nbsp;S&nbsp;hacking&nbsp;with&nbsp;Python.&nbsp;&nbsp;The&nbsp;new<br>
-API&nbsp;is&nbsp;compliant&nbsp;with&nbsp;the&nbsp;Open&nbsp;Spherical&nbsp;Camera&nbsp;specification.<br>
-There&nbsp;are&nbsp;three&nbsp;example&nbsp;programs&nbsp;that&nbsp;use&nbsp;this&nbsp;library.<br>
-At&nbsp;the&nbsp;top&nbsp;of&nbsp;your&nbsp;Python&nbsp;script,&nbsp;use<br>
-&nbsp;&nbsp;from&nbsp;thetalib&nbsp;import&nbsp;*<br>
-&nbsp;<br>
-&nbsp;&nbsp;Example&nbsp;use&nbsp;of&nbsp;the&nbsp;library&nbsp;with&nbsp;Pygame&nbsp;to&nbsp;detect&nbsp;the<br>
-&nbsp;&nbsp;button&nbsp;press.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;event.type&nbsp;==&nbsp;pygame.MOUSEBUTTONDOWN:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mouse_pos&nbsp;=&nbsp;pygame.mouse.get_pos()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;pictureButton.collidepoint(mouse_pos):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sid&nbsp;=&nbsp;<a href="#-startSession">startSession</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-takePicture">takePicture</a>(sid)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;captureStartButton.collidepoint(mouse_pos):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sid&nbsp;=&nbsp;<a href="#-startSession">startSession</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-startCapture">startCapture</a>(sid)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;captureStopButton.collidepoint(mouse_pos):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-stopCapture">stopCapture</a>(sid)</tt></p>
-<p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#aa55cc">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
 
-<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="PIL.Image.html">PIL.Image</a><br>
-</td><td width="25%" valign=top><a href="json.html">json</a><br>
-</td><td width="25%" valign=top><a href="pprint.html">pprint</a><br>
-</td><td width="25%" valign=top><a href="requests.html">requests</a><br>
-</td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#eeaa77">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+  There are three example programs that use this library.
+  At the top of your Python script, use
 
-<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-getImage"><strong>getImage</strong></a>(fileUri, imageType<font color="#909090">='image'</font>)</dt><dd><tt>Transfer&nbsp;the&nbsp;file&nbsp;from&nbsp;the&nbsp;camera&nbsp;to&nbsp;computer&nbsp;and&nbsp;save&nbsp;the<br>
-binary&nbsp;data&nbsp;to&nbsp;local&nbsp;storage.&nbsp;&nbsp;This&nbsp;works,&nbsp;but&nbsp;is&nbsp;clunky.<br>
-There&nbsp;are&nbsp;easier&nbsp;ways&nbsp;to&nbsp;do&nbsp;this.&nbsp;The&nbsp;__type&nbsp;parameter<br>
-can&nbsp;be&nbsp;set&nbsp;to&nbsp;"thumb"&nbsp;for&nbsp;a&nbsp;thumbnail&nbsp;or&nbsp;"image"&nbsp;for&nbsp;the<br>
-full-size&nbsp;image.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;"image".</tt></dd></dl>
- <dl><dt><a name="-info"><strong>info</strong></a>()</dt><dd><tt>Get&nbsp;basic&nbsp;information&nbsp;ont&nbsp;he&nbsp;camera.&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;is&nbsp;a&nbsp;GET&nbsp;call<br>
-and&nbsp;not&nbsp;a&nbsp;POST.&nbsp;&nbsp;Most&nbsp;of&nbsp;the&nbsp;calls&nbsp;are&nbsp;POST.</tt></dd></dl>
- <dl><dt><a name="-latestFileUri"><strong>latestFileUri</strong></a>()</dt><dd><tt>This&nbsp;will&nbsp;only&nbsp;work&nbsp;if&nbsp;you've&nbsp;just&nbsp;taken&nbsp;a&nbsp;picture.&nbsp;&nbsp;The&nbsp;state<br>
-will&nbsp;include&nbsp;the&nbsp;attribute&nbsp;latestFileUri.&nbsp;&nbsp;You&nbsp;need&nbsp;this&nbsp;to<br>
-transfer&nbsp;the&nbsp;file&nbsp;from&nbsp;the&nbsp;camera&nbsp;to&nbsp;your&nbsp;computer&nbsp;or&nbsp;phone.</tt></dd></dl>
- <dl><dt><a name="-listAll"><strong>listAll</strong></a>(entryCount<font color="#909090">=3</font>, detail<font color="#909090">=False</font>, sortType<font color="#909090">='newest'</font>)</dt><dd><tt>entryCount:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No.&nbsp;of&nbsp;still&nbsp;images&nbsp;and&nbsp;video&nbsp;files&nbsp;to&nbsp;be&nbsp;acquired<br>
-detail:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Optional)&nbsp;&nbsp;Whether&nbsp;or&nbsp;not&nbsp;file&nbsp;details&nbsp;are&nbsp;acquired<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true&nbsp;is&nbsp;acquired&nbsp;by&nbsp;default.&nbsp;Only&nbsp;values&nbsp;that&nbsp;can&nbsp;be&nbsp;acquired<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;when&nbsp;false&nbsp;is&nbsp;specified&nbsp;are&nbsp;"name",&nbsp;"uri",&nbsp;"size"&nbsp;and&nbsp;"dateTime"<br>
-sort:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Optional)&nbsp;Specify&nbsp;the&nbsp;sort&nbsp;order<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newest&nbsp;(dateTime&nbsp;descending&nbsp;order)/&nbsp;oldest&nbsp;(dateTime&nbsp;ascending&nbsp;order)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;is&nbsp;newest</tt></dd></dl>
- <dl><dt><a name="-request"><strong>request</strong></a>(url_request)</dt><dd><tt>Generate&nbsp;the&nbsp;URI&nbsp;to&nbsp;send&nbsp;to&nbsp;the&nbsp;THETA&nbsp;S.&nbsp;&nbsp;The&nbsp;THETA&nbsp;IP&nbsp;address&nbsp;is<br>
-192.168.1.1<br>
-All&nbsp;calls&nbsp;start&nbsp;with&nbsp;/osc/</tt></dd></dl>
- <dl><dt><a name="-startCapture"><strong>startCapture</strong></a>(sid)</dt><dd><tt>Begin&nbsp;video&nbsp;capture&nbsp;if&nbsp;the&nbsp;captureMode&nbsp;is&nbsp;_video.&nbsp;&nbsp;If&nbsp;the<br>
-captureMode&nbsp;is&nbsp;set&nbsp;to&nbsp;image,&nbsp;the&nbsp;camera&nbsp;will&nbsp;take&nbsp;multiple<br>
-still&nbsp;images.&nbsp;&nbsp;The&nbsp;captureMode&nbsp;can&nbsp;be&nbsp;set&nbsp;in&nbsp;the&nbsp;options.<br>
-Note&nbsp;that&nbsp;this&nbsp;will&nbsp;not&nbsp;work&nbsp;with&nbsp;streaming&nbsp;video&nbsp;using&nbsp;the<br>
-HDMI&nbsp;or&nbsp;USB&nbsp;cable.</tt></dd></dl>
- <dl><dt><a name="-startSession"><strong>startSession</strong></a>()</dt><dd><tt>Start&nbsp;a&nbsp;new&nbsp;session.&nbsp;&nbsp;Grab&nbsp;the&nbsp;sessionId&nbsp;number&nbsp;and<br>
-return&nbsp;it.<br>
-You'll&nbsp;need&nbsp;the&nbsp;sessionId&nbsp;to&nbsp;take&nbsp;a&nbsp;video&nbsp;or&nbsp;image.</tt></dd></dl>
- <dl><dt><a name="-state"><strong>state</strong></a>()</dt><dd><tt>Get&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;camera,&nbsp;which&nbsp;will&nbsp;include&nbsp;the&nbsp;sessionsId&nbsp;and&nbsp;also&nbsp;the<br>
-latestFileUri&nbsp;if&nbsp;you've&nbsp;just&nbsp;taken&nbsp;a&nbsp;picture.</tt></dd></dl>
- <dl><dt><a name="-stopCapture"><strong>stopCapture</strong></a>(sid)</dt><dd><tt>Stop&nbsp;video&nbsp;capture</tt></dd></dl>
- <dl><dt><a name="-takePicture"><strong>takePicture</strong></a>(sid)</dt><dd><tt>Take&nbsp;a&nbsp;still&nbsp;image.&nbsp;&nbsp;The&nbsp;sessionId&nbsp;is&nbsp;either&nbsp;taken&nbsp;from<br>
-startSession&nbsp;or&nbsp;from&nbsp;state.</tt></dd></dl>
-</td></tr></table>
-</body></html>
-++++
+    from thetalib import *
+
+  After you import the library, you can use the commands like this:
+
+    state()
+
+  That will return the state of the camera, which is great to
+  get the sessionId.
+
+  You can also get the sessionId when you start a new session:
+
+    startSession()
+
+  In fact, the startSession() function will return the
+  sessionId.
+
+  Example use of the library with Pygame to detect the
+  button press.
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if pictureButton.collidepoint(mouse_pos):
+                    sid = startSession()
+                    takePicture(sid)
+                if captureStartButton.collidepoint(mouse_pos):
+                    sid = startSession()
+                    startCapture(sid)
+                if captureStopButton.collidepoint(mouse_pos):
+                    stopCapture(sid)
+
+  Example use of library from the command line:
+
+          if sys.argv[1] == "startCapture":
+              if len(sys.argv) < 3:
+                  print("Usage: pyTHETA.py startCapture SID_000X")
+                  print("Use 'state' to get sessionId")
+
+              else:
+                  sid = sys.argv[2]
+                  response = startCapture(sid)
+                  pprint.pprint(response)
+          elif sys.argv[1] == "stopCapture":
+              if len(sys.argv) < 3:
+                  print("Usage: pyTHETA.py stopCapture SID_000X")
+                  print("Use 'state' to get sessionId")
+              else:
+                  sid = sys.argv[2]
+                  response = stopCapture(sid)
+                  pprint.pprint(response)
+
+---
+
+  Functions
+
+
+  getImage(fileUri, imageType='image')
+      Transfer the file from the camera to computer and save the
+      binary data to local storage.  This works, but is clunky.
+      There are easier ways to do this. The __type parameter
+      can be set to "thumb" for a thumbnail or "image" for the
+      full-size image.  The default is "image".
+
+  info()
+      Get basic information ont he camera.  Note that this is a GET call
+      and not a POST.  Most of the calls are POST.
+
+  latestFileUri()
+      This will only work if you've just taken a picture.  The state
+      will include the attribute latestFileUri.  You need this to
+      transfer the file from the camera to your computer or phone.
+
+  listAll(entryCount=3, detail=False, sortType='newest')
+      entryCount:
+              Integer     No. of still images and video files
+                          to be acquired
+      detail:
+              Boolean     (Optional)  Whether or not file details are
+                          acquired true is acquired by default.
+                          Only values that can be acquired
+                          when false is specified are "name", "uri",
+                          "size" and "dateTime"
+      sort:
+              String      (Optional) Specify the sort order
+                          newest (dateTime descending order)/ oldest
+                          (dateTime ascending order)
+                          Default is newest
+
+  request(url_request)
+      Generate the URI to send to the THETA S.  The THETA IP address is
+      192.168.1.1
+      All calls start with /osc/
+
+  startCapture(sid)
+      Begin video capture if the captureMode is _video.  If the
+      captureMode is set to image, the camera will take multiple
+      still images.  The captureMode can be set in the options.
+      Note that this will not work with streaming video using the
+      HDMI or USB cable.
+
+  startSession()
+      Start a new session.  Grab the sessionId number and
+      return it.
+      You'll need the sessionId to take a video or image.
+
+  state()
+      Get the state of the camera, which will include the sessionsId and also the
+      latestFileUri if you've just taken a picture.
+
+  stopCapture(sid)
+      Stop video capture.  If in image mode, will stop
+      automatic image taking.
+
+  takePicture(sid)
+      Take a still image.  The sessionId is either taken from
+      startSession or from state.  You can change the mode
+      from video to image with captureMode in the options.
