@@ -22,7 +22,7 @@ commands before you build your own library.
   There are three example programs that use this library.
   At the top of your Python script, use
 
-    from thetalib import *
+    from thetapylib import *
 
   After you import the library, you can use the commands like this:
 
