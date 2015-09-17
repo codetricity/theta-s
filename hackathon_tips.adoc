@@ -16,7 +16,8 @@ serial numbers. Make sure you connect to the right THETA.  The access point
 is the serial number.
 
 * By default, the WiFi password for the THETA S models at the hackathon
- is the last eight digits of the serial number.
+ is the last eight digits of the serial number.  The serial number is in
+ the WiFi SSID as well as on the bottom of the camera.
 
 * You can't change `captureMode` option to `_liveStreaming` with the API.
 At least, no one has gotten it to work this way.  Live streaming
