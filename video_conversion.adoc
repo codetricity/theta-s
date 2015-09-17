@@ -8,10 +8,8 @@ upload it to YouTube, you'll need to convert it to
 equirectangular.  Sorry, but we do not have example code or a
 public application to do this.  `:-(`
 
-The RICOH table will have an application called Dualfish Blender.  You
+The RICOH table will have an application for conversion.  You can
 bring a thumbdrive over to get your video converted.
-
-image::img/video/convert_video_file.png[]
 
 By default, the program will take your file name and add `_er` to it.
 The file is saved in the same location that the original video file was in.
