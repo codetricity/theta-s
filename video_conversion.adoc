@@ -30,6 +30,6 @@ This is cool!
 
 image::img/video/youtube_360.png[role="thumb" title="YouTube 360 video"]
 
-link::https://youtu.be/MXX_JjQdtmE[Try it out].
+https://youtu.be/MXX_JjQdtmE[Try it out].
 
 NOTE: I've only tested the YouTube viewer on Windows, not on Linux.
