@@ -13,6 +13,12 @@ IMPORTANT: The THETA S requires a new app.  The older app will not work.
 * https://play.google.com/store/apps/details?id=com.theta360[Android THETA S application]
 * https://itunes.apple.com/us/app/id1023254741[iOS]
 
+==== Official RICOH SDK
+There's a lot of great sample code in the RICOH THETA SDK.  Download it
+fromthe link below.
+
+* https://developers.theta360.com/en/docs/sdk/download.html[RICOH THETA SDK]
+
 ==== Third-Party Recommended Viewers
 * https://play.google.com/store/apps/details?id=jp.co.taosoftware.android.sphericalviewer&hl=en[Tao360] for Android
 * https://itunes.apple.com/us/app/kiroru-360/id954157416?mt=8[KIRORU 360 for iOS (not tested)]
