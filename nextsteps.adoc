@@ -19,11 +19,13 @@ use Pygame to capture keyboard presses.  Unfortunately, I ran out of time.
 Both Kivy and Pygame work with the Raspberry Pi.  I have not tested this yet.
 . *External sensors*: By using a Raspberry Pi with external sensors, it would
 be easy to trigger the camera to take pictures with some input, such as
-a motion detector or movement.
-. *Javascript*: I tried this for about 30 minutes using an jQuery.ajax
- and ran into a
-permissions error. As I only had a few days,
-I made the strategic decision to give up Javascript testing
-and decided to prioritize Python testing first
-to provide a quick overview of the API commands.  Hopefully, someone
-will get Javascript to work and share it back.  
+a motion detector, light, temperature, or position.
+. *JavaScript*: I tried this for about 30 minutes using a `jQuery.ajax`
+ and ran into a permissions error running it from a browser.  I did
+ not try `node.js`, which may work.
+
+WARNING: I believe that JavaScript will not work with a browser due to
+camera-side (server-side) security settings. I think you may be able to to use
+`node.js` to write JavaScript programs.  I have not tested it.  I
+looked for a way to use jQuery with node.js.  It looked a bit involved,
+so I just gave up and used Python.

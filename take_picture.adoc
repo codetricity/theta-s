@@ -17,11 +17,11 @@ Grab the `sessionId` and take the picture.
     	"sessionId": "SID_0001"
     }
   }
-  
+
 The camera will beep.
 
 At this point, you can grab the image with the API. However,
-it will be a stream of base64 data.  To convert this into
+it will be a stream of binary data.  To convert this into
 a something like a jpg that can displayed on the screen, you'll
 need to get the stream, convert it, then display the image to your
 screen and allow user interaction with the image.

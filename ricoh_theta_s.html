@@ -467,6 +467,28 @@ adapters.</p>
 <p>Your Wireless LAN must be in the subnet <code>192.168.1.x</code>.  The Default Gateway
 must be <code>192.168.1.1</code>.  The gateway is the THETA S.</p>
 </div>
+<div class="paragraph">
+<p>After establishing a wifi connection, please open a browser and access:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>http://192.168.1.1/osc/info</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A response will come as below</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{"manufacture":"RICOH",
+  "model":"RICOH THETA S",
+  "serialNumber":"00001054",
+  "firmwareVersion":"01.00",
+  "supportUrl":"https://theta360.com/en/support/",
+  "endpoints":{
+    ... THERE WILL BE MORE INFO</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -597,7 +619,7 @@ site.</p>
 </div>
 <div class="paragraph">
 <p>At this point, you can grab the image with the API. However,
-it will be a stream of base64 data.  To convert this into
+it will be a stream of binary data.  To convert this into
 a something like a jpg that can displayed on the screen, you&#8217;ll
 need to get the stream, convert it, then display the image to your
 screen and allow user interaction with the image.</p>
@@ -1813,25 +1835,37 @@ Both Kivy and Pygame work with the Raspberry Pi.  I have not tested this yet.</p
 <li>
 <p><strong>External sensors</strong>: By using a Raspberry Pi with external sensors, it would
 be easy to trigger the camera to take pictures with some input, such as
-a motion detector or movement.</p>
+a motion detector, light, temperature, or position.</p>
 </li>
 <li>
-<p><strong>Javascript</strong>: I tried this for about 30 minutes using an jQuery.ajax
- and ran into a
-permissions error. As I only had a few days,
-I made the strategic decision to give up Javascript testing
-and decided to prioritize Python testing first
-to provide a quick overview of the API commands.  Hopefully, someone
-will get Javascript to work and share it back.</p>
+<p><strong>JavaScript</strong>: I tried this for about 30 minutes using a <code>jQuery.ajax</code>
+and ran into a permissions error running it from a browser.  I did
+not try <code>node.js</code>, which may work.</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+I believe that JavaScript will not work with a browser due to
+camera-side (server-side) security settings. I think you may be able to to use
+<code>node.js</code> to write JavaScript programs.  I have not tested it.  I
+looked for a way to use jQuery with node.js.  It looked a bit involved,
+so I just gave up and used Python.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-17 08:13:27 PDT
+Last updated 2015-09-18 16:41:16 PDT
 </div>
 </div>
 </body>

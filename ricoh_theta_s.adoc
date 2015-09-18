@@ -32,6 +32,21 @@ image::img/ipconfig_network_adapters.png[]
 Your Wireless LAN must be in the subnet `192.168.1.x`.  The Default Gateway
 must be `192.168.1.1`.  The gateway is the THETA S.
 
+After establishing a wifi connection, please open a browser and access:
+
+  http://192.168.1.1/osc/info
+
+A response will come as below
+
+  {"manufacture":"RICOH",
+    "model":"RICOH THETA S",
+    "serialNumber":"00001054",
+    "firmwareVersion":"01.00",
+    "supportUrl":"https://theta360.com/en/support/",
+    "endpoints":{
+      ... THERE WILL BE MORE INFO
+
+
 == Test Commands From Computer to Camera
 You can use any tool to test `POST` and `GET` commands to the camera.
 Many people use
