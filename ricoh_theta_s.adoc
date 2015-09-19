@@ -36,7 +36,7 @@ After establishing a wifi connection, please open a browser and access:
 
   http://192.168.1.1/osc/info
 
-A response will come as below
+The response:
 
   {"manufacture":"RICOH",
     "model":"RICOH THETA S",
