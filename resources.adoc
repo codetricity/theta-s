@@ -28,3 +28,8 @@ The source code of the sample apps is useful.
 === YouTube 360 degree Videos
 * https://www.youtube.com/360[#360Video on YouTube]
 * https://support.google.com/youtube/answer/6178631?hl=en[Upload 360 degree videos to YouTube]
+
+=== Untested Community Viewers
+* https://github.com/akokubo/ThetaViewer[Akokubo ThetaViewer] equirectangular
+projection panorama HTML 5 viewer.  The main source file is
+https://github.com/akokubo/ThetaViewer/blob/master/src/theta-viewer.js[here].
