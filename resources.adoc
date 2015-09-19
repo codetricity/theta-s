@@ -33,3 +33,5 @@ The source code of the sample apps is useful.
 * https://github.com/akokubo/ThetaViewer[Akokubo ThetaViewer] equirectangular
 projection panorama HTML 5 viewer.  The main source file is
 https://github.com/akokubo/ThetaViewer/blob/master/src/theta-viewer.js[here].
+Example image in viewer is
+http://akokubo.github.io/ThetaViewer/demo1.html[here].
