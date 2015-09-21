@@ -136,6 +136,8 @@ include::video_conversion.adoc[]
 
 include::google.adoc[]
 
+include::rpi.adoc[]
+
 include::resources.adoc[]
 
 include::hackathon_tips.adoc[]
