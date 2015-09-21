@@ -399,6 +399,12 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </ul>
 </li>
 <li><a href="#_raspberry_pi">Raspberry Pi</a></li>
+<li>
+<ul class="sectlevel2">
+<li><a href="#_using_an_ir_remote_to_control_the_theta_s">Using an IR Remote to Control the THETA S</a></li>
+<li><a href="#_screengrabs_over_usb_in_live_streaming_mode">Screengrabs Over USB in Live Streaming Mode</a></li>
+</ul>
+</li>
 <li><a href="#_resources">Resources</a></li>
 <li>
 <ul class="sectlevel2">
@@ -1437,8 +1443,13 @@ by posting your spherical images on Google Maps.</p>
 <h2 id="_raspberry_pi">Raspberry Pi</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Raspberry Pi works great with the RICOH THETA S API over WiFi.
-In this example, I have it working with the
+<p>The Raspberry Pi works great with the RICOH THETA S API over WiFi and
+over USB.</p>
+</div>
+<div class="sect2">
+<h3 id="_using_an_ir_remote_to_control_the_theta_s">Using an IR Remote to Control the THETA S</h3>
+<div class="paragraph">
+<p>In this example, I have it working with the
 <a href="https://flirc.tv/">FLIRC</a> USB dongle to connect a simple IR remote
 to THETA S.</p>
 </div>
@@ -1478,6 +1489,27 @@ the GUI serves no purpose other than testing from the Pi to the THETA.</p>
 <div class="imageblock">
 <div class="content">
 <img src="img/rpi/app.jpg" alt="app">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_screengrabs_over_usb_in_live_streaming_mode">Screengrabs Over USB in Live Streaming Mode</h3>
+<div class="paragraph">
+<p>The THETA S can be put into liveStreaming mode by holding down the
+bottom button and turning the power on while holding the button down.</p>
+</div>
+<div class="paragraph">
+<p>Once in liveStreaming mode, you can grab images directly from the
+USB cable.</p>
+</div>
+<div class="paragraph">
+<p>I used <code>fswebcam</code> to grab dual-fisheye shots and save it to the SD card
+of the Raspberry Pi.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/rpi/screengrab.jpg" alt="screengrab">
+</div>
 </div>
 </div>
 </div>

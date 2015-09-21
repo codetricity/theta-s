@@ -1,6 +1,9 @@
 == Raspberry Pi
 
-The Raspberry Pi works great with the RICOH THETA S API over WiFi.
+The Raspberry Pi works great with the RICOH THETA S API over WiFi and
+over USB.
+
+=== Using an IR Remote to Control the THETA S
 In this example, I have it working with the
 https://flirc.tv/[FLIRC] USB dongle to connect a simple IR remote
 to THETA S.
@@ -29,3 +32,16 @@ you don't need a monitor connected to run the program.  Right now,
 the GUI serves no purpose other than testing from the Pi to the THETA.
 
 image::img/rpi/app.jpg[]
+
+=== Screengrabs Over USB in Live Streaming Mode
+
+The THETA S can be put into liveStreaming mode by holding down the
+bottom button and turning the power on while holding the button down.
+
+Once in liveStreaming mode, you can grab images directly from the
+USB cable.
+
+I used `fswebcam` to grab dual-fisheye shots and save it to the SD card
+of the Raspberry Pi.
+
+image::img/rpi/screengrab.jpg[]
