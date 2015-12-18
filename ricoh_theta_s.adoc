@@ -1,4 +1,4 @@
-= API Usage - Unoffical RICOH THETA S Community Guide
+= API Usage - Unoffical RICOH THETA S Community Guide (Guide 1 of 3)
 :icons: font
 :toc:
 Craig Oda and the Community
@@ -14,6 +14,7 @@ We are in the process of dividing the guide into two sections:
 - http://codetricity.github.io/theta-s/index.html[API Usage] (This Guide)
 - http://theta360developers.github.io/community-document/community.html [360 Media]
 Live Streaming of 360 videos, 360 image display.
+- Usage - planned. Does not exist as of Dec, 2015
 
 == Connect Computer to THETA S
 Turn on the THETA S.  The WiFi icon will flash blue.
@@ -136,9 +137,9 @@ include::kivy_example.adoc[]
 
 include::transfer.adoc[]
 
-include::live_streaming.adoc[]
+/*include::live_streaming.adoc[]*/
 
-include::video_conversion.adoc[]
+/*include::video_conversion.adoc[]*/
 
 include::google.adoc[]
 
