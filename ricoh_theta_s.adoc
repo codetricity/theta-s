@@ -11,10 +11,10 @@ This is not authorized by RICOH and is based on publicly available information.
 
 == RICOH THETA Developer Community Guide and Other Resources
 We are in the process of dividing the guide into two sections:
-- http://codetricity.github.io/theta-s/index.html[API Usage] (This Guide)
-- http://theta360developers.github.io/community-document/community.html [360 Media]
-Live Streaming of 360 videos, 360 image display.
-- Usage - planned. Does not exist as of Dec, 2015
+
+1. http://codetricity.github.io/theta-s/index.html[API Usage] (This Guide)
+2. http://theta360developers.github.io/community-document/community.html[360 Media] Live Streaming of 360 videos, 360 image display.
+3. Usage - planned. Does not exist as of Dec, 2015
 
 == Connect Computer to THETA S
 Turn on the THETA S.  The WiFi icon will flash blue.
