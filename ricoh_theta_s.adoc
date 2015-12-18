@@ -1,7 +1,7 @@
-= API Usage - Unoffical RICOH THETA S Community Guide (Guide 1 of 3)
+= API Guide - How to Use the THETA S API Community Guide (Guide 1 of 3)
 :icons: font
 :toc:
-Craig Oda and the Community
+The RICOH THETA Developer Community
 
 image::img/desktop/dev_app.png[]
 
