@@ -15,7 +15,7 @@ IMPORTANT: The THETA S requires a new app.  The older app will not work.
 
 ==== Official RICOH SDK
 There's a lot of great sample code in the RICOH THETA SDK.  Download it
-from the link below.  The SDK is for the RICOH THETA m15, not the RICOH THETA S.
+from the link below.  There are different SDKs for the RICOH THETA m15 and the RICOH THETA S.
 The source code of the sample apps is useful.
 
 * https://developers.theta360.com/en/docs/sdk/download.html[RICOH THETA SDK]
