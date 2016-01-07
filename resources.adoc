@@ -1,4 +1,4 @@
-== Resources
+== Additional Resources
 
 === API Documentation
 * https://developers.theta360.com/en/docs/v2/api_reference/[RICOH THETA API version 2 reference documentation]
