@@ -1,7 +1,10 @@
-= Unofficial API Guide - How to Use the THETA S API
+= Unofficial API Guide 
 :icons: font
-:toc:
-The RICOH THETA Developer Community
+:toc: right
+:toclevels: 1
+:toc-title: Contents
+:sectnums:
+The RICOH THETA Developer Community  <ricohtheta360@oppkey.com>
 
 image::img/desktop/dev_app.png[]
 
@@ -9,11 +12,26 @@ image::img/desktop/dev_app.png[]
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
-== RICOH THETA Developer Community Guide and Other Resources
-We are in the process of dividing the guide into two sections:
 
-1. http://codetricity.github.io/theta-s/index.html[Unofficial API Usage] (This Guide)
-2. http://theta360developers.github.io/community-document/community.html[Unofficial 360 Media Guide] Live Streaming of 360 videos, 360 image display.
+== Official Information
+
+* https://developers.theta360.com/en/docs/v2/api_reference/[RICOH THETA API v2],
+compliant with
+https://developers.google.com/streetview/open-spherical-camera/[Open Spherical Camera API version 1.0] from Google.
+* https://developers.theta360.com/en/forums/[THETA Developers Official Forum]
+* https://developers.theta360.com/en/docs/sdk/[Official SDK]
+* https://theta360.com/en/support/download/[Windows, Mac, iOS, Android apps]
+
+== Unofficial Information
+* https://github.com/theta360developers[GitHub listing of community repositories] - libraries and code examples from the community
+* http://theta360developers.github.io/blog/[Blog for developers] - How-To articles from the community
+* Guides
+** http://codetricity.github.io/theta-s/index.html[Unofficial API Guide] - Use the RICOH
+THETA S API, a HTTP API based on Open Spherical Camera (OSC) specifications.
+Beginners should start here. Web browser using advanced HTTP clients,
+command line curl, Python. Planned examples for JavaScript and other languages.
+** http://theta360developers.github.io/community-document/community.html[Unofficial Media Guide] -
+360 degree media management. Streaming video, equirectangular conversion, stitching
 
 
 == Connect Computer to THETA S

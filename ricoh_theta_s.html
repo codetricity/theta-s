@@ -5,8 +5,8 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<meta name="author" content="The RICOH THETA Developer Community">
-<title>Unofficial API Guide - How to Use the THETA S API</title>
+<meta name="author" content="The RICOH THETA Developer Community &lt;ricohtheta360@oppkey.com&gt;">
+<title>Unofficial API Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -411,52 +411,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
-<h1>Unofficial API Guide - How to Use the THETA S API</h1>
+<h1>Unofficial API Guide</h1>
 <div class="details">
-<span id="author" class="author">The RICOH THETA Developer Community</span><br>
+<span id="author" class="author">The RICOH THETA Developer Community &lt;ricohtheta360@oppkey.com&gt;</span><br>
 </div>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_unofficial_and_unauthorized">Unofficial and Unauthorized</a></li>
-<li><a href="#_ricoh_theta_developer_community_guide_and_other_resources">RICOH THETA Developer Community Guide and Other Resources</a></li>
-<li><a href="#_connect_computer_to_theta_s">Connect Computer to THETA S</a></li>
-<li><a href="#_test_commands_from_computer_to_camera">Test Commands From Computer to Camera</a></li>
-<li><a href="#_taking_pictures">Taking Pictures</a></li>
-<li><a href="#_testing_workflow_using_a_http_browser_tool">Testing Workflow Using a HTTP Browser Tool</a></li>
-<li><a href="#_testing_theta_s_api_with_python">Testing THETA S API with Python</a></li>
-<li><a href="#_python_desktop_application_example">Python Desktop Application Example</a>
-<ul class="sectlevel2">
-<li><a href="#_full_program">Full Program</a></li>
-<li><a href="#_code_walkthrough">Code Walkthrough</a></li>
-</ul>
-</li>
-<li><a href="#_transferring_files_from_the_theta">Transferring Files from the THETA</a></li>
-<li><a href="#_google_maps_photos">Google Maps, Photos</a>
-<ul class="sectlevel2">
-<li><a href="#_maps">Maps</a></li>
-<li><a href="#_google_and_google_photos">Google+ and Google Photos</a></li>
-</ul>
-</li>
-<li><a href="#_raspberry_pi">Raspberry Pi</a>
-<ul class="sectlevel2">
-<li><a href="#_using_an_ir_remote_to_control_the_theta_s">Using an IR Remote to Control the THETA S</a></li>
-<li><a href="#_screengrabs_over_usb_in_live_streaming_mode">Screengrabs Over USB in Live Streaming Mode</a></li>
-</ul>
-</li>
-<li><a href="#_resources">Resources</a>
-<ul class="sectlevel2">
-<li><a href="#_api_documentation">API Documentation</a></li>
-<li><a href="#_phone_applications">Phone Applications</a></li>
-<li><a href="#_youtube_360_degree_videos">YouTube 360 degree Videos</a></li>
-<li><a href="#_untested_community_viewers">Untested Community Viewers</a></li>
-</ul>
-</li>
-<li><a href="#_before_you_hack">Before You Hack</a></li>
-<li><a href="#_thetapylib">thetapylib</a></li>
-<li><a href="#_next_steps">Next Steps</a></li>
+<li><a href="#_unofficial_and_unauthorized">1. Unofficial and Unauthorized</a></li>
+<li><a href="#_official_information">2. Official Information</a></li>
+<li><a href="#_unofficial_information">3. Unofficial Information</a></li>
+<li><a href="#_connect_computer_to_theta_s">4. Connect Computer to THETA S</a></li>
+<li><a href="#_test_commands_from_computer_to_camera">5. Test Commands From Computer to Camera</a></li>
+<li><a href="#_taking_pictures">6. Taking Pictures</a></li>
+<li><a href="#_testing_workflow_using_a_http_browser_tool">7. Testing Workflow Using a HTTP Browser Tool</a></li>
+<li><a href="#_testing_theta_s_api_with_python">8. Testing THETA S API with Python</a></li>
+<li><a href="#_python_desktop_application_example">9. Python Desktop Application Example</a></li>
+<li><a href="#_transferring_files_from_the_theta">10. Transferring Files from the THETA</a></li>
+<li><a href="#_google_maps_photos">11. Google Maps, Photos</a></li>
+<li><a href="#_raspberry_pi">12. Raspberry Pi</a></li>
+<li><a href="#_resources">13. Resources</a></li>
+<li><a href="#_before_you_hack">14. Before You Hack</a></li>
+<li><a href="#_thetapylib">15. thetapylib</a></li>
+<li><a href="#_next_steps">16. Next Steps</a></li>
 </ul>
 </div>
 </div>
@@ -471,7 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unofficial_and_unauthorized">Unofficial and Unauthorized</h2>
+<h2 id="_unofficial_and_unauthorized">1. Unofficial and Unauthorized</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is an unofficial, community-generated guide to using the RICOH THETA S API.
@@ -480,25 +459,62 @@ This is not authorized by RICOH and is based on publicly available information.<
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ricoh_theta_developer_community_guide_and_other_resources">RICOH THETA Developer Community Guide and Other Resources</h2>
+<h2 id="_official_information">2. Official Information</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>We are in the process of dividing the guide into two sections:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p><a href="http://codetricity.github.io/theta-s/index.html">Unofficial API Usage</a> (This Guide)</p>
+<p><a href="https://developers.theta360.com/en/docs/v2/api_reference/">RICOH THETA API v2</a>,
+compliant with
+<a href="https://developers.google.com/streetview/open-spherical-camera/">Open Spherical Camera API version 1.0</a> from Google.</p>
 </li>
 <li>
-<p><a href="http://theta360developers.github.io/community-document/community.html">Unofficial 360 Media Guide</a> Live Streaming of 360 videos, 360 image display.</p>
+<p><a href="https://developers.theta360.com/en/forums/">THETA Developers Official Forum</a></p>
 </li>
-</ol>
+<li>
+<p><a href="https://developers.theta360.com/en/docs/sdk/">Official SDK</a></p>
+</li>
+<li>
+<p><a href="https://theta360.com/en/support/download/">Windows, Mac, iOS, Android apps</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connect_computer_to_theta_s">Connect Computer to THETA S</h2>
+<h2 id="_unofficial_information">3. Unofficial Information</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/theta360developers">GitHub listing of community repositories</a> - libraries and code examples from the community</p>
+</li>
+<li>
+<p><a href="http://theta360developers.github.io/blog/">Blog for developers</a> - How-To articles from the community</p>
+</li>
+<li>
+<p>Guides</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://codetricity.github.io/theta-s/index.html">Unofficial API Guide</a> - Use the RICOH
+THETA S API, a HTTP API based on Open Spherical Camera (OSC) specifications.
+Beginners should start here. Web browser using advanced HTTP clients,
+command line curl, Python. Planned examples for JavaScript and other languages.</p>
+</li>
+<li>
+<p><a href="http://theta360developers.github.io/community-document/community.html">Unofficial Media Guide</a> -
+360 degree media management. Streaming video, equirectangular conversion, stitching</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connect_computer_to_theta_s">4. Connect Computer to THETA S</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Turn on the THETA S.  The WiFi icon will flash blue.</p>
@@ -558,7 +574,7 @@ must be <code>192.168.1.1</code>.  The gateway is the THETA S.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_test_commands_from_computer_to_camera">Test Commands From Computer to Camera</h2>
+<h2 id="_test_commands_from_computer_to_camera">5. Test Commands From Computer to Camera</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You can use any tool to test <code>POST</code> and <code>GET</code> commands to the camera.
@@ -649,7 +665,7 @@ site.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_taking_pictures">Taking Pictures</h2>
+<h2 id="_taking_pictures">6. Taking Pictures</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Start the session.</p>
@@ -740,7 +756,7 @@ time.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testing_workflow_using_a_http_browser_tool">Testing Workflow Using a HTTP Browser Tool</h2>
+<h2 id="_testing_workflow_using_a_http_browser_tool">7. Testing Workflow Using a HTTP Browser Tool</h2>
 <div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
@@ -784,7 +800,7 @@ build a functional mock server, send it to me. :-)
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testing_theta_s_api_with_python">Testing THETA S API with Python</h2>
+<h2 id="_testing_theta_s_api_with_python">8. Testing THETA S API with Python</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://github.com/codetricity/theta-s-api-tests">Sample code</a>
@@ -1008,7 +1024,7 @@ an interface to access the Python library we&#8217;re building.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_python_desktop_application_example">Python Desktop Application Example</h2>
+<h2 id="_python_desktop_application_example">9. Python Desktop Application Example</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -1054,7 +1070,7 @@ GUI prior to the Hackathon, but we&#8217;re in crunch time.
 </table>
 </div>
 <div class="sect2">
-<h3 id="_full_program">Full Program</h3>
+<h3 id="_full_program">9.1. Full Program</h3>
 <div class="literalblock">
 <div class="content">
 <pre>import pygame, sys
@@ -1130,7 +1146,7 @@ SCREEN.blit(developers_logo, (10, 10))</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_walkthrough">Code Walkthrough</h3>
+<h3 id="_code_walkthrough">9.2. Code Walkthrough</h3>
 <div class="paragraph">
 <p>Import the <code>pygame</code> and <code>sys</code> libraries and set up a blank window.</p>
 </div>
@@ -1219,7 +1235,7 @@ point of the mouse is inside of the button, then take the picture.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transferring_files_from_the_theta">Transferring Files from the THETA</h2>
+<h2 id="_transferring_files_from_the_theta">10. Transferring Files from the THETA</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Here&#8217;s an example of getting the file from the camera to a computer
@@ -1297,7 +1313,7 @@ your local storage.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_google_maps_photos">Google Maps, Photos</h2>
+<h2 id="_google_maps_photos">11. Google Maps, Photos</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://www.google.com/intl/en_us/maps/streetview/">Google Street View</a></p>
@@ -1310,14 +1326,14 @@ You can share and view your spherical images on Google’s service
 (Gallery, Google Maps, Google+, Photos).</p>
 </div>
 <div class="sect2">
-<h3 id="_maps">Maps</h3>
+<h3 id="_maps">11.1. Maps</h3>
 <div class="paragraph">
 <p>You can share the place you photographed with RICOH THETA
 by posting your spherical images on Google Maps.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_google_and_google_photos">Google+ and Google Photos</h3>
+<h3 id="_google_and_google_photos">11.2. Google+ and Google Photos</h3>
 <div class="paragraph">
 <p>You can share your spherical images with your friends by posting them to Google+.
  Spherical images posted to Google+ can be rotated and viewed using this app on an Android phone. Also, when you save your spherical images on your smart phone, they will be synced with Google Photos using Auto Backup, making it easy to see them on Google+.</p>
@@ -1326,14 +1342,14 @@ by posting your spherical images on Google Maps.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_raspberry_pi">Raspberry Pi</h2>
+<h2 id="_raspberry_pi">12. Raspberry Pi</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Raspberry Pi works great with the RICOH THETA S API over WiFi and
 over USB.</p>
 </div>
 <div class="sect2">
-<h3 id="_using_an_ir_remote_to_control_the_theta_s">Using an IR Remote to Control the THETA S</h3>
+<h3 id="_using_an_ir_remote_to_control_the_theta_s">12.1. Using an IR Remote to Control the THETA S</h3>
 <div class="paragraph">
 <p>In this example, I have it working with the
 <a href="https://flirc.tv/">FLIRC</a> USB dongle to connect a simple IR remote
@@ -1379,7 +1395,7 @@ the GUI serves no purpose other than testing from the Pi to the THETA.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_screengrabs_over_usb_in_live_streaming_mode">Screengrabs Over USB in Live Streaming Mode</h3>
+<h3 id="_screengrabs_over_usb_in_live_streaming_mode">12.2. Screengrabs Over USB in Live Streaming Mode</h3>
 <div class="paragraph">
 <p>The THETA S can be put into liveStreaming mode by holding down the
 bottom button and turning the power on while holding the button down.</p>
@@ -1401,10 +1417,10 @@ of the Raspberry Pi.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_resources">Resources</h2>
+<h2 id="_resources">13. Resources</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_api_documentation">API Documentation</h3>
+<h3 id="_api_documentation">13.1. API Documentation</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1418,7 +1434,7 @@ RICOH THETA S is OSC v1 compliant</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_phone_applications">Phone Applications</h3>
+<h3 id="_phone_applications">13.2. Phone Applications</h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -1432,7 +1448,7 @@ The THETA S requires a new app.  The older app will not work.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_apps">Official RICOH Apps</h4>
+<h4 id="_official_ricoh_apps">13.2.1. Official RICOH Apps</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1445,7 +1461,7 @@ The THETA S requires a new app.  The older app will not work.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_sdk">Official RICOH SDK</h4>
+<h4 id="_official_ricoh_sdk">13.2.2. Official RICOH SDK</h4>
 <div class="paragraph">
 <p>There&#8217;s a lot of great sample code in the RICOH THETA SDK.  Download it
 from the link below.  There are different SDKs for the RICOH THETA m15 and the RICOH THETA S.
@@ -1460,7 +1476,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_third_party_recommended_viewers">Third-Party Recommended Viewers</h4>
+<h4 id="_third_party_recommended_viewers">13.2.3. Third-Party Recommended Viewers</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1474,7 +1490,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_youtube_360_degree_videos">YouTube 360 degree Videos</h3>
+<h3 id="_youtube_360_degree_videos">13.3. YouTube 360 degree Videos</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1487,7 +1503,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untested_community_viewers">Untested Community Viewers</h3>
+<h3 id="_untested_community_viewers">13.4. Untested Community Viewers</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1503,7 +1519,7 @@ Example image in viewer is
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_hack">Before You Hack</h2>
+<h2 id="_before_you_hack">14. Before You Hack</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1564,7 +1580,7 @@ I have not tested it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_thetapylib">thetapylib</h2>
+<h2 id="_thetapylib">15. thetapylib</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The sample Python library is included purely as an example of some of the
@@ -1785,7 +1801,7 @@ elif sys.argv[1] == "stopCapture":
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps">Next Steps</h2>
+<h2 id="_next_steps">16. Next Steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>By using a library I was able to quickly prototype applications
@@ -1848,7 +1864,7 @@ so I just gave up and used Python.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-01-07 10:32:26 PST
+Last updated 2016-01-07 13:09:12 PST
 </div>
 </div>
 </body>
