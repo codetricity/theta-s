@@ -1,4 +1,4 @@
-= Unofficial Guides
+= http://theta360developers.github.io/[Unofficial Guides]
 :icons: font
 :toc: right
 :toclevels: 1
