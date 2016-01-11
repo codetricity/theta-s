@@ -5,7 +5,7 @@
 :toc-title: Contents
 :sectnums:
 
-image::img/api_guide_logo.png[]
+image::img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
 
 Send comments and corrections to <ricohtheta360@oppkey.com>
 
