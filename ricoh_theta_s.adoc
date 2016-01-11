@@ -4,7 +4,7 @@
 :toclevels: 1
 :toc-title: Contents
 :sectnums:
-The RICOH THETA Developer Community  <ricohtheta360@oppkey.com>
+The Unofficial RICOH THETA Developer Community  <ricohtheta360@oppkey.com>
 
 image::img/desktop/dev_app.png[]
 
