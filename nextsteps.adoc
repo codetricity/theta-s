@@ -12,20 +12,20 @@ tested the code on Android and it will need minor modification.
 I may have it by the time of the hackathon.
 . *Kivy Python library*: This Python library runs on everything Pygame runs on
 and runs on iOS.  It also has multi-touch and swipe support.
-. *Hardware remote*: I was planning to use https://flirc.tv/[FLIRC] to send IR
-commands to a Raspberry Pi for the demo.  It's easy to do since the FLIRC
-USB dongle simply translates keyboard commands.  It would be easy to
-use Pygame to capture keyboard presses.  Unfortunately, I ran out of time.
-Both Kivy and Pygame work with the Raspberry Pi.  I have not tested this yet.
-. *External sensors*: By using a Raspberry Pi with external sensors, it would
-be easy to trigger the camera to take pictures with some input, such as
-a motion detector, light, temperature, or position.
-. *JavaScript*: I tried this for about 30 minutes using a `jQuery.ajax`
- and ran into a permissions error running it from a browser.  I did
- not try `node.js`, which may work.
+. *Hardware remote*: I built examples using https://flirc.tv/[FLIRC] to send IR
+commands to a Raspberry Pi for a demo.  It's easy to do since the FLIRC
+USB dongle simply translates keyboard commands.  I
+used Pygame to capture keyboard presses.
+Both Kivy and Pygame work with the Raspberry Pi. The remote example was
+primarily a concept demo. Most people will probably use bluetooth.
+. *External sensors*: By using a Raspberry Pi with external sensors, it is easy
+to trigger the camera to take pictures with some input, such as
+a motion detector, light, temperature, or position. I ran experiments
+using the GPIO pins and physical buttons.
+. *JavaScript*: I only have JavaScript working with Node.js now, not
+within a browser. There are two NPM packages.
 
-WARNING: I believe that JavaScript will not work with a browser due to
-camera-side (server-side) security settings. I think you may be able to to use
-`node.js` to write JavaScript programs.  I have not tested it.  I
-looked for a way to use jQuery with node.js.  It looked a bit involved,
-so I just gave up and used Python.
+* https://www.npmjs.com/package/osc-client[OSC Client by turbobeast]
+** https://github.com/BublTechnology/osc-client[GitHub repository of OCS Client]
+* https://www.npmjs.com/package/osc-client-theta_s[OSC Client THETA S by horihiro]
+** https://gitlab.com/horihiro/osc-client-theta_s#README[GitLab repository of Client OCS THETA S]

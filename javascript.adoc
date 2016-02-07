@@ -1,0 +1,43 @@
+== Testing THETA S API with JavaScript
+
+Normally, JavaScript within a web browser will not be able to access the
+THETA due to security restrictions. However, Node.js is able to communicate
+with the camera, so that’s what I recommend using.
+
+I https://nodejs.org/en/[downloaded Node.js] for Windows.
+Then, I followed a
+blog post by Satoru Yamada who describes
+http://theta360developers.github.io/blog/javascript/2015/12/17/theta-s-nodejs.html[how to
+access the THETA camera with JavaScript].
+After copying and pasting his code into a text editor,
+titling the program `main.js` and running it using the
+`node` command prompt” I ran into a problem with the `osc-client`.
+
+This was simply remedied by downloading the
+https://www.npmjs.com/package/osc-client[`osc-client`] using NPM.
+After downloading osc-client, I tried running the program at
+the command prompt again.
+
+IMPORTANT: Remember to connect to the camera over WiFi first
+
+If everything goes well then the program will tell the camera to
+take a picture, then save the newly created picture in the directory where
+you executed the command. The file is immediately transferred to the computer.
+
+If you want to take videos there is an additional package that needs to be
+installed. A community member has created an add on to the osc-client
+called https://www.npmjs.com/package/osc-client-theta_s[osc-client-theta_s]
+that allows video capture and download. His code is included in the same link.
+
+I ran into a series of problems with his code. First I had to download a
+series of modules (superagent, debug, qs, osc-client-theta_s)
+using NPM (which can be found by simply typing in the “find packages”
+  search bar). Then `ThetaSOscClient` returned as undefined.
+
+So far, I have not been able to move past this point.
+The
+https://gitlab.com/horihiro/osc-client-theta_s/tree/master[entire code sample for osc-client-theta_s is available on GitLab].
+
+image::img/javascript/osc-client-theta-s.png[]
+
+Perhaps you may have better luck.

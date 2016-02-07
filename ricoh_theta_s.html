@@ -755,9 +755,9 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_taking_pictures">4. Taking Pictures</a></li>
 <li><a href="#_testing_workflow_using_a_http_browser_tool">5. Testing Workflow Using a HTTP Browser Tool</a></li>
 <li><a href="#_testing_theta_s_api_with_python">6. Testing THETA S API with Python</a></li>
-<li><a href="#_python_desktop_application_example">7. Python Desktop Application Example</a></li>
-<li><a href="#_transferring_files_from_the_theta">8. Transferring Files from the THETA</a></li>
-<li><a href="#_google_maps_photos">9. Google Maps, Photos</a></li>
+<li><a href="#_testing_theta_s_api_with_javascript">7. Testing THETA S API with JavaScript</a></li>
+<li><a href="#_python_desktop_application_example">8. Python Desktop Application Example</a></li>
+<li><a href="#_transferring_files_from_the_theta">9. Transferring Files from the THETA</a></li>
 <li><a href="#_raspberry_pi">10. Raspberry Pi</a></li>
 <li><a href="#_additional_resources">11. Additional Resources</a></li>
 <li><a href="#_before_you_hack">12. Before You Hack</a></li>
@@ -1358,7 +1358,75 @@ an interface to access the Python library we&#8217;re building.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_python_desktop_application_example">7. Python Desktop Application Example</h2>
+<h2 id="_testing_theta_s_api_with_javascript">7. Testing THETA S API with JavaScript</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Normally, JavaScript within a web browser will not be able to access the
+THETA due to security restrictions. However, Node.js is able to communicate
+with the camera, so that’s what I recommend using.</p>
+</div>
+<div class="paragraph">
+<p>I <a href="https://nodejs.org/en/">downloaded Node.js</a> for Windows.
+Then, I followed a
+blog post by Satoru Yamada who describes
+<a href="http://theta360developers.github.io/blog/javascript/2015/12/17/theta-s-nodejs.html">how to
+access the THETA camera with JavaScript</a>.
+After copying and pasting his code into a text editor,
+titling the program <code>main.js</code> and running it using the
+<code>node</code> command prompt” I ran into a problem with the <code>osc-client</code>.</p>
+</div>
+<div class="paragraph">
+<p>This was simply remedied by downloading the
+<a href="https://www.npmjs.com/package/osc-client"><code>osc-client</code></a> using NPM.
+After downloading osc-client, I tried running the program at
+the command prompt again.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Remember to connect to the camera over WiFi first
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If everything goes well then the program will tell the camera to
+take a picture, then save the newly created picture in the directory where
+you executed the command. The file is immediately transferred to the computer.</p>
+</div>
+<div class="paragraph">
+<p>If you want to take videos there is an additional package that needs to be
+installed. A community member has created an add on to the osc-client
+called <a href="https://www.npmjs.com/package/osc-client-theta_s">osc-client-theta_s</a>
+that allows video capture and download. His code is included in the same link.</p>
+</div>
+<div class="paragraph">
+<p>I ran into a series of problems with his code. First I had to download a
+series of modules (superagent, debug, qs, osc-client-theta_s)
+using NPM (which can be found by simply typing in the “find packages”
+  search bar). Then <code>ThetaSOscClient</code> returned as undefined.</p>
+</div>
+<div class="paragraph">
+<p>So far, I have not been able to move past this point.
+The
+<a href="https://gitlab.com/horihiro/osc-client-theta_s/tree/master">entire code sample for osc-client-theta_s is available on GitLab</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/javascript/osc-client-theta-s.png" alt="osc client theta s">
+</div>
+</div>
+<div class="paragraph">
+<p>Perhaps you may have better luck.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_python_desktop_application_example">8. Python Desktop Application Example</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -1404,7 +1472,7 @@ GUI prior to the Hackathon, but we&#8217;re in crunch time.
 </table>
 </div>
 <div class="sect2">
-<h3 id="_full_program">7.1. Full Program</h3>
+<h3 id="_full_program">8.1. Full Program</h3>
 <div class="literalblock">
 <div class="content">
 <pre>import pygame, sys
@@ -1480,7 +1548,7 @@ SCREEN.blit(developers_logo, (10, 10))</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_walkthrough">7.2. Code Walkthrough</h3>
+<h3 id="_code_walkthrough">8.2. Code Walkthrough</h3>
 <div class="paragraph">
 <p>Import the <code>pygame</code> and <code>sys</code> libraries and set up a blank window.</p>
 </div>
@@ -1569,7 +1637,7 @@ point of the mouse is inside of the button, then take the picture.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transferring_files_from_the_theta">8. Transferring Files from the THETA</h2>
+<h2 id="_transferring_files_from_the_theta">9. Transferring Files from the THETA</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Here&#8217;s an example of getting the file from the camera to a computer
@@ -1636,41 +1704,6 @@ your local storage.</p>
         response = requests.post(url, data=body, stream=True)
         for block in response.iter_content(1024):
             handle.write(block)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>/<strong>include::live_streaming.adoc[]</strong>/</p>
-</div>
-<div class="paragraph">
-<p>/<strong>include::video_conversion.adoc[]</strong>/</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_google_maps_photos">9. Google Maps, Photos</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="https://www.google.com/intl/en_us/maps/streetview/">Google Street View</a></p>
-</div>
-<div class="paragraph">
-<p>RICOH THETA supports
-<a href="https://www.google.com/maps/about/contribute/photosphere/">Google Photo Sphere</a>
- XMP.
-You can share and view your spherical images on Google’s service
-(Gallery, Google Maps, Google+, Photos).</p>
-</div>
-<div class="sect2">
-<h3 id="_maps">9.1. Maps</h3>
-<div class="paragraph">
-<p>You can share the place you photographed with RICOH THETA
-by posting your spherical images on Google Maps.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_google_and_google_photos">9.2. Google+ and Google Photos</h3>
-<div class="paragraph">
-<p>You can share your spherical images with your friends by posting them to Google+.
- Spherical images posted to Google+ can be rotated and viewed using this app on an Android phone. Also, when you save your spherical images on your smart phone, they will be synced with Google Photos using Auto Backup, making it easy to see them on Google+.</p>
 </div>
 </div>
 </div>
@@ -2159,46 +2192,55 @@ I may have it by the time of the hackathon.</p>
 and runs on iOS.  It also has multi-touch and swipe support.</p>
 </li>
 <li>
-<p><strong>Hardware remote</strong>: I was planning to use <a href="https://flirc.tv/">FLIRC</a> to send IR
-commands to a Raspberry Pi for the demo.  It&#8217;s easy to do since the FLIRC
-USB dongle simply translates keyboard commands.  It would be easy to
-use Pygame to capture keyboard presses.  Unfortunately, I ran out of time.
-Both Kivy and Pygame work with the Raspberry Pi.  I have not tested this yet.</p>
+<p><strong>Hardware remote</strong>: I built examples using <a href="https://flirc.tv/">FLIRC</a> to send IR
+commands to a Raspberry Pi for a demo.  It&#8217;s easy to do since the FLIRC
+USB dongle simply translates keyboard commands.  I
+used Pygame to capture keyboard presses.
+Both Kivy and Pygame work with the Raspberry Pi. The remote example was
+primarily a concept demo. Most people will probably use bluetooth.</p>
 </li>
 <li>
-<p><strong>External sensors</strong>: By using a Raspberry Pi with external sensors, it would
-be easy to trigger the camera to take pictures with some input, such as
-a motion detector, light, temperature, or position.</p>
+<p><strong>External sensors</strong>: By using a Raspberry Pi with external sensors, it is easy
+to trigger the camera to take pictures with some input, such as
+a motion detector, light, temperature, or position. I ran experiments
+using the GPIO pins and physical buttons.</p>
 </li>
 <li>
-<p><strong>JavaScript</strong>: I tried this for about 30 minutes using a <code>jQuery.ajax</code>
-and ran into a permissions error running it from a browser.  I did
-not try <code>node.js</code>, which may work.</p>
+<p><strong>JavaScript</strong>: I only have JavaScript working with Node.js now, not
+within a browser. There are two NPM packages.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.npmjs.com/package/osc-client">OSC Client by turbobeast</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/BublTechnology/osc-client">GitHub repository of OCS Client</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/osc-client-theta_s">OSC Client THETA S by horihiro</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://gitlab.com/horihiro/osc-client-theta_s#README">GitLab repository of Client OCS THETA S</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ol>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-I believe that JavaScript will not work with a browser due to
-camera-side (server-side) security settings. I think you may be able to to use
-<code>node.js</code> to write JavaScript programs.  I have not tested it.  I
-looked for a way to use jQuery with node.js.  It looked a bit involved,
-so I just gave up and used Python.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-03 19:05:16 PST
+Last updated 2016-02-06 20:51:35 PST
 </div>
 </div>
 </body>

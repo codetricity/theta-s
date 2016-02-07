@@ -159,19 +159,11 @@ build a functional mock server, send it to me. :-)
 
 include::python_tests.adoc[]
 
+include::javascript.adoc[]
+
 include::python_desktop.adoc[]
 
-////
-include::kivy_example.adoc[]
-////
-
 include::transfer.adoc[]
-
-/*include::live_streaming.adoc[]*/
-
-/*include::video_conversion.adoc[]*/
-
-include::google.adoc[]
 
 include::rpi.adoc[]
 
