@@ -1,4 +1,4 @@
-== Testing THETA S API with Python
+== Python
 
 https://github.com/codetricity/theta-s-api-tests[Sample code]
 is available on GitHub.
