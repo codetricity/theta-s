@@ -1378,7 +1378,7 @@ titling the program <code>main.js</code> and running it using the
 <div class="paragraph">
 <p>This was simply remedied by downloading the
 <a href="https://www.npmjs.com/package/osc-client"><code>osc-client</code></a> using NPM.
-After downloading osc-client, I tried running the program at
+After downloading <code>osc-client</code>, I tried running the program at
 the command prompt again.</p>
 </div>
 <div class="admonitionblock important">
@@ -1392,6 +1392,49 @@ Remember to connect to the camera over WiFi first
 </td>
 </tr>
 </table>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var fs = require('fs');
+var OscClientClass = require('osc-client').OscClient;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var domain = '192.168.1.1';
+var port = '80';
+var client = new OscClientClass(domain, port);
+var sessionId;
+var filename;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>client.startSession().then(function(res){
+  sessionId = res.body.results.sessionId;
+  return client.takePicture(sessionId);
+  })</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>.then(function (res) {
+  var pictureUri = res.body.results.fileUri;
+  console.log('pictureUri :%s',pictureUri);</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  var path = pictureUri.split('/');
+  filename = path.pop();
+  return client.getImage(pictureUri);
+})
+.then(function(res){
+  var imgData = res.body;
+  fs.writeFile(filename,imgData);
+  return client.closeSession(sessionId);
+});</pre>
+</div>
 </div>
 <div class="paragraph">
 <p>If everything goes well then the program will tell the camera to

@@ -15,10 +15,38 @@ titling the program `main.js` and running it using the
 
 This was simply remedied by downloading the
 https://www.npmjs.com/package/osc-client[`osc-client`] using NPM.
-After downloading osc-client, I tried running the program at
+After downloading `osc-client`, I tried running the program at
 the command prompt again.
 
 IMPORTANT: Remember to connect to the camera over WiFi first
+
+  var fs = require('fs');
+  var OscClientClass = require('osc-client').OscClient;
+
+  var domain = '192.168.1.1';
+  var port = '80';
+  var client = new OscClientClass(domain, port);
+  var sessionId;
+  var filename;
+
+  client.startSession().then(function(res){
+    sessionId = res.body.results.sessionId;
+    return client.takePicture(sessionId);
+    })
+
+  .then(function (res) {
+    var pictureUri = res.body.results.fileUri;
+    console.log('pictureUri :%s',pictureUri);
+
+    var path = pictureUri.split('/');
+    filename = path.pop();
+    return client.getImage(pictureUri);
+  })
+  .then(function(res){
+    var imgData = res.body;
+    fs.writeFile(filename,imgData);
+    return client.closeSession(sessionId);
+  });
 
 If everything goes well then the program will tell the camera to
 take a picture, then save the newly created picture in the directory where
