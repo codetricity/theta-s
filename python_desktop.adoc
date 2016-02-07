@@ -1,4 +1,4 @@
-== Python Desktop Application Example
+== Python Desktop
 
 
 image::img/desktop/desktop_app.png[]
