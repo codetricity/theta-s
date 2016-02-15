@@ -1366,6 +1366,35 @@ THETA due to security restrictions. However, Node.js is able to communicate
 with the camera, so that’s what I recommend using.</p>
 </div>
 <div class="paragraph">
+<p>In addition to server-side applications,
+people have successfully built applications using Cordova and
+Titanium. At the DeveloperWeek Hackathon, Thuong Ho showed a nice
+example using
+<a href="http://ionicframework.com/">Ionic</a>
+and
+<a href="http://browserify.org/">Browserify</a>.
+Browserify lets you require('modules') in the browser by bundling
+up all of your dependencies. He used Ionic to get the
+<a href="https://angularjs.org/">AngularJS</a> components in his mobile application and
+was able to take a picture and download the code using the Node.js example code
+below.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Remember that running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with the easiest example, Node.js, from the command line.</p>
+</div>
+<div class="paragraph">
 <p>I <a href="https://nodejs.org/en/">downloaded Node.js</a> for Windows.
 Then, I followed a
 blog post by Satoru Yamada who describes
@@ -1464,7 +1493,13 @@ The
 </div>
 </div>
 <div class="paragraph">
-<p>Perhaps you may have better luck.</p>
+<p>I saw a demo by Nate Levine at the DeveloperWeek Hackathon where he was
+able to successfully take a video using the osc-client-theta_s module and
+download it to his local computer. He mentioned that the example code
+from horihori doesn&#8217;t work. However, the module does work and his team
+won the THETA API hackathon prize at the hackathon. They took 2nd place
+overall out of 120 teams. I have a note out to have to try and get his
+example code.</p>
 </div>
 </div>
 </div>
@@ -2283,7 +2318,7 @@ within a browser. There are two NPM packages.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-06 20:51:35 PST
+Last updated 2016-02-15 04:58:03 PST
 </div>
 </div>
 </body>
