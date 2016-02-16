@@ -1386,7 +1386,7 @@ below.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Remember that running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
+Running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
 </td>
 </tr>
 </table>
@@ -1406,8 +1406,27 @@ titling the program <code>main.js</code> and running it using the
 </div>
 <div class="paragraph">
 <p>This was simply remedied by downloading the
-<a href="https://www.npmjs.com/package/osc-client"><code>osc-client</code></a> using NPM.
-After downloading <code>osc-client</code>, I tried running the program at
+<a href="https://www.npmjs.com/package/osc-client"><code>osc-client</code></a> using NPM.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>npm install osc-client --save</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Use --save
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After installing <code>osc-client</code>, I tried running the program at
 the command prompt again.</p>
 </div>
 <div class="admonitionblock important">
@@ -1417,7 +1436,7 @@ the command prompt again.</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Remember to connect to the camera over WiFi first
+Connect to the camera over WiFi first
 </td>
 </tr>
 </table>
@@ -1470,6 +1489,18 @@ var filename;</pre>
 take a picture, then save the newly created picture in the directory where
 you executed the command. The file is immediately transferred to the computer.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Organzing a [github repository of JavaScript API examples](<a href="https://github.com/theta360developers/javascript-api-samples" class="bare">https://github.com/theta360developers/javascript-api-samples</a>)
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>If you want to take videos there is an additional package that needs to be
 installed. A community member has created an add on to the osc-client
@@ -1483,9 +1514,9 @@ using NPM (which can be found by simply typing in the “find packages”
   search bar). Then <code>ThetaSOscClient</code> returned as undefined.</p>
 </div>
 <div class="paragraph">
-<p>So far, I have not been able to move past this point.
-The
-<a href="https://gitlab.com/horihiro/osc-client-theta_s/tree/master">entire code sample for osc-client-theta_s is available on GitLab</a>.</p>
+<p>Even if you use the
+<a href="https://gitlab.com/horihiro/osc-client-theta_s/tree/master">entire code sample for osc-client-theta_s that is available on GitLab</a>,
+you will see this error.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1493,13 +1524,82 @@ The
 </div>
 </div>
 <div class="paragraph">
-<p>I saw a demo by Nate Levine at the DeveloperWeek Hackathon where he was
+<p>Nate Levine got the node module working at the DeveloperWeek Hackathon where he was
 able to successfully take a video using the osc-client-theta_s module and
 download it to his local computer. He mentioned that the example code
 from horihori doesn&#8217;t work. However, the module does work and his team
 won the THETA API hackathon prize at the hackathon. They took 2nd place
-overall out of 120 teams. I have a note out to have to try and get his
-example code.</p>
+overall out of 120 teams.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a code snippet portion related to 360 video download using
+node and the THETA S API. This is from Nate&#8217;s award-winning code. :-)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var fs = require('fs');
+var ThetaSOscClient = require('osc-client-theta_s').ThetaSOscClient;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>var domain = '192.168.1.1';
+var port = '80';
+var thetaClient = new ThetaSOscClient(domain, port);
+var sessionId;
+var fileName;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>thetaClient.startSession().then(function (res) {
+  //Grab the session id
+  sessionId = res.body.results.sessionId;
+  return thetaClient.setOptions(sessionId, {captureMode:"_video"})
+})
+.then(function (res) {
+  console.log('starting capture');
+  return thetaClient.startCapture(sessionId);
+})
+.catch(function (error) {
+  console.log(error);
+});</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>// Stop capturing after a certain interval in ms
+var interval = 5000;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>setTimeout(function () {
+  console.log('stopping capture');
+  thetaClient.stopCapture(sessionId)
+  .then(function (res) {
+    console.log('stopped capture, writing file');
+    return thetaClient.listAll({entryCount:1, sort:"newest"});
+  })
+  // Get the filename and most recently recorded video uri
+  .then(function (res) {
+    fileName = res.body.results.entries[0].name;
+    console.log(fileName);
+    return thetaClient.getVideo(res.body.results.entries[0].uri, "full");
+  })
+  // Write to disk
+  .then(function (res) {
+    fs.writeFile(fileName, res.body);
+  })
+  .then(function (err) {
+    console.log('closing the session');
+    return thetaClient.closeSession(sessionId);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}, interval);</pre>
+</div>
 </div>
 </div>
 </div>
