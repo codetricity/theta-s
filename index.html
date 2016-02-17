@@ -2082,8 +2082,9 @@ WiFi working.</p>
 </li>
 <li>
 <p>The THETA can connect to only one device at a time.  It can connect
-to a phone or a computer, but not at the same time.  You can connect to
-the THETA, but your team mate will not be able to connect to it at the same time.</p>
+to a phone or a computer, but not at the same time.  If you have
+dual network interfaces, you can connect to the Internet and the
+THETA at the same time. You may need to adjust your routes.</p>
 </li>
 <li>
 <p>There are multiple THETAs at the hackathon with similar SSID access point
@@ -2103,16 +2104,23 @@ no problem.  The lack of <code>_liveStreaming</code> switching with the API is n
 from reading the API documentation.</p>
 </li>
 <li>
-<p>Live streaming is only in dual fish-eye mode.  It can&#8217;t be switched to
-output equirectangular video. If you need this, you will need to write your
-own code to stitch it. (as of Sept 15, 2015)</p>
+<p>Live streaming is only in dual fish-eye mode and only with USB or HDMI,
+not WiFi.
+As of February 16, 2016, RICOH
+demoed live streaming of video in equirectangular mode using USB
+at CES in January
+and at DeveloperWeek hackathon in February. The live streaming
+stitching driver is still not publicly available. It does not work with HDMI.</p>
 </li>
 <li>
-<p>Live streaming won&#8217;t work over WiFi.</p>
+<p>Live streaming won&#8217;t work over WiFi. Live Preview mode will work
+at lower resolution and lower framerates. See the
+[Unofficial Media Guide](<a href="http://theta360developers.github.io/community-document/community.html" class="bare">http://theta360developers.github.io/community-document/community.html</a>)
+for video specifications.</p>
 </li>
 <li>
-<p>We don&#8217;t have example code to de-fish the spherical image. Sorry, we ran
-out of time.  :-(</p>
+<p>There is a [GitHub Repository](<a href="https://github.com/theta360developers?tab=repositories" class="bare">https://github.com/theta360developers?tab=repositories</a>)
+of example code from the community.</p>
 </li>
 <li>
 <p>The WiFi signal is not strong.  Test the distance and signal strength before
