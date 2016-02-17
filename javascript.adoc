@@ -74,7 +74,7 @@ If everything goes well then the program will tell the camera to
 take a picture, then save the newly created picture in the directory where
 you executed the command. The file is immediately transferred to the computer.
 
-NOTE: Organzing a [github repository of JavaScript API examples](https://github.com/theta360developers/javascript-api-samples)
+NOTE: Organzing a https://github.com/theta360developers/javascript-api-samples[github repository of JavaScript API examples]
 
 If you want to take videos there is an additional package that needs to be
 installed. A community member has created an add on to the osc-client
@@ -101,7 +101,8 @@ won the THETA API hackathon prize at the hackathon. They took 2nd place
 overall out of 120 teams.
 
 Here's a code snippet portion related to 360 video download using
-node and the THETA S API. This is from Nate's award-winning code. :-)
+node and the THETA S API. This is from
+https://github.com/natelevine/Gauger[Nate's award-winning code]. :-)
 
 
   var fs = require('fs');
