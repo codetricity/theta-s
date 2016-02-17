@@ -171,11 +171,11 @@ build a functional mock server, send it to me. :-)
 
 include::python_tests.adoc[]
 
-include::javascript.adoc[]
-
 include::python_desktop.adoc[]
 
 include::transfer.adoc[]
+
+include::javascript.adoc[]
 
 include::rpi.adoc[]
 

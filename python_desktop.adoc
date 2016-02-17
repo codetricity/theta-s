@@ -1,4 +1,4 @@
-== Python Desktop
+=== Python Desktop
 
 
 image::img/desktop/desktop_app.png[]
@@ -24,7 +24,7 @@ deskTHETA.py now has more examples to start and stop video capture.  I'll
 try and get some of the file listing and transfer commands working with the
 GUI prior to the Hackathon, but we're in crunch time.
 
-=== Full Program
+==== Full Program
   import pygame, sys
   import requests
   import json
@@ -73,7 +73,7 @@ GUI prior to the Hackathon, but we're in crunch time.
 
 
 
-=== Code Walkthrough
+==== Code Walkthrough
 
 Import the `pygame` and `sys` libraries and set up a blank window.
 

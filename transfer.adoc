@@ -1,4 +1,4 @@
-== Transferring Files from the THETA
+=== Python File Transfer
 
 Here's an example of getting the file from the camera to a computer
 or Android phone.  There's easier ways to get the file from the camera,
