@@ -92,7 +92,8 @@ you will see this error.
 
 image::img/javascript/osc-client-theta-s.png[]
 
-Nate Levine got the node module working at the DeveloperWeek Hackathon where he was
+https://github.com/natelevine[Nate Levine] got the node
+module working at the DeveloperWeek Hackathon where he was
 able to successfully take a video using the osc-client-theta_s module and
 download it to his local computer. He mentioned that the example code
 from horihori doesn't work. However, the module does work and his team
