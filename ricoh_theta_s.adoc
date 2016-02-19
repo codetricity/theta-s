@@ -179,6 +179,8 @@ include::javascript.adoc[]
 
 include::rpi.adoc[]
 
+include::network.adoc[]
+
 include::resources.adoc[]
 
 include::hackathon_tips.adoc[]

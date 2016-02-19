@@ -757,10 +757,11 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_python">6. Python</a></li>
 <li><a href="#_javascript">7. JavaScript</a></li>
 <li><a href="#_raspberry_pi">8. Raspberry Pi</a></li>
-<li><a href="#_additional_resources">9. Additional Resources</a></li>
-<li><a href="#_before_you_hack">10. Before You Hack</a></li>
-<li><a href="#_thetapylib">11. thetapylib</a></li>
-<li><a href="#_next_steps">12. Next Steps</a></li>
+<li><a href="#_network">9. Network</a></li>
+<li><a href="#_additional_resources">10. Additional Resources</a></li>
+<li><a href="#_before_you_hack">11. Before You Hack</a></li>
+<li><a href="#_thetapylib">12. thetapylib</a></li>
+<li><a href="#_next_steps">13. Next Steps</a></li>
 </ul>
 </div>
 </div>
@@ -1969,10 +1970,61 @@ of the Raspberry Pi.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_additional_resources">9. Additional Resources</h2>
+<h2 id="_network">9. Network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you&#8217;re connected to the THETA with WiFi, how do you
+connect to the Internet at the same time?</p>
+</div>
+<div class="sect2">
+<h3 id="_desktop_and_development_environment">9.1. Desktop and Development Environment</h3>
+<div class="paragraph">
+<p>You need to have a separate
+network card for Internet access. The most common scenario is to connect
+your workstation to Ethernet and then put a USB WiFi adapter into a spare
+USB port. I am using a cheap WiFi adapter that I got on Amazon for $10. I
+originally bought it for my Raspberry Pi, but it works great on
+Windows 10 and the connection to the THETA is solid. I have the WiFi
+adapter less than a foot from my THETA for testing.</p>
+</div>
+<div class="paragraph">
+<p>From the Windows 10 machine, I can connect to both the THETA and the
+Internet. If I power the THETA from a 1.5A power source such as a
+portable battery or wall socket, I can test the THETA for long periods.</p>
+</div>
+<div class="paragraph">
+<p>As I normally work within a Linux VirtualBox VM running on a Windows 10
+host, I set the VirtualBox Network Adapter with a single NAT adapter. With this
+configuration, I can access both the Internet and the THETA
+from within the guest VM.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/tools/dev_environment.png" alt="dev environment">
+</div>
+<div class="title">Figure 1. Accessing the THETA and Internet Simultaneously</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mobile_phone">9.2. Mobile Phone</h3>
+<div class="paragraph">
+<p>You need to manually change the WiFi connection. If you&#8217;re using
+Android, we&#8217;ve heard that you can use your application to
+change the WiFi connection from the phone to the Internet. Here&#8217;s a discussion
+on
+<a href="http://stackoverflow.com/questions/8818290/how-to-connect-to-a-specific-wifi-network-in-android-programmatically">StackOverflow</a>
+about this. I have not tried to implement anything myself. If you build
+an application that switches the WiFi connection from the THETA to the
+Internet, send me a code snippet and I&#8217;ll put it in our repository.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources">10. Additional Resources</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_api_documentation">9.1. API Documentation</h3>
+<h3 id="_api_documentation">10.1. API Documentation</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1986,7 +2038,7 @@ RICOH THETA S is OSC v1 compliant</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_phone_applications">9.2. Phone Applications</h3>
+<h3 id="_phone_applications">10.2. Phone Applications</h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -2000,7 +2052,7 @@ The THETA S requires a new app.  The older app will not work.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_apps">9.2.1. Official RICOH Apps</h4>
+<h4 id="_official_ricoh_apps">10.2.1. Official RICOH Apps</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2013,7 +2065,7 @@ The THETA S requires a new app.  The older app will not work.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_sdk">9.2.2. Official RICOH SDK</h4>
+<h4 id="_official_ricoh_sdk">10.2.2. Official RICOH SDK</h4>
 <div class="paragraph">
 <p>There&#8217;s a lot of great sample code in the RICOH THETA SDK.  Download it
 from the link below.  There are different SDKs for the RICOH THETA m15 and the RICOH THETA S.
@@ -2028,7 +2080,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_third_party_recommended_viewers">9.2.3. Third-Party Recommended Viewers</h4>
+<h4 id="_third_party_recommended_viewers">10.2.3. Third-Party Recommended Viewers</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2042,7 +2094,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_youtube_360_degree_videos">9.3. YouTube 360 degree Videos</h3>
+<h3 id="_youtube_360_degree_videos">10.3. YouTube 360 degree Videos</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2055,7 +2107,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untested_community_viewers">9.4. Untested Community Viewers</h3>
+<h3 id="_untested_community_viewers">10.4. Untested Community Viewers</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2071,7 +2123,7 @@ Example image in viewer is
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_hack">10. Before You Hack</h2>
+<h2 id="_before_you_hack">11. Before You Hack</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -2140,7 +2192,7 @@ I have not tested it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_thetapylib">11. thetapylib</h2>
+<h2 id="_thetapylib">12. thetapylib</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The sample Python library is included purely as an example of some of the
@@ -2361,7 +2413,7 @@ elif sys.argv[1] == "stopCapture":
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps">12. Next Steps</h2>
+<h2 id="_next_steps">13. Next Steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>By using a library I was able to quickly prototype applications
@@ -2433,7 +2485,7 @@ within a browser. There are two NPM packages.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-16 16:55:58 PST
+Last updated 2016-02-18 16:00:30 PST
 </div>
 </div>
 </body>
