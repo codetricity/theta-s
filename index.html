@@ -1979,10 +1979,60 @@ connect to the Internet at the same time?</p>
 <div class="sect2">
 <h3 id="_desktop_and_development_environment">9.1. Desktop and Development Environment</h3>
 <div class="paragraph">
-<p>You need to have a separate
-network card for Internet access. The most common scenario is to connect
-your workstation to Ethernet and then put a USB WiFi adapter into a spare
-USB port. I am using a cheap WiFi adapter that I got on Amazon for $10. I
+<p>The THETA S is always at <code>192.168.1.1</code>. You can&#8217;t change the IP address.
+In my primary test environment, my Internet router from ATT is
+<code>192.168.1.254</code>. Thus, I can connect to the THETA with a USB WiFi
+adapter and to the Internet with Ethernet.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If your WiFi router is at 192.168.1.1, then you will need to change it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t know the IP address of your gateway, you can use <code>ipconfig</code>
+on Windows or <code>ifconfig</code> on Linux.</p>
+</div>
+<div class="paragraph">
+<p>This is what I see on Windows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>C:\Users\Craig&gt;ipconfig
+Windows IP Configuration
+Ethernet adapter Ethernet:
+   Connection-specific DNS Suffix  . : attlocal.net
+   IPv4 Address. . . . . . . . . . . : 192.168.1.64
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.254</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I actually have more IPv6 info, but as we&#8217;re not using IPv6 addresses
+in this example, I just included the IPv4 (192.x.x.x) information.</p>
+</div>
+<div class="paragraph">
+<p>On Windows, the connection from the desktop Windows machine to the
+THETA looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Wireless LAN adapter Wi-Fi:
+   Connection-specific DNS Suffix  . :
+   IPv4 Address. . . . . . . . . . . : 192.168.1.5
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 192.168.1.1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I am using a cheap WiFi adapter that I got on Amazon for $10. I
 originally bought it for my Raspberry Pi, but it works great on
 Windows 10 and the connection to the THETA is solid. I have the WiFi
 adapter less than a foot from my THETA for testing.</p>
@@ -2003,6 +2053,37 @@ from within the guest VM.</p>
 <img src="img/tools/dev_environment.png" alt="dev environment">
 </div>
 <div class="title">Figure 1. Accessing the THETA and Internet Simultaneously</div>
+</div>
+<div class="paragraph">
+<p>Inside of the Linux VM, I am getting good Internet access to GitHub over the
+Internet and to the THETA, which I can test using <code>curl</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ricoh@odapolis: $ ping theta360developers.github.io
+PING github.map.fastly.net (185.31.19.133) 56(84) bytes of data.
+64 bytes from 185.31.19.133: icmp_seq=1 ttl=52 time=161 ms
+64 bytes from 185.31.19.133: icmp_seq=2 ttl=52 time=161 ms
+^C
+--- github.map.fastly.net ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 161.515/161.688/161.862/0.437 ms</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ricoh@odapolis: $ curl http://192.168.1.1/osc/info
+{"manufacturer":"RICOH","model":"RICOH THETA S","serialNumber":"00001221",
+"firmwareVersion":"01.30",
+"supportUrl":"https://theta360.com/en/support/",
+"endpoints":{"httpPort":80,"httpUpdatesPort":80},
+"gps":false,"gyro":false,"uptime":226,
+"api":["/osc/info",
+"/osc/state",
+"/osc/checkForUpdates",
+"/osc/commands/execute",
+"/osc/commands/status"]}</pre>
+</div>
 </div>
 </div>
 <div class="sect2">

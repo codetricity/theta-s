@@ -2,11 +2,41 @@
 If you're connected to the THETA with WiFi, how do you
 connect to the Internet at the same time?
 
+
 === Desktop and Development Environment
-You need to have a separate
-network card for Internet access. The most common scenario is to connect
-your workstation to Ethernet and then put a USB WiFi adapter into a spare
-USB port. I am using a cheap WiFi adapter that I got on Amazon for $10. I
+The THETA S is always at `192.168.1.1`. You can't change the IP address.
+In my primary test environment, my Internet router from ATT is
+`192.168.1.254`. Thus, I can connect to the THETA with a USB WiFi
+adapter and to the Internet with Ethernet.
+
+IMPORTANT: If your WiFi router is at 192.168.1.1, then you will need to change it.
+
+If you don't know the IP address of your gateway, you can use `ipconfig`
+on Windows or `ifconfig` on Linux.
+
+This is what I see on Windows:
+
+  C:\Users\Craig>ipconfig
+  Windows IP Configuration
+  Ethernet adapter Ethernet:
+     Connection-specific DNS Suffix  . : attlocal.net
+     IPv4 Address. . . . . . . . . . . : 192.168.1.64
+     Subnet Mask . . . . . . . . . . . : 255.255.255.0
+     Default Gateway . . . . . . . . . : 192.168.1.254
+
+I actually have more IPv6 info, but as we're not using IPv6 addresses
+in this example, I just included the IPv4 (192.x.x.x) information.
+
+On Windows, the connection from the desktop Windows machine to the
+THETA looks like this:
+
+  Wireless LAN adapter Wi-Fi:
+     Connection-specific DNS Suffix  . :
+     IPv4 Address. . . . . . . . . . . : 192.168.1.5
+     Subnet Mask . . . . . . . . . . . : 255.255.255.0
+     Default Gateway . . . . . . . . . : 192.168.1.1
+
+I am using a cheap WiFi adapter that I got on Amazon for $10. I
 originally bought it for my Raspberry Pi, but it works great on
 Windows 10 and the connection to the THETA is solid. I have the WiFi
 adapter less than a foot from my THETA for testing.
@@ -21,6 +51,30 @@ configuration, I can access both the Internet and the THETA
 from within the guest VM.
 
 image::img/tools/dev_environment.png[role="thumb" title="Accessing the THETA and Internet Simultaneously"]
+
+Inside of the Linux VM, I am getting good Internet access to GitHub over the
+Internet and to the THETA, which I can test using `curl`.
+
+  ricoh@odapolis: $ ping theta360developers.github.io
+  PING github.map.fastly.net (185.31.19.133) 56(84) bytes of data.
+  64 bytes from 185.31.19.133: icmp_seq=1 ttl=52 time=161 ms
+  64 bytes from 185.31.19.133: icmp_seq=2 ttl=52 time=161 ms
+  ^C
+  --- github.map.fastly.net ping statistics ---
+  2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+  rtt min/avg/max/mdev = 161.515/161.688/161.862/0.437 ms
+
+  ricoh@odapolis: $ curl http://192.168.1.1/osc/info
+  {"manufacturer":"RICOH","model":"RICOH THETA S","serialNumber":"00001221",
+  "firmwareVersion":"01.30",
+  "supportUrl":"https://theta360.com/en/support/",
+  "endpoints":{"httpPort":80,"httpUpdatesPort":80},
+  "gps":false,"gyro":false,"uptime":226,
+  "api":["/osc/info",
+  "/osc/state",
+  "/osc/checkForUpdates",
+  "/osc/commands/execute",
+  "/osc/commands/status"]}
 
 === Mobile Phone
 You need to manually change the WiFi connection. If you're using
