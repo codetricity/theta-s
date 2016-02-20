@@ -39,7 +39,11 @@ THETA looks like this:
 I am using a cheap WiFi adapter that I got on Amazon for $10. I
 originally bought it for my Raspberry Pi, but it works great on
 Windows 10 and the connection to the THETA is solid. I have the WiFi
-adapter less than a foot from my THETA for testing.
+adapter less than a foot from my THETA for testing. There are many WiFi
+adapters at the $10 price point. If you're going
+to develop apps for the THETA, it's a good investment.
+
+image::img/network/wifi_dongle.png[role="thumb" title="Example of a cheap WiFi adapter on Amazon.com that I use on RPi and Win 10"]
 
 From the Windows 10 machine, I can connect to both the THETA and the
 Internet. If I power the THETA from a 1.5A power source such as a
