@@ -89,3 +89,19 @@ http://stackoverflow.com/questions/8818290/how-to-connect-to-a-specific-wifi-net
 about this. I have not tried to implement anything myself. If you build
 an application that switches the WiFi connection from the THETA to the
 Internet, send me a code snippet and I'll put it in our repository.
+
+=== Raspberry Pi and Windows Tablet
+If you'd like to build a standalone hardware device to give to real estate
+agents or used car marketers, you can put two Wifi adapters on Raspberry Pi
+or plug a WiFi adapter into the USB port of your tablet.
+
+This is a picture of a self-contained Raspberry Pi unit powered by a
+rechargeable battery.
+
+image::img/rpi/rpi_box.png[role="thumb" title="Prototype used car marketing unit with dual WiFi and battery power"]
+
+The Raspberry Pi is completely portable and can connect to the Internet and the
+THETA at the same time. The interface is a touchscreen. I'll update the shot
+below later with the RPi touch interface demo built with Pygame.
+
+image::img/rpi/rpi_front.png[role="thumb" title="Touchscreen for Raspberry Pi and THETA"]
