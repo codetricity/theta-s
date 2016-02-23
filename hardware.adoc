@@ -1,0 +1,20 @@
+== Other Hardware
+
+As we can't run API commands over the USB cable right now, you'll need
+to use boards that can handle a WiFi signal. The cheapest boards are
+around ESP8266, which sell for between $6 and $15. Most boards can
+be purchased for $10 and come with the microcontroller, WiFi components,
+and flash.
+
+=== ESP8266
+
+I've written a
+http://theta360developers.github.io/blog/applications/2016/02/22/remote-shutter.html[blog post]
+with information on using the ESP8266.
+
+Information:
+
+* http://theta360developers.github.io/blog/applications/2016/02/22/remote-shutter.html[Blog Post]
+* https://github.com/katsuya-san/ESP8266-THETA-S-FullRemoteControler[Katsuya-san's GitHub repo of ESP8266 code]
+* https://www.sparkfun.com/products/13231[SparkFun ESP8266 Thing] One of the more expensive boards
+* http://www.esp8266.com/[ESP8266 Community Forum]
