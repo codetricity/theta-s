@@ -101,7 +101,11 @@ rechargeable battery.
 image::img/rpi/rpi_box.png[role="thumb" title="Prototype used car marketing unit with dual WiFi and battery power"]
 
 The Raspberry Pi is completely portable and can connect to the Internet and the
-THETA at the same time. The interface is a touchscreen. I'll update the shot
-below later with the RPi touch interface demo built with Pygame.
+THETA at the same time. The interface is a touchscreen.
 
 image::img/rpi/rpi_front.png[role="thumb" title="Touchscreen for Raspberry Pi and THETA"]
+
+This is an updated version of the system with a
+RPi touch interface built with Pygame.
+
+image::img/rpi/driver_eye.png[role="thumb" title="DriverEye - Used Car Marketing System Prototype"]
