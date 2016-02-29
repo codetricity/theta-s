@@ -1,7 +1,13 @@
 == Python
 
 https://github.com/codetricity/theta-s-api-tests[Sample code]
-is available on GitHub.
+is available on GitHub. Additional Python examples are also available
+ from the community. A better https://github.com/hpd/OpenSphericalCamera[OSC Python library is available
+ from Haarm-Pieter Duiker].
+https://github.com/theta360developers/python-download-rossgoderer[Ulrich Rossgoderer wrote an example to download media from the command
+line].
+
+
 
 I am using the Python http://docs.python-requests.org/en/latest/[`requests`]
 library for `HTTP` requests.  While you can use

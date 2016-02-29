@@ -35,10 +35,10 @@ stitching driver is still not publicly available. It does not work with HDMI.
 
 * Live streaming won't work over WiFi. Live Preview mode will work
 at lower resolution and lower framerates. See the
-[Unofficial Media Guide](http://theta360developers.github.io/community-document/community.html)
+http://theta360developers.github.io/community-document/community.html[Unofficial Media Guide]
 for video specifications.
 
-* There is a [GitHub Repository](https://github.com/theta360developers?tab=repositories)
+* There is a https://github.com/theta360developers?tab=repositories[GitHub Repository]
 of example code from the community.
 
 * The WiFi signal is not strong.  Test the distance and signal strength before
