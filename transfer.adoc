@@ -48,3 +48,9 @@ your local storage.
           response = requests.post(url, data=body, stream=True)
           for block in response.iter_content(1024):
               handle.write(block)
+
+
+==== Other Command Line Python Tools
+
+* https://github.com/theta360developers/python-download-rossgoderer[Python script downloader]
+from Ulrich Rossgoderer. Community.

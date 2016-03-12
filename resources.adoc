@@ -35,3 +35,8 @@ projection panorama HTML 5 viewer.  The main source file is
 https://github.com/akokubo/ThetaViewer/blob/master/src/theta-viewer.js[here].
 Example image in viewer is
 http://akokubo.github.io/ThetaViewer/demo1.html[here].
+
+=== Programming Languages
+The HTTP API of the THETA S can be accessed from almost any programming language.
+
+* http://qiita.com/sandinist/items/9c3a77fdf262513ede3d[Article in Japanese] about using the RICOH THETA S API in shell, Ruby, Python, Swift, and C#.
