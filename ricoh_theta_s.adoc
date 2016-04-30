@@ -177,6 +177,8 @@ include::transfer.adoc[]
 
 include::javascript.adoc[]
 
+include::otherLang.adoc[]
+
 include::rpi.adoc[]
 
 include::hardware.adoc[]
