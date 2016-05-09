@@ -36,7 +36,7 @@ Send comments and corrections to <ricohtheta360@oppkey.com>
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
-== http://theta360.guide/contest/[$45,000 Dev Contest]
+== http://theta360.guide/contest/[$45,000 THETA Dev Contest]
 
 ==  Resources
 === Official Information
