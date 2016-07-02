@@ -413,7 +413,7 @@ equirectangular format.
 
 Focus on the numbers in places 5-8 and reverse the order.
 
-image::img/usb/get-storage.png[role="thumb" title="getting the storage IDs in the THETA"]
+image::img/usb/getstorageid.png[role="thumb" title="getting the storage IDs in the THETA"]
 
 ==== Get Object Handles
 
