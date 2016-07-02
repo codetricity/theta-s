@@ -178,6 +178,8 @@ include::hardware.adoc[]
 
 include::network.adoc[]
 
+include::usb.adoc[]
+
 include::resources.adoc[]
 
 include::hackathon_tips.adoc[]

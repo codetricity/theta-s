@@ -761,10 +761,11 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_raspberry_pi">10. Raspberry Pi</a></li>
 <li><a href="#_other_hardware">11. Other Hardware</a></li>
 <li><a href="#_network">12. Network</a></li>
-<li><a href="#_additional_resources">13. Additional Resources</a></li>
-<li><a href="#_before_you_hack">14. Before You Hack</a></li>
-<li><a href="#_thetapylib">15. thetapylib</a></li>
-<li><a href="#_next_steps">16. Next Steps</a></li>
+<li><a href="#_using_the_api_over_usb">13. Using the API Over USB</a></li>
+<li><a href="#_additional_resources">14. Additional Resources</a></li>
+<li><a href="#_before_you_hack">15. Before You Hack</a></li>
+<li><a href="#_thetapylib">16. thetapylib</a></li>
+<li><a href="#_next_steps">17. Next Steps</a></li>
 </ul>
 </div>
 </div>
@@ -2224,10 +2225,767 @@ RPi touch interface built with Pygame.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_additional_resources">13. Additional Resources</h2>
+<h2 id="_using_the_api_over_usb">13. Using the API Over USB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developers can access the RICOH THETA API over USB.</p>
+</div>
+<div class="sect2">
+<h3 id="_advantages_of_api_over_usb">13.1. Advantages of API Over USB</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The THETA can be left powered on indefinitely for applications such as surveillance,
+map creation or time-lapse photography</p>
+</li>
+<li>
+<p>The files download much faster from the camera to the computer</p>
+</li>
+<li>
+<p>There are no issues with WiFi signal strength or WiFi setup</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_disadvantages_of_api_over_usb">13.2. Disadvantages of API Over USB</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The PTP API (the USB one) is not as complete as the THETA API v2 (the WiFi one)</p>
+</li>
+<li>
+<p>There are less people using the USB API</p>
+</li>
+<li>
+<p>It&#8217;s harder to work with as you need to send it hex codes, not human-readable commands</p>
+</li>
+<li>
+<p>We may find issues with the libraries for PTP access</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you choose to develop your application with the v2 USB API, you are a pioneer.
+Please contribute your experiences with the community.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controlling_from_raspberry_pi_or_linux_with_usb">13.3. Controlling from Raspberry Pi or Linux With USB</h3>
+<div class="paragraph">
+<p>The community initially started connecting to the THETA from Windows with
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff384848(v=vs.85).aspx">MTP Extensions</a>
+and
+Raspberry Pi devices using
+<a href="http://libptp.sourceforge.net/">libptp</a>. As I am more familiar with Linux,
+I ran my tests on Ubuntu 16.04. I also know that people are using the same programs on the
+Raspberry Pi with Raspian OS (similar to Ubuntu or Debian).</p>
+</div>
+<div class="paragraph">
+<p>As far as I know, the API works fine on Windows and the
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff384842(v=vs.85).aspx">examples</a> on the
+Microsoft site work.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the above example, change the Op Code to 0x100e and the StorageID to 0x0
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This tutorial will focus on <code>libptp</code>, which I compiled from source.
+I&#8217;ll document the installation of <code>libptp</code> in a future update. <code>libptp</code>
+also installs <code>ptpcam</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_preparing_the_camera_for_usb_control">13.3.1. Preparing the Camera for USB Control</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Camera is on, there is a blue light</p>
+</li>
+<li>
+<p>Camera is connected with USB to Linux computer (camera is USB 2.0, but it&#8217;ll work on a USB 3.0 port)</p>
+</li>
+<li>
+<p>Camera is not mounted</p>
+</li>
+</ul>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/camera-usb-ready.png" alt="camera usb ready">
+</div>
+<div class="title">Figure 6. Ready for USB Control - Power on and unmounted</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verify_computer_finds_camera_as_usb_devices">13.3.2. Verify Computer finds Camera as USB Devices</h4>
+<div class="literalblock">
+<div class="content">
+<pre>$ lsusb
+Bus 003 Device 009: ID 05ca:0366 Ricoh Co., Ltd</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verify_ptpcam_can_connect_to_camera">13.3.3. Verify ptpcam Can Connect to Camera</h4>
+<div class="paragraph">
+<p>First verify that ptpcam can connect to the camera.</p>
+</div>
+<div class="paragraph">
+<p>$ ptpcam -i</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera information
+==================
+Model: RICOH THETA S
+  manufacturer: Ricoh Company, Ltd.
+  serial number: '00010093'
+  device version: 01.42
+  extension ID: 0x00000006
+  extension description: (null)
+  extension version: 0x006e</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we&#8217;ll list all the operations that libptp can access on the camera over usb.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam -o</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Listing supported operations...
+Camera: RICOH THETA S
+  0x1001: GetDeviceInfo
+  0x1002: OpenSession
+  0x1003: CloseSession
+  0x1004: GetStorageIDs
+  0x1005: GetStorageInfo
+  0x1006: GetNumObjects
+  0x1007: GetObjectHandles
+  0x1008: GetObjectInfo
+  0x1009: GetObject
+  0x100a: GetThumb
+  0x100b: DeleteObject
+  0x1014: GetDevicePropDesc
+  0x1015: GetDevicePropValue
+  0x101b: GetPartialObject
+  0x9001: UNKNOWN
+  0x9991: UNKNOWN
+  0x9999: UNKNOWN
+  0x999a: UNKNOWN
+  0x999b: UNKNOWN
+  0x999c: UNKNOWN
+  0x999d: UNKNOWN
+  0x100e: InitiateCapture
+  0x1016: SetDevicePropValue
+  0x101c: InitiateOpenCapture
+  0x1018: TerminateOpenCapture
+  0x99a2: UNKNOWN</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s looking very promising. Next, we&#8217;ll list the properties that can accessed.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_camera_properties_over_usb">13.4. Accessing Camera Properties Over USB</h3>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam -p</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Listing properties...
+Camera: RICOH THETA S
+  0x5001: Battery Level
+  0x5002: Functional Mode
+  0x5003: Image Size
+  0x5011: Date Time
+  0x5012: Pre-Capture Delay
+  0xd407: UNKNOWN
+  0x5005: White Balance
+  0x500e: Exposure Program Mode
+  0x500f: Exposure Index (film speed ISO)
+  0x5010: Exposure Bias Compensation
+  0x5013: Still Capture Mode
+  0x501a: Timelapse Number
+  0x501b: Timelapse Interval
+  0x502c: UNKNOWN
+  ....</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s check if I have battery.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5001</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Battery Level' is set to: 100</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s plugged into USB, so it makes sense that my battery is at 100%.</p>
+</div>
+<div class="paragraph">
+<p>Next, I&#8217;ll check the image size:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5003</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Image Size' is set to: "5376x2688"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I&#8217;ll check the time:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5011</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Date Time' is set to: "20160701T142845-0700"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check Capture Mode</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5013</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Still Capture Mode' is set to: [Normal]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Set Capture Mode to Video</p>
+</div>
+<div class="paragraph">
+<p>Using the RICOH v2 USB documentation, you can find that video shooting corresponds to 0x8002.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --set-property=0x5013 --val=0x8002</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Still Capture Mode' is set to: [Normal]
+Changing property value to 0x8002 [(null)] succeeded.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the change was saved:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5013</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Still Capture Mode' is set to: 0x8002 (-32766)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The blue light on the THETA now shows a video icon.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/video-light.png" alt="video light">
+</div>
+<div class="title">Figure 7. Using USB to set mode</div>
+</div>
+<div class="paragraph">
+<p>At this stage, I boiled a pot of tea and left the camera on. When I came back, it had turned off.</p>
+</div>
+<div class="paragraph">
+<p>I verified that the battery was still at 100%.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5013</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Still Capture Mode' is set to: 0x8002 (-32766)
+craig@linux-silver:~$ ptpcam --show-property=0x5001</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Battery Level' is set to: 100</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I then looked at the sleepDelay</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0xd803</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'UNKNOWN' is set to: 600</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sleepDelay is set to 600 seconds, or 10 minutes. I&#8217;m going to disable it.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --set-property=0xd803 --val=0</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'UNKNOWN' is set to: 600
+Changing property value to 0 [(null)] succeeded.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, hopefully, the THETA will stay on indefinitely, powered by the USB and I&#8217;ll be able to use it in an industrial application such as security surveillance.</p>
+</div>
+<div class="paragraph">
+<p>List the files on your THETA.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam -L</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Listing files...
+Camera: RICOH THETA S
+Handler:           Size:     Captured:          name:
+0x0064026e:      4000851    2016-06-03 21:11    R0010622.JPG
+0x0064026f:      3953884    2016-06-09 22:52    R0010623.JPG
+0x00640270:      3923907    2016-06-10 00:22    R0010624.JPG</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Download the first file from the camera to your local computer.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --get-file=0x0064026e
+Camera: RICOH THETA S
+Saving file: "R0010622.JPG" is done.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Boom! It&#8217;s super fast.</p>
+</div>
+<div class="paragraph">
+<p>You can look at the image in your Linux file browser just to verify that
+the image was downloaded. In this picture, I have the THETA
+lying on it&#8217;s side on my desk.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/image-sample.png" alt="image sample">
+</div>
+<div class="title">Figure 8. Sample Image Downloaded with USB API</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s not a very nice picture, so I&#8217;ll delete it.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --delete-object=0x0064026e</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Object 0x0064026e (R0010622.JPG) deleted.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I&#8217;m going to take another shot with my camera in a tripod. First, I&#8217;ll set the
+mode to still image as I set it to video earlier.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --set-property=0x5013 --val=0x0001</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Still Capture Mode' is set to: 0x8002 (-32766)
+Changing property value to 0x0001 [(null)] succeeded.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, I take the image.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam -c</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Initiating captue...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List the files on the camera:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam -L</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Listing files...
+Camera: RICOH THETA S
+Handler:           Size:     Captured:          name:
+....
+0x0064027e:      3930938    2016-07-01 23:22    R0010638.JPG</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Download the file to my local computer</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --get-file=0x0064027e
+Camera: RICOH THETA S
+Saving file: "R0010638.JPG" is done.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the download worked.</p>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/sample.jpg" alt="sample">
+</div>
+<div class="title">Figure 9. Sample Image of My Rig Downloaded with USB API</div>
+</div>
+<div class="paragraph">
+<p>You can now see my boss Antec case for my overclocked system and the top of
+my overclocked and watercooled Linux test rig decorated with
+rainbow tape by my daughter.</p>
+</div>
+<div class="paragraph">
+<p>I then checked the battery to verify that the THETA can last indefinitely connected with USB:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=0x5001</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Battery Level' is set to: 100</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait! The camera just turned off. I&#8217;m going to connect with the WiFi USB to set the offDelay.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+I have two network interfaces in my computer, I can access the THETA over WiFi while I am connected to the Internet.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+I use DHC to easily set the options. DHC is a tool to send, save, and organize HTTP requests. As I test the THETA frequently.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/dhc.png" alt="dhc">
+</div>
+<div class="title">Figure 10. Use the free DHC Chrome App to save HTTP tests</div>
+</div>
+<div class="paragraph">
+<p>If the image is difficult to see, the relevant POST body is</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{"name": "camera.setOptions",
+    "parameters":
+	{
+    "sessionId": "SID_0001",
+    "options": {
+		"offDelay": 65535
+    	}
+	}
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can check the offDelay parameter with this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{"name": "camera.getOptions",
+    "parameters":
+	{
+    	"sessionId": "SID_0001",
+    	"optionNames": [
+            "offDelay"
+    	]
+	}
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, I have this template saved in DHC, so it&#8217;s easy for me to just change the optionNames.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;m hopeful that the THETA will now stay on forever. At this point, it&#8217;s been on for
+several hours and I can send it API commands.
+So, it&#8217;s in a good state for surveillance or mapping. I think I can leave it on
+for days. I just checked the battery again after leaving the camera on for
+hours.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ptpcam --show-property=5001</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera: RICOH THETA S
+'Battery Level' is set to: 100</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bring on the industrial applications!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_raw_ptp_commands">13.5. Using Raw PTP Commands</h3>
+<div class="paragraph">
+<p>Your program may have to use raw PTP commands. It&#8217;s almost the same as
+the examples above. I&#8217;ll include some examples using raw PTP.</p>
+</div>
+<div class="sect3">
+<h4 id="_grabbing_info">13.5.1. Grabbing Info</h4>
+<div class="paragraph">
+<p>Pass the raw PTP command of <code>GetDeviceInfo</code> as a hex string, <code>0x1001</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>craig@linux-silver:$ ptpcam -R 0x1001
+Camera: RICOH THETA S
+Sending generic request: reqCode=0x1001, params=[0x00000000,0x00000000,0x00000000,0x00000000,0x00000000]
+64 00 06 00 00 00 6e 00 00 01 80 1a 00 00 00 01 - d.....n.........
+10 02 10 03 10 04 10 05 10 06 10 07 10 08 10 09 - ................
+10 0a 10 0b 10 14 10 15 10 1b 10 01 90 91 99 99 - ................
+99 9a 99 9b 99 9c 99 9d 99 0e 10 16 10 1c 10 18 - ................
+10 a2 99 06 00 00 00 02 40 06 40 08 40 0a 40 0c - ........@.@.@.@.
+40 0d 40 1d 00 00 00 01 50 02 50 03 50 11 50 12 - @.@.....P.P.P.P.
+50 07 d4 05 50 0e 50 0f 50 10 50 13 50 1a 50 1b - P...P.P.P.P.P.P.
+50 2c 50 06 d0 0f d0 01 d8 02 d8 03 d8 05 d8 06 - P,P.............
+d8 07 d8 08 d8 09 d8 0a d8 0b d8 0c d8 0d d8 0e - ................
+d8 00 00 00 00 04 00 00 00 01 30 01 38 02 b8 82 - ..........0.8...
+b9 14 52 00 69 00 63 00 6f 00 68 00 20 00 43 00 - ..R.i.c.o.h. .C.
+6f 00 6d 00 70 00 61 00 6e 00 79 00 2c 00 20 00 - o.m.p.a.n.y.,. .
+4c 00 74 00 64 00 2e 00 00 00 0e 52 00 49 00 43 - L.t.d......R.I.C
+00 4f 00 48 00 20 00 54 00 48 00 45 00 54 00 41 - .O.H. .T.H.E.T.A
+00 20 00 53 00 00 00 06 30 00 31 00 2e 00 34 00 - . .S....0.1...4.
+32 00 00 00 09 30 00 30 00 30 00 31 00 30 00 30 - 2....0.0.0.1.0.0
+00 39 00 33 00 00 00 00                         - .9.3....
+PTP: response OK</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_checking_battery_status">13.5.2. Checking Battery Status</h4>
+<div class="paragraph">
+<p><code>0x1015</code> is <code>GetDevicePropValue</code>. The property battery is <code>0x5001</code>.
+The result is a number between 0 and 100. I get 64 in hex which corresponds
+to a decimal value of 100. My battery charge is 100%. It&#8217;s connected with USB,
+it&#8217;s always 100% :-)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>craig@linux-silver:$ ptpcam -R 0x1015,0x5001
+Camera: RICOH THETA S
+Sending generic request: reqCode=0x1015, params=[0x00005001,0x00000000,0x00000000,0x00000000,0x00000000]
+64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - d...............
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
+00 00 00 00 00 00 00 00                         - ........
+PTP: response OK</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getting_size_of_still_image">13.5.3. Getting Size of Still Image</h4>
+<div class="paragraph">
+<p>In this example, I look for the property ImageSize which is 0x5003. Just to refresh from the previous example, 0x1015 is GetDevicePropValue. In the right column, you can see that the image size is 5376x2688</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>craig@linux-silver:$ ptpcam -R 0x1015,0x5003
+Camera: RICOH THETA S
+Sending generic request: reqCode=0x1015, params=[0x00005003,0x00000000,0x00000000,0x00000000,0x00000000]
+0a 35 00 33 00 37 00 36 00 78 00 32 00 36 00 38 - .5.3.7.6.x.2.6.8
+00 38 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - .8..............
+00 00 00 00 00 00 00 00                         - ........
+PTP: response OK</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_windows_mtp_extensions">13.6. Windows MTP Extensions</h3>
+<div class="paragraph">
+<p>To get the API to work over USB on Windows, you just have to issue “raw” MTP/PTP commands
+to get it to work. For people using Windows Portable Devices API to control the
+THETA S, keep this in mind:</p>
+</div>
+<div class="paragraph">
+<p>It looks like you can’t use the <code>WPD</code> command
+<code>WPD_COMMAND_STILL_IMAGE_CAPTURE_INITIATE</code> to initiate capture. If you use this
+command the driver returns an error to you.</p>
+</div>
+<div class="paragraph">
+<p>The correct way to do this is to use <code>WPD_COMMAND_MTP_EXT_EXECUTE_COMMAND_WITHOUT_DATA_PHASE</code>
+and set up all the parameters and Op Code for image capture and then send that command. Take a look at
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff384842(v=vs.85).aspx">this example</a>
+from Microsoft for setting things up. Basically you just need to change the Op Code to
+<code>0x100E</code> (for initiate capture) and change the StorageID to <code>0x0</code>
+(as documented in the Theta v2 USB API) and you are ready to go.</p>
+</div>
+<div class="paragraph">
+<p>This information was originally contributed by Matt Wymore in the RICOH developer
+<a href="https://developers.theta360.com/en/forums/viewtopic.php?f=4&amp;t=626#p1815">forum</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Refer to Windows <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff384848(v=vs.85).aspx">MTP Extensions documentation</a> on the Microsoft site
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gphoto2_on_linux">13.7. gphoto2 on Linux</h3>
+<div class="paragraph">
+<p>gphoto2 partially works without modification. It may be useful for some
+applications or you can potentially get it to work fully with a bit of effort.
+As it has some use and can be installed with a simple <code>apt install gphoto2</code>,
+I will include some information on it.</p>
+</div>
+<div class="paragraph">
+<p>gphoto2 automatically detected the THETA and correctly identified the BUS and PORT.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gphoto2 --auto-detect
+Model                          Port
+----------------------------------------------------------
+USB PTP Class Camera           usb:003,009</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It can list files on the THETA.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># gphoto2 -L -f /store_00010001/DCIM/100RICOH
+There are 8 files in folder '/store_00010001/DCIM/100RICOH'.
+#1     R0010622.JPG               rd  3908 KB 5376x2688 image/jpeg
+#2     R0010623.JPG               rd  3862 KB 5376x2688 image/jpeg
+#3     R0010624.JPG               rd  3832 KB 5376x2688 image/jpeg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Capture Image and Download also works</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gphoto2 --capture-image-and-download
+New file is in location /store_00010001/DCIM/100RICOH/R0010632.JPG on the camera
+Saving file as R0010632.JPG
+Deleting file /store_00010001/DCIM/100RICOH/R0010632.JPG on the camera
+craig@linux-silver:~/Documents/tmp/img$</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to using gphoto2, I also tried the Python bindings for
+libgphoto2. I only got it to work partially. If you can get it to work
+fully, let me know.</p>
+</div>
+<div class="paragraph">
+<p>At this stage, I have <code>libptp</code> working almost completely with only a few
+glitches with stopping video. If you get it to work fully, send me a note.
+I&#8217;ll take another look at it in the future.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_resources">14. Additional Resources</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_api_documentation">13.1. API Documentation</h3>
+<h3 id="_api_documentation">14.1. API Documentation</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2241,7 +2999,7 @@ RICOH THETA S is OSC v1 compliant</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_phone_applications">13.2. Phone Applications</h3>
+<h3 id="_phone_applications">14.2. Phone Applications</h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -2255,7 +3013,7 @@ The THETA S requires a new app.  The older app will not work.
 </table>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_apps">13.2.1. Official RICOH Apps</h4>
+<h4 id="_official_ricoh_apps">14.2.1. Official RICOH Apps</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2268,7 +3026,7 @@ The THETA S requires a new app.  The older app will not work.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_official_ricoh_sdk">13.2.2. Official RICOH SDK</h4>
+<h4 id="_official_ricoh_sdk">14.2.2. Official RICOH SDK</h4>
 <div class="paragraph">
 <p>There&#8217;s a lot of great sample code in the RICOH THETA SDK.  Download it
 from the link below.  There are different SDKs for the RICOH THETA m15 and the RICOH THETA S.
@@ -2283,7 +3041,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_third_party_recommended_viewers">13.2.3. Third-Party Recommended Viewers</h4>
+<h4 id="_third_party_recommended_viewers">14.2.3. Third-Party Recommended Viewers</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2297,7 +3055,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_youtube_360_degree_videos">13.3. YouTube 360 degree Videos</h3>
+<h3 id="_youtube_360_degree_videos">14.3. YouTube 360 degree Videos</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2310,7 +3068,7 @@ The source code of the sample apps is useful.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_untested_community_viewers">13.4. Untested Community Viewers</h3>
+<h3 id="_untested_community_viewers">14.4. Untested Community Viewers</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2324,7 +3082,7 @@ Example image in viewer is
 </div>
 </div>
 <div class="sect2">
-<h3 id="_programming_languages">13.5. Programming Languages</h3>
+<h3 id="_programming_languages">14.5. Programming Languages</h3>
 <div class="paragraph">
 <p>The HTTP API of the THETA S can be accessed from almost any programming language.</p>
 </div>
@@ -2339,7 +3097,7 @@ Example image in viewer is
 </div>
 </div>
 <div class="sect1">
-<h2 id="_before_you_hack">14. Before You Hack</h2>
+<h2 id="_before_you_hack">15. Before You Hack</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -2408,7 +3166,7 @@ I have not tested it.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_thetapylib">15. thetapylib</h2>
+<h2 id="_thetapylib">16. thetapylib</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The sample Python library is included purely as an example of some of the
@@ -2629,7 +3387,7 @@ elif sys.argv[1] == "stopCapture":
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps">16. Next Steps</h2>
+<h2 id="_next_steps">17. Next Steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>By using a library I was able to quickly prototype applications
@@ -2701,7 +3459,7 @@ within a browser. There are two NPM packages.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-26 21:09:30 PDT
+Last updated 2016-07-01 17:03:01 PDT
 </div>
 </div>
 </body>
