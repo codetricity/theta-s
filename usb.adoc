@@ -389,6 +389,86 @@ In this example, I look for the property ImageSize which is 0x5003. Just to refr
   00 00 00 00 00 00 00 00                         - ........
   PTP: response OK
 
+==== Taking a Picture
+I can take a picture, but get a PTP: I/O error. This doesn't appear to
+negatively impact taking a picture. I'll take a look at this in the futre. I think
+it may relate to the delay that the THETA takes to process the image into
+equirectangular format.
+
+  $ ptpcam -R 0x100e
+  Camera: RICOH THETA S
+  Sending generic request: reqCode=0x100e, params=[0x00000000,0x00000000,0x00000000,0x00000000,0x00000000]
+  PTP: I/O error
+
+
+==== Get Storage IDs
+
+  $ ptpcam -R 0x1004
+  Camera: RICOH THETA S
+  Sending generic request: reqCode=0x1004, params=[0x00000000,0x00000000,0x00000000,0x00000000,0x00000000]
+  01 00 00 00 01 00 01 00 00 00 00 00 00 00 00 00 - ................
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
+  00 00 00 00 00 00 00 00                         - ........
+  PTP: response OK
+
+Focus on the numbers in places 5-8 and reverse the order.
+
+image::img/usb/get-storage.png[role="thumb" title="getting the storage IDs in the THETA"]
+
+==== Get Object Handles
+
+  $ ptpcam -R 0x1007,0x00010001
+  Camera: RICOH THETA S
+  Sending generic request: reqCode=0x1007, params=[0x00010001,0x00000000,0x00000000,0x00000000,0x00000000]
+  15 00 00 00 00 00 00 80 00 00 64 00 6f 02 64 00 - ..........d.o.d.
+  70 02 64 00 71 02 64 00 72 02 64 00 73 02 64 00 - p.d.q.d.r.d.s.d.
+  74 02 64 00 75 02 64 00 76 02 64 00 77 02 64 00 - t.d.u.d.v.d.w.d.
+  79 02 64 00 7a 02 64 00 7b 02 64 00 7c 02 64 00 - y.d.z.d.{.d.|.d.
+  7d 02 64 00 7e 02 64 00 7f 02 64 00 80 02 64 00 - }.d.~.d...d...d.
+  81 02 64 00 82 02 64 00                         - ..d...d.
+  PTP: response OK
+  $
+
+You'll need to reverse the order of each file handle to get information on it
+or download.
+
+==== Get File Information From Camera
+
+  $ ptpcam -R 0x1008,0x00640282
+  Camera: RICOH THETA S
+  Sending generic request: reqCode=0x1008, params=[0x00640282,0x00000000,0x00000000,0x00000000,0x00000000]
+  01 00 01 00 01 38 00 00 76 1f 3c 00 08 38 72 0d - .....8..v.<..8r.
+  00 00 a0 00 00 00 78 00 00 00 00 15 00 00 80 0a - ......x.........
+  00 00 08 00 00 00 00 00 64 00 00 00 00 00 00 00 - ........d.......
+  00 00 00 00 0d 52 00 30 00 30 00 31 00 30 00 36 - .....R.0.0.1.0.6
+  00 34 00 32 00 2e 00 4a 00 50 00 47 00 00 00 10 - .4.2...J.P.G....
+  32 00 30 00 31 00 36 00 30 00 37 00 30 00 32 00 - 2.0.1.6.0.7.0.2.
+  54 00 30 00 37 00 30 00 38 00 33 00 33 00 00 00 - T.0.7.0.8.3.3...
+  10 32 00 30 00 31 00 36 00 30 00 37 00 30 00 32 - .2.0.1.6.0.7.0.2
+  00 54 00 30 00 37 00 30 00 38 00 33 00 33 00 00 - .T.0.7.0.8.3.3..
+  00 01 00 00 00 00 00 00                         - ........
+  PTP: response OK
+
+==== Download File as Hexdump For Testing
+
+File contents below have been edited so you can see the beginning and end
+of the file.
+
+  $ ptpcam -R 0x1009,0x00640282 > hexdump
+  $ less hexdump
+  Camera: RICOH THETA S
+  Sending generic request: reqCode=0x1009, params=[0x00640282,0x00000000,0x00000000,0x00000000,0x00000000]
+  ff d8 ff e1 f1 fe 45 78 69 66 00 00 4d 4d 00 2a - ......Exif..MM.*
+  00 00 00 08 00 0d 01 0e 00 02 00 00 00 40 00 00 - .............@..
+  00 aa 01 0f 00 02 00 00 00 16 00 00 00 ea 01 10 - ................
+  ....
+  ....
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
+  PTP: response OK
+
+
+
 === Windows MTP Extensions
 
 To get the API to work over USB on Windows, you just have to issue “raw” MTP/PTP commands
