@@ -416,7 +416,8 @@ TIP: Refer to Windows link:https://msdn.microsoft.com/en-us/library/windows/desk
 gphoto2 partially works without modification. It may be useful for some
 applications or you can potentially get it to work fully with a bit of effort.
 As it has some use and can be installed with a simple `apt install gphoto2`,
-I will include some information on it.
+I will include some information on it. It could also help with
+troubleshooting.
 
 gphoto2 automatically detected the THETA and correctly identified the BUS and PORT.
 
@@ -448,3 +449,31 @@ fully, let me know.
 At this stage, I have `libptp` working almost completely with only a few
 glitches with stopping video. If you get it to work fully, send me a note.
 I'll take another look at it in the future.
+
+=== Troubleshooting the USB connection
+
+==== Could not open session
+
+unmount the camera.
+
+  craig@linux-silver:~$ ptpcam -i
+
+  Camera information
+  ==================
+  ERROR: Could not open session!
+
+image::img/usb/camera-mounted.png[role="thumb" title="You may have problems with ptpcam if your camera is mounted"]
+
+After you unmount the camera, you will see this:
+
+  craig@linux-silver:~$ ptpcam -i
+
+  Camera information
+  ==================
+  Model: RICOH THETA S
+    manufacturer: Ricoh Company, Ltd.
+    serial number: '00010093'
+    device version: 01.42
+    extension ID: 0x00000006
+    extension description: (null)
+    extension version: 0x006e

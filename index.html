@@ -2931,7 +2931,8 @@ Refer to Windows <a href="https://msdn.microsoft.com/en-us/library/windows/deskt
 <p>gphoto2 partially works without modification. It may be useful for some
 applications or you can potentially get it to work fully with a bit of effort.
 As it has some use and can be installed with a simple <code>apt install gphoto2</code>,
-I will include some information on it.</p>
+I will include some information on it. It could also help with
+troubleshooting.</p>
 </div>
 <div class="paragraph">
 <p>gphoto2 automatically detected the THETA and correctly identified the BUS and PORT.</p>
@@ -2977,6 +2978,33 @@ fully, let me know.</p>
 <p>At this stage, I have <code>libptp</code> working almost completely with only a few
 glitches with stopping video. If you get it to work fully, send me a note.
 I&#8217;ll take another look at it in the future.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_troubleshooting_the_usb_connection">13.8. Troubleshooting the USB connection</h3>
+<div class="sect3">
+<h4 id="_could_not_open_session">13.8.1. Could not open session</h4>
+<div class="paragraph">
+<p>unmount the camera.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>craig@linux-silver:~$ ptpcam -i</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera information
+==================
+ERROR: Could not open session!</pre>
+</div>
+</div>
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/camera-mounted.png" alt="camera mounted">
+</div>
+<div class="title">Figure 11. You may have problems with ptpcam if your camera is mounted</div>
+</div>
 </div>
 </div>
 </div>
