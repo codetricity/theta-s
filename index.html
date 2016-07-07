@@ -3134,6 +3134,119 @@ Model: RICOH THETA S
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_simple_usb_control_of_camera_with_python">13.9. Simple USB Control of Camera with Python</h3>
+<div class="paragraph">
+<p>Using the Python subprocess module, you can simply run <code>ptpcam</code> inside
+of your Python program and control the control without having to deal with
+the raw PTP codes.</p>
+</div>
+<div class="paragraph">
+<p>The example below does the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>takes a picture</p>
+</li>
+<li>
+<p>gets camera info and manipulates it inside the Python program</p>
+</li>
+<li>
+<p>gets list of files on camera and snips off the handle for the last image taken</p>
+</li>
+<li>
+<p>downloads the last image to local disk</p>
+<div class="literalblock">
+<div class="content">
+<pre>import subprocess</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>## example of taking a picture
+def takePicture():
+    subprocess.call("ptpcam -c", shell=True)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>takePicture()</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># example of grabbing device info and using it in your python program.
+ptpinfo = subprocess.Popen(["ptpcam", "--info"], stdout=subprocess.PIPE)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># although this simply prints to stdout, you can parse
+# the response for your program
+for line in ptpinfo.stdout.readlines():
+    print(line.rstrip())</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># find the last picture taken. Modify to parse for date or other
+files = []
+listFiles = subprocess.Popen(["ptpcam", "-L"], stdout=subprocess.PIPE)
+for line in listFiles.stdout.readlines():
+    files.append(line.rstrip())
+lastLine = files[len(files) - 2].split(" ")
+lastPicture = lastLine[0][:-1]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>print("The handle for the last picture taken is " + lastPicture)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># download the picture
+ptpcommand = "ptpcam --get-file=" + lastPicture</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>subprocess.call(ptpcommand, shell=True)</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>I&#8217;ve saved the file as <code>pyptp.py</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ python pyptp.py</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Camera information
+==================
+Model: RICOH THETA S
+  manufacturer: Ricoh Company, Ltd.
+  serial number: '00010093'
+  device version: 01.42
+  extension ID: 0x00000006
+  extension description: (null)
+  extension version: 0x006e</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The handle for the last picture taken is 0x00640284
+Camera: RICOH THETA S
+Saving file: "R0010644.JPG" is done.</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

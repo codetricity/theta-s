@@ -557,3 +557,67 @@ After you unmount the camera, you will see this:
     extension ID: 0x00000006
     extension description: (null)
     extension version: 0x006e
+
+=== Simple USB Control of Camera with Python
+
+Using the Python subprocess module, you can simply run `ptpcam` inside
+of your Python program and control the control without having to deal with
+the raw PTP codes.
+
+The example below does the following:
+
+1. takes a picture
+2. gets camera info and manipulates it inside the Python program
+3. gets list of files on camera and snips off the handle for the last image taken
+4. downloads the last image to local disk
+
+    import subprocess
+
+    ## example of taking a picture
+    def takePicture():
+        subprocess.call("ptpcam -c", shell=True)
+
+    takePicture()
+
+    # example of grabbing device info and using it in your python program.
+    ptpinfo = subprocess.Popen(["ptpcam", "--info"], stdout=subprocess.PIPE)
+
+    # although this simply prints to stdout, you can parse
+    # the response for your program
+    for line in ptpinfo.stdout.readlines():
+        print(line.rstrip())
+
+
+
+    # find the last picture taken. Modify to parse for date or other
+    files = []
+    listFiles = subprocess.Popen(["ptpcam", "-L"], stdout=subprocess.PIPE)
+    for line in listFiles.stdout.readlines():
+        files.append(line.rstrip())
+    lastLine = files[len(files) - 2].split(" ")
+    lastPicture = lastLine[0][:-1]
+
+    print("The handle for the last picture taken is " + lastPicture)
+
+    # download the picture
+    ptpcommand = "ptpcam --get-file=" + lastPicture
+
+    subprocess.call(ptpcommand, shell=True)
+
+I've saved the file as `pyptp.py`
+
+    $ python pyptp.py
+
+    Camera information
+    ==================
+    Model: RICOH THETA S
+      manufacturer: Ricoh Company, Ltd.
+      serial number: '00010093'
+      device version: 01.42
+      extension ID: 0x00000006
+      extension description: (null)
+      extension version: 0x006e
+
+    The handle for the last picture taken is 0x00640284
+    Camera: RICOH THETA S
+    Saving file: "R0010644.JPG" is done.
