@@ -1,6 +1,22 @@
-== Using the API Over USB
+++++
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-Developers can access the RICOH THETA API over USB.
+  ga('create', 'UA-73311422-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+++++
+
+== Using the THETA API Over USB
+
+image::img/usb/camera-usb-ready.png[role="thumb" title="Ready for USB Control - Power on and unmounted"]
+
+Developers can access the RICOH
+link:https://developers.theta360.com/en/docs/v2/usb_reference/[THETA API over USB].
 
 
 === Advantages of API Over USB
@@ -20,7 +36,7 @@ map creation or time-lapse photography
 If you choose to develop your application with the v2 USB API, you are a pioneer.
 Please contribute your experiences with the community.
 
-=== Controlling from Raspberry Pi or Linux With USB
+=== Controlling the THETA from Raspberry Pi or Linux With USB
 
 The community initially started connecting to the THETA from Windows with
 link:https://msdn.microsoft.com/en-us/library/windows/desktop/ff384848(v=vs.85).aspx[MTP Extensions]
@@ -34,7 +50,7 @@ As far as I know, the API works fine on Windows and the
 link:https://msdn.microsoft.com/en-us/library/windows/desktop/ff384842(v=vs.85).aspx[examples] on the
 Microsoft site work.
 
-NOTE: In the above example, change the Op Code to 0x100e and the StorageID to 0x0
+NOTE: In the above example for Windows, change the Op Code to 0x100e and the StorageID
 
 This tutorial will focus on `libptp`, which I compiled from source.
 I'll document the installation of `libptp` in a future update. `libptp`
@@ -44,11 +60,16 @@ also installs `ptpcam`.
 
 * Camera is on, there is a blue light
 * Camera is connected with USB to Linux computer (camera is USB 2.0, but it'll work on a USB 3.0 port)
-* Camera is not mounted
+* Camera is not mounted as filesystem on your computer
 
-image::img/usb/camera-usb-ready.png[role="thumb" title="Ready for USB Control - Power on and unmounted"]
+TIP: With $3 for common nuts and a bolt, you can attach the THETA to any tripod or attach to another machine for industrial use. Use 1/4 inch, 20 TPI parts
 
-==== Verify Computer finds Camera as USB Devices
+image::img/usb/usb-tripod.jpg[role="thumb" title="1/4 inch, 20 TPI bolt adapter"]
+
+Here's more information on building a
+link:http://lists.theta360.guide/t/3-tripod-modification-for-theta-live-streaming-usb-cable/64?u=codetricity[camera attachment adapter] that works with the USB cable plugged in.
+
+==== Verify Computer finds Camera as USB Device
 
   $ lsusb
   Bus 003 Device 009: ID 05ca:0366 Ricoh Co., Ltd
@@ -104,7 +125,7 @@ Next, we'll list all the operations that libptp can access on the camera over us
 
 It's looking very promising. Next, we'll list the properties that can accessed.
 
-=== Accessing Camera Properties Over USB
+=== Access Camera Properties Over USB
 
   $ ptpcam -p
 
@@ -126,7 +147,7 @@ It's looking very promising. Next, we'll list the properties that can accessed.
     0x502c: UNKNOWN
     ....
 
-Let's check if I have battery.
+Let's check if I have a good battery charge.
 
   $ ptpcam --show-property=0x5001
 
@@ -238,7 +259,9 @@ It's not a very nice picture, so I'll delete it.
 
   Object 0x0064026e (R0010622.JPG) deleted.
 
-I'm going to take another shot with my camera in a tripod. First, I'll set the
+I'm going to take another shot with my
+link:http://lists.theta360.guide/t/3-tripod-modification-for-theta-live-streaming-usb-cable/64?u=codetricity[camera in a tripod].
+First, I'll set the
 mode to still image as I set it to video earlier.
 
   $ ptpcam --set-property=0x5013 --val=0x0001
@@ -340,6 +363,9 @@ the examples above. I'll include some examples using raw PTP.
 
 Pass the raw PTP command of `GetDeviceInfo` as a hex string, `0x1001`
 
+My gosh, this looks horrible. What does it mean? Oh wait, there's some
+human-readable text in the right-hand column next to the hex dump.
+
   craig@linux-silver:$ ptpcam -R 0x1001
   Camera: RICOH THETA S
   Sending generic request: reqCode=0x1001, params=[0x00000000,0x00000000,0x00000000,0x00000000,0x00000000]
@@ -362,10 +388,16 @@ Pass the raw PTP command of `GetDeviceInfo` as a hex string, `0x1001`
   00 39 00 33 00 00 00 00                         - .9.3....
   PTP: response OK
 
+Well, at least I know it works. Though, it's a little daunting that the
+responses are in hex. I'm going to power through!
+
 ==== Checking Battery Status
 
 `0x1015` is `GetDevicePropValue`. The property battery is `0x5001`.
-The result is a number between 0 and 100. I get 64 in hex which corresponds
+The result is a number between 0 and 100. Hmm, 64. That doesn't correspond
+to 100%. Ahh, it's in hex. :-(
+
+64 in hex corresponds
 to a decimal value of 100. My battery charge is 100%. It's connected with USB,
 it's always 100% :-)
 
@@ -376,6 +408,11 @@ it's always 100% :-)
   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
   00 00 00 00 00 00 00 00                         - ........
   PTP: response OK
+
+Wow, I can only imagine dealing with the response codes in C. If the connection
+wasn't so fast and so stable, it would be too much to put up with.
+
+However, the more I look at this, the hex dump is starting to grow on me.
 
 ==== Getting Size of Still Image
 
@@ -391,8 +428,8 @@ In this example, I look for the property ImageSize which is 0x5003. Just to refr
 
 ==== Taking a Picture
 I can take a picture, but get a PTP: I/O error. This doesn't appear to
-negatively impact taking a picture. I'll take a look at this in the futre. I think
-it may relate to the delay that the THETA takes to process the image into
+negatively impact taking a picture. I'll take a look at this in the future. I think
+it may be caused by the delay that the THETA causes when it processes the image into
 equirectangular format.
 
   $ ptpcam -R 0x100e
@@ -410,6 +447,9 @@ equirectangular format.
   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
   00 00 00 00 00 00 00 00                         - ........
   PTP: response OK
+
+Wow, this was not pleasant to look at for the first few minutes. Eventually,
+I realized that the storage ID was reversed.
 
 Focus on the numbers in places 5-8 and reverse the order.
 
@@ -467,7 +507,13 @@ of the file.
   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
   PTP: response OK
 
-
+It's possible to write a bit of code to parse the file and convert the hex
+into JPG format. I decided to leave this one for someone else. I suspect
+that another library may be a bit more friendly. The good news is that
+it's possible to download the image. The source code for `ptpcam` has
+an example of how to download the binary file. Or, you can use
+`ptpcam --get-file=FILE_HANDLE` within a script to download the image
+as a JPEG file.
 
 === Windows MTP Extensions
 

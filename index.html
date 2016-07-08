@@ -761,7 +761,7 @@ p { margin-bottom: 1.25rem; }
 <li><a href="#_raspberry_pi">10. Raspberry Pi</a></li>
 <li><a href="#_other_hardware">11. Other Hardware</a></li>
 <li><a href="#_network">12. Network</a></li>
-<li><a href="#_using_the_api_over_usb">13. Using the API Over USB</a></li>
+<li><a href="#_using_the_theta_api_over_usb">13. Using the THETA API Over USB</a></li>
 <li><a href="#_additional_resources">14. Additional Resources</a></li>
 <li><a href="#_before_you_hack">15. Before You Hack</a></li>
 <li><a href="#_thetapylib">16. thetapylib</a></li>
@@ -2221,14 +2221,31 @@ RPi touch interface built with Pygame.</p>
 </div>
 <div class="title">Figure 5. DriverEye - Used Car Marketing System Prototype</div>
 </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73311422-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_the_api_over_usb">13. Using the API Over USB</h2>
+<h2 id="_using_the_theta_api_over_usb">13. Using the THETA API Over USB</h2>
 <div class="sectionbody">
+<div class="imageblock thumb">
+<div class="content">
+<img src="img/usb/camera-usb-ready.png" alt="camera usb ready">
+</div>
+<div class="title">Figure 6. Ready for USB Control - Power on and unmounted</div>
+</div>
 <div class="paragraph">
-<p>Developers can access the RICOH THETA API over USB.</p>
+<p>Developers can access the RICOH
+<a href="https://developers.theta360.com/en/docs/v2/usb_reference/">THETA API over USB</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="_advantages_of_api_over_usb">13.1. Advantages of API Over USB</h3>
@@ -2271,7 +2288,7 @@ Please contribute your experiences with the community.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_controlling_from_raspberry_pi_or_linux_with_usb">13.3. Controlling from Raspberry Pi or Linux With USB</h3>
+<h3 id="_controlling_the_theta_from_raspberry_pi_or_linux_with_usb">13.3. Controlling the THETA from Raspberry Pi or Linux With USB</h3>
 <div class="paragraph">
 <p>The community initially started connecting to the THETA from Windows with
 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff384848(v=vs.85).aspx">MTP Extensions</a>
@@ -2293,7 +2310,7 @@ Microsoft site work.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In the above example, change the Op Code to 0x100e and the StorageID to 0x0
+In the above example for Windows, change the Op Code to 0x100e and the StorageID
 </td>
 </tr>
 </table>
@@ -2314,19 +2331,35 @@ also installs <code>ptpcam</code>.</p>
 <p>Camera is connected with USB to Linux computer (camera is USB 2.0, but it&#8217;ll work on a USB 3.0 port)</p>
 </li>
 <li>
-<p>Camera is not mounted</p>
+<p>Camera is not mounted as filesystem on your computer</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+With $3 for common nuts and a bolt, you can attach the THETA to any tripod or attach to another machine for industrial use. Use 1/4 inch, 20 TPI parts
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock thumb">
 <div class="content">
-<img src="img/usb/camera-usb-ready.png" alt="camera usb ready">
+<img src="img/usb/usb-tripod.jpg" alt="usb tripod">
 </div>
-<div class="title">Figure 6. Ready for USB Control - Power on and unmounted</div>
+<div class="title">Figure 7. 1/4 inch, 20 TPI bolt adapter</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s more information on building a
+<a href="http://lists.theta360.guide/t/3-tripod-modification-for-theta-live-streaming-usb-cable/64?u=codetricity">camera attachment adapter</a> that works with the USB cable plugged in.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verify_computer_finds_camera_as_usb_devices">13.3.2. Verify Computer finds Camera as USB Devices</h4>
+<h4 id="_verify_computer_finds_camera_as_usb_device">13.3.2. Verify Computer finds Camera as USB Device</h4>
 <div class="literalblock">
 <div class="content">
 <pre>$ lsusb
@@ -2401,7 +2434,7 @@ Camera: RICOH THETA S
 </div>
 </div>
 <div class="sect2">
-<h3 id="_accessing_camera_properties_over_usb">13.4. Accessing Camera Properties Over USB</h3>
+<h3 id="_access_camera_properties_over_usb">13.4. Access Camera Properties Over USB</h3>
 <div class="literalblock">
 <div class="content">
 <pre>$ ptpcam -p</pre>
@@ -2429,7 +2462,7 @@ Camera: RICOH THETA S
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s check if I have battery.</p>
+<p>Let&#8217;s check if I have a good battery charge.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -2526,7 +2559,7 @@ Changing property value to 0x8002 [(null)] succeeded.</pre>
 <div class="content">
 <img src="img/usb/video-light.png" alt="video light">
 </div>
-<div class="title">Figure 7. Using USB to set mode</div>
+<div class="title">Figure 8. Using USB to set mode</div>
 </div>
 <div class="paragraph">
 <p>At this stage, I boiled a pot of tea and left the camera on. When I came back, it had turned off.</p>
@@ -2624,7 +2657,7 @@ lying on it&#8217;s side on my desk.</p>
 <div class="content">
 <img src="img/usb/image-sample.png" alt="image sample">
 </div>
-<div class="title">Figure 8. Sample Image Downloaded with USB API</div>
+<div class="title">Figure 9. Sample Image Downloaded with USB API</div>
 </div>
 <div class="paragraph">
 <p>It&#8217;s not a very nice picture, so I&#8217;ll delete it.</p>
@@ -2640,7 +2673,9 @@ lying on it&#8217;s side on my desk.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>I&#8217;m going to take another shot with my camera in a tripod. First, I&#8217;ll set the
+<p>I&#8217;m going to take another shot with my
+<a href="http://lists.theta360.guide/t/3-tripod-modification-for-theta-live-streaming-usb-cable/64?u=codetricity">camera in a tripod</a>.
+First, I&#8217;ll set the
 mode to still image as I set it to video earlier.</p>
 </div>
 <div class="literalblock">
@@ -2702,7 +2737,7 @@ Saving file: "R0010638.JPG" is done.</pre>
 <div class="content">
 <img src="img/usb/sample.jpg" alt="sample">
 </div>
-<div class="title">Figure 9. Sample Image of My Rig Downloaded with USB API</div>
+<div class="title">Figure 10. Sample Image of My Rig Downloaded with USB API</div>
 </div>
 <div class="paragraph">
 <p>You can now see my boss Antec case for my overclocked system and the top of
@@ -2754,7 +2789,7 @@ I use DHC to easily set the options. DHC is a tool to send, save, and organize H
 <div class="content">
 <img src="img/usb/dhc.png" alt="dhc">
 </div>
-<div class="title">Figure 10. Use the free DHC Chrome App to save HTTP tests</div>
+<div class="title">Figure 11. Use the free DHC Chrome App to save HTTP tests</div>
 </div>
 <div class="paragraph">
 <p>If the image is difficult to see, the relevant POST body is</p>
@@ -2824,6 +2859,10 @@ the examples above. I&#8217;ll include some examples using raw PTP.</p>
 <div class="paragraph">
 <p>Pass the raw PTP command of <code>GetDeviceInfo</code> as a hex string, <code>0x1001</code></p>
 </div>
+<div class="paragraph">
+<p>My gosh, this looks horrible. What does it mean? Oh wait, there&#8217;s some
+human-readable text in the right-hand column next to the hex dump.</p>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre>craig@linux-silver:$ ptpcam -R 0x1001
@@ -2849,12 +2888,20 @@ b9 14 52 00 69 00 63 00 6f 00 68 00 20 00 43 00 - ..R.i.c.o.h. .C.
 PTP: response OK</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Well, at least I know it works. Though, it&#8217;s a little daunting that the
+responses are in hex. I&#8217;m going to power through!</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_checking_battery_status">13.5.2. Checking Battery Status</h4>
 <div class="paragraph">
 <p><code>0x1015</code> is <code>GetDevicePropValue</code>. The property battery is <code>0x5001</code>.
-The result is a number between 0 and 100. I get 64 in hex which corresponds
+The result is a number between 0 and 100. Hmm, 64. That doesn&#8217;t correspond
+to 100%. Ahh, it&#8217;s in hex. :-(</p>
+</div>
+<div class="paragraph">
+<p>64 in hex corresponds
 to a decimal value of 100. My battery charge is 100%. It&#8217;s connected with USB,
 it&#8217;s always 100% :-)</p>
 </div>
@@ -2868,6 +2915,13 @@ Sending generic request: reqCode=0x1015, params=[0x00005001,0x00000000,0x0000000
 00 00 00 00 00 00 00 00                         - ........
 PTP: response OK</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Wow, I can only imagine dealing with the response codes in C. If the connection
+wasn&#8217;t so fast and so stable, it would be too much to put up with.</p>
+</div>
+<div class="paragraph">
+<p>However, the more I look at this, the hex dump is starting to grow on me.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2891,8 +2945,8 @@ PTP: response OK</pre>
 <h4 id="_taking_a_picture">13.5.4. Taking a Picture</h4>
 <div class="paragraph">
 <p>I can take a picture, but get a PTP: I/O error. This doesn&#8217;t appear to
-negatively impact taking a picture. I&#8217;ll take a look at this in the futre. I think
-it may relate to the delay that the THETA takes to process the image into
+negatively impact taking a picture. I&#8217;ll take a look at this in the future. I think
+it may be caused by the delay that the THETA causes when it processes the image into
 equirectangular format.</p>
 </div>
 <div class="literalblock">
@@ -2918,13 +2972,17 @@ PTP: response OK</pre>
 </div>
 </div>
 <div class="paragraph">
+<p>Wow, this was not pleasant to look at for the first few minutes. Eventually,
+I realized that the storage ID was reversed.</p>
+</div>
+<div class="paragraph">
 <p>Focus on the numbers in places 5-8 and reverse the order.</p>
 </div>
 <div class="imageblock thumb">
 <div class="content">
 <img src="img/usb/getstorageid.png" alt="getstorageid">
 </div>
-<div class="title">Figure 11. getting the storage IDs in the THETA</div>
+<div class="title">Figure 12. getting the storage IDs in the THETA</div>
 </div>
 </div>
 <div class="sect3">
@@ -2991,6 +3049,15 @@ ff d8 ff e1 f1 fe 45 78 69 66 00 00 4d 4d 00 2a - ......Exif..MM.*
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - ................
 PTP: response OK</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s possible to write a bit of code to parse the file and convert the hex
+into JPG format. I decided to leave this one for someone else. I suspect
+that another library may be a bit more friendly. The good news is that
+it&#8217;s possible to download the image. The source code for <code>ptpcam</code> has
+an example of how to download the binary file. Or, you can use
+<code>ptpcam --get-file=FILE_HANDLE</code> within a script to download the image
+as a JPEG file.</p>
 </div>
 </div>
 </div>
@@ -3109,7 +3176,7 @@ ERROR: Could not open session!</pre>
 <div class="content">
 <img src="img/usb/camera-mounted.png" alt="camera mounted">
 </div>
-<div class="title">Figure 12. You may have problems with ptpcam if your camera is mounted</div>
+<div class="title">Figure 13. You may have problems with ptpcam if your camera is mounted</div>
 </div>
 <div class="paragraph">
 <p>After you unmount the camera, you will see this:</p>
