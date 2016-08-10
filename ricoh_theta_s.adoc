@@ -22,12 +22,12 @@ ga('set', 'contentGroup1', 'All RICOH');
 image::img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
 
 
-Send comments and corrections to <ricohtheta360@oppkey.com>
+Send comments and corrections to <info@theta360.guide>
 
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
-== http://theta360.guide/contest/[$45,000 THETA Dev Contest]
+== http://theta360.guide/ecosystem/[Register for the THETA Developer Ecosystem]
 
 ==  Resources
 === Official Information
