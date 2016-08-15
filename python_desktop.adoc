@@ -10,8 +10,11 @@ The source code is available on https://github.com/codetricity/theta-s-api-tests
 
 Modify the code in the previous example to allow running as a library.
 
+[source, python, linenums]
+----
   if __name__ == '__main__':
       main()
+----
 
 The previous code is called `thetaPythonTest.py` and is in the same directory
 as my new program.  The full program has two graphics purely for decoration.
@@ -25,6 +28,8 @@ try and get some of the file listing and transfer commands working with the
 GUI prior to the Hackathon, but we're in crunch time.
 
 ==== Full Program
+[source, python, linenums]
+----
   import pygame, sys
   import requests
   import json
@@ -71,12 +76,14 @@ GUI prior to the Hackathon, but we're in crunch time.
 
       pygame.display.update()
 
-
+----
 
 ==== Code Walkthrough
 
 Import the `pygame` and `sys` libraries and set up a blank window.
 
+[source, python]
+----
   import pygame, sys
 
   pygame.init()
@@ -90,32 +97,42 @@ Import the `pygame` and `sys` libraries and set up a blank window.
               sys.exit()
       pygame.display.update()
 
+----
+
 Load your fonts and colors above the main `while` loop.
 
+[source, python]
+----
   WHITE = (255,255,255)
   GRAY = (230, 230, 230)
   GREEN = (100, 200, 50)
   DARK = (64, 64, 64)
   font = pygame.font.Font("fnt/Lato-Thin.ttf", 20)
+----
 
 Build the button to press to take a picture.  This code also goes above
 the main `while` loop.
-
+[source, python]
+----
   button = pygame.Rect(100, 120, 140, 80)
   button_text = font.render("Take Picture", True, DARK)
   text_box = (button.left + 15, button.top + 23)
-
+----
 Import your previous functions, close to the top of your program.
-
+[source, python]
+----
   from thetaPythonTest import startSession, takePicture
-
+----
 Draw the button inside of the main `while` loop above the `display.update`
 statement.
 
+[source, python]
+----
   SCREEN.fill(WHITE)
   pygame.draw.rect(SCREEN,GRAY, button)
   pygame.draw.rect(SCREEN, DARK, button, 1)
   SCREEN.blit(button_text, text_box)
+----
 
 In the event queue loop, check for a button press. If there is a button
 press, then start a new camera session and take the picture. The button press is
@@ -123,8 +140,11 @@ detected by first checking for an event `MOUSEBUTTONDOWN`.  If the mouse or
 touchscreen is down, then get the position of the mouse or finger. If the
 point of the mouse is inside of the button, then take the picture.
 
+[source, python]
+----
   if event.type == pygame.MOUSEBUTTONDOWN:
       mouse_pos = pygame.mouse.get_pos()
       if button.collidepoint(mouse_pos):
           sid = startSession()
           takePicture(sid)
+----
