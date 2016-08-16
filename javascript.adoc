@@ -1,4 +1,4 @@
-== JavaScript
+=== JavaScript
 
 Normally, JavaScript within a web browser will not be able to access the
 THETA due to security restrictions. However, Node.js is able to communicate

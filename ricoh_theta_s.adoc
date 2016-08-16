@@ -27,35 +27,16 @@ Send comments and corrections to <info@theta360.guide>
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
-== http://theta360.guide/ecosystem/[Register for the THETA Developer Ecosystem]
 
-==  Resources
-=== Official Information
+TIP: http://theta360.guide/ecosystem/[**Register for the THETA Developer Ecosystem**]
 
-* https://developers.theta360.com/en/docs/v2/api_reference/[RICOH THETA API v2],
-compliant with
-https://developers.google.com/streetview/open-spherical-camera/[Open Spherical Camera API version 1.0] from Google.
-* https://developers.theta360.com/en/forums/[THETA Developers Official Forum]
-* https://developers.theta360.com/en/docs/sdk/[Official SDK]
-* https://theta360.com/en/support/download/[Windows, Mac, iOS, Android apps]
+== Quickstart
 
-=== Unofficial Information
-* https://github.com/theta360developers[GitHub listing of community repositories] - libraries and code examples from the community
-* http://theta360developers.github.io/blog/[Blog for developers] - How-To articles from the community
-* Guides
-** http://codetricity.github.io/theta-s/index.html[Unofficial API Guide] - Use the RICOH
-THETA S API, a HTTP API based on Open Spherical Camera (OSC) specifications.
-Beginners should start here. Web browser using advanced HTTP clients,
-command line curl, Python. Planned examples for JavaScript and other languages.
-** http://theta360developers.github.io/community-document/community.html[Unofficial Media Guide] -
-360 degree media management. Streaming video, equirectangular conversion, stitching
-
-
-== Connect Computer to THETA S
+=== Connect Computer to THETA S
 Turn on the THETA S.  The WiFi icon will flash blue.
 
 On your computer connect to the THETA access point that the camera
-created.
+created. The password is the serial number
 
 image::img/wifi_access.png[]
 
@@ -89,7 +70,7 @@ The response:
       ... THERE WILL BE MORE INFO
 
 
-== Test Commands From Computer to Camera
+=== Test Commands From Computer to Camera
 You can use any tool to test `POST` and `GET` commands to the camera.
 Many people use
 link:http://curl.haxx.se/[curl], a web browser, or
@@ -146,7 +127,7 @@ site.
 
 include::take_picture.adoc[]
 
-== Testing Workflow Using a HTTP Browser Tool
+=== Test Workflow With a HTTP Browser Tool
 
 TIP: For quick testing, save the individual commands into your testing tool.
 
@@ -162,9 +143,13 @@ NOTE: I have not been able to get a mock server running that supports the full
 RICOH THETA API v2.  In my tests, I needed to connect to the actual device.  If you
 build a functional mock server, send it to me. :-)
 
+== Basic Apps
+
 include::python_tests.adoc[]
 
 include::python_desktop.adoc[]
+
+include::thetapylib.adoc[]
 
 include::transfer.adoc[]
 
@@ -172,18 +157,26 @@ include::javascript.adoc[]
 
 include::otherLang.adoc[]
 
+== Small Hardware WiFi Control
+
 include::rpi.adoc[]
 
 include::hardware.adoc[]
 
-include::network.adoc[]
 
 include::usb.adoc[]
 
-include::resources.adoc[]
+include::tips.adoc[]
 
-include::hackathon_tips.adoc[]
 
-include::thetapylib.adoc[]
+==  Resources
+=== Official Information
 
-include::nextsteps.adoc[]
+* https://developers.theta360.com/en/docs/v2/api_reference/[RICOH THETA API v2.1],
+* https://developers.theta360.com/en/forums/[THETA Developers Official Forum]
+* https://developers.theta360.com/en/docs/sdk/[Official SDK]
+* https://theta360.com/en/support/download/[Windows, Mac, iOS, Android apps]
+
+=== Unofficial Information
+// * https://github.com/theta360developers[GitHub listing of community repositories] - libraries and code examples from the community
+* http://theta360.guide/[THETA Unofficial Guide] - Articles, guides, and tutorials from the community

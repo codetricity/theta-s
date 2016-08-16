@@ -1,4 +1,39 @@
 == Tips
+
+* You can't access the WiFi API if your camera is plugged into your computer.
+Plug your camera into a 1,500 mA power source that is plugged into a wall.
+
+* The THETA can connect to only one device at a time.  It can connect
+to a phone or a computer, but not at the same time.  If you have
+dual network interfaces, you can connect to the Internet and the
+THETA at the same time. You may need to adjust your routes.
+
+* If there are multiple THETAs at an event (like a hackathon) the SSID access points
+will look the same. Make sure you connect to the right THETA.  Your access point
+contains the serial number on your THETA.
+
+* By default, the WiFi password for the THETA S
+ is the last eight digits of the serial number.  The serial number is in
+ the WiFi SSID as well as on the bottom of the camera.
+
+* You can't change `captureMode` option to `_liveStreaming` with the API.
+Live streaming does work manually.  You can change capture
+mode to `image` or `_video` with the API.
+
+* Live streaming won't work over WiFi. Live Preview mode will work
+at lower resolution and lower framerates. See the
+http://theta360developers.github.io/community-document/community.html[Unofficial Media Guide]
+for video specifications.
+
+* There is a https://github.com/theta360developers?tab=repositories[GitHub Repository]
+of example code from the community.
+
+* The WiFi signal is not strong.  Test the distance and signal strength before
+you build your app.  I suggest you test a file download at different distances
+so you can get a sense for how the distance affects transfer speeds.
+
+
+
 === Network
 If you're connected to the THETA with WiFi, how do you
 connect to the Internet at the same time?

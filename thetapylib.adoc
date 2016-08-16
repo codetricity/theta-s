@@ -1,4 +1,4 @@
-== thetapylib
+=== thetapylib
 
 The sample Python library is included purely as an example of some of the
 core commands that the THETA API v2 provides.  It is not intended for

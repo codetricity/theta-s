@@ -1,4 +1,4 @@
-== Python
+=== Python
 
 https://github.com/codetricity/theta-s-api-tests[Sample code]
 is available on GitHub. Additional Python examples are also available

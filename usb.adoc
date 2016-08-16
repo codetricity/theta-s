@@ -1,5 +1,5 @@
 
-== Using the THETA API Over USB
+== USB Cable Control
 
 image::img/usb/camera-usb-ready.png[role="thumb" title="Ready for USB Control - Power on and unmounted"]
 

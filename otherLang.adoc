@@ -1,8 +1,8 @@
-== Other Languages
+=== Other Languages
 Any language with that can send HTTP commands can be used to connect
 to the THETA S.
 
-=== Scala
+==== Scala
 https://github.com/vogon101[Freddie Poser] contributed this Scala library.
 
  * https://github.com/vogon101/scala-ricoh[scala-ricoh]

@@ -1,10 +1,7 @@
 == Before You Hack
 
-* The camera should be plugged into a 1,500 mA power source.  I don't think
-it will charge from your laptop USB cable.  At least that was my experience.
-If you have it plugged into your laptop, the WiFi, and thus the API access,
-most likely won't work.  I have used it plugged into a wall charger with the
-WiFi working.
+* You can't access the WiFi API if your camera is plugged into your computer.
+Plug your camera into a 1,500 mA power source that is plugged into a wall.  
 
 * The THETA can connect to only one device at a time.  It can connect
 to a phone or a computer, but not at the same time.  If you have
