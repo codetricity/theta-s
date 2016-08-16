@@ -1299,7 +1299,7 @@ from the camera and print it to your console.</p>
   <td class="code"><pre><span class="keyword">import</span> <span class="include">requests</span>, <span class="include">json</span>, <span class="include">pprint</span>
 
 <span class="keyword">def</span> <span class="function">request</span>(url_request):
-    url_base = <span class="string"><span class="delimiter">&quot;</span><span class="content">http://192.168.1.1/osc/</span><span class="delimiter">&quot;</span></span>
+    url_base = <span class="string"><span class="delimiter">&quot;</span><span class="content">http://192.168.1.1/osc/</span><span class="delimiter">&quot;</span></span> <i class="conum" data-value="1"></i><b>(1)</b>
     url = url_base + url_request
     <span class="keyword">return</span> url
 
@@ -1321,10 +1321,17 @@ from the camera and print it to your console.</p>
 <span class="keyword">def</span> <span class="function">main</span>():
   basic_info()
 
-main()
-</pre></td>
+main()</pre></td>
 </tr></table></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The IP address of the camera is always 192.168.1.1</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>This is what I get:</p>
