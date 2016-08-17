@@ -57,7 +57,7 @@ You will see the equirectangular image in the response.
 
 image::img/tools/getImageResponse.png[]
 
-You can also check out the
+If you want to see the image with navigation, open the
 image with your phone using the THETA S app.
 
 First disconnect your computer from the THETA S WiFi hotspot, then connect

@@ -848,6 +848,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_usb_cable_control">4. USB Cable Control</a></li>
 <li><a href="#_tips">5. Tips</a></li>
 <li><a href="#_resources">6. Resources</a></li>
+<li><a href="#_appendix">7. Appendix</a></li>
 </ul>
 </div>
 </div>
@@ -1142,7 +1143,7 @@ I have not managed to get <code>listFiles</code> to work yet.
 </div>
 </div>
 <div class="paragraph">
-<p>You can also check out the
+<p>If you want to see the image with navigation, open the
 image with your phone using the THETA S app.</p>
 </div>
 <div class="paragraph">
@@ -1189,7 +1190,7 @@ time.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_test_workflow_with_a_http_browser_tool">1.5. Test Workflow With a HTTP Browser Tool</h3>
+<h3 id="_save_tests_with_a_http_browser_tool">1.5. Save Tests With a HTTP Browser Tool</h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -1223,6 +1224,11 @@ Chrome browser on any computer.</p>
 <div class="sect1">
 <h2 id="_basic_apps">2. Basic Apps</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>I used Python and JavaScript with node to test the API.
+If you use JavaScript, browser code can&#8217;t access the camera directly
+due to security restrictions.</p>
+</div>
 <div class="sect2">
 <h3 id="_python">2.1. Python</h3>
 <div class="paragraph">
@@ -1513,549 +1519,16 @@ takePicture - Testing RICOH THETA API v2</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In the next few sections, I&#8217;ll show how easy it is to build
-an interface to access the Python library we&#8217;re building.</p>
-</div>
-<div class="sect3">
-<h4 id="_python_desktop">2.1.1. Python Desktop</h4>
-<div class="imageblock">
-<div class="content">
-<img src="img/desktop/desktop_app.png" alt="desktop app">
-</div>
-</div>
-<div class="paragraph">
-<p>This example uses the same Python code from the previous command line
-example and runs it from a GUI.  The example uses <a href="http://www.pygame.org/download.shtml">Pygame</a>
-due to the ease with which a GUI can be built. The application can
-also be <a href="https://github.com/renpytom/rapt-pygame-example">modified to run on Android phones</a>.
-The source code is available on <a href="https://github.com/codetricity/theta-s-api-tests">GitHub</a>.</p>
-</div>
-<div class="paragraph">
-<p>Modify the code in the previous example to allow running as a library.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-</pre></td>
-  <td class="code"><pre>  <span class="keyword">if</span> __name__ == <span class="string"><span class="delimiter">'</span><span class="content">__main__</span><span class="delimiter">'</span></span>:
-      main()</pre></td>
-</tr></table></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The previous code is called <code>thetaPythonTest.py</code> and is in the same directory
-as my new program.  The full program has two graphics purely for decoration.
-You don&#8217;t need those portions and can ignore them.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-I&#8217;ve changed the library name to thetapylib.py, but I have not updated
-the code example below.  Suggest you look at pyTHETA.py command line tool.
-The older test library thetaPythonTest.py should still be there and work.
-deskTHETA.py now has more examples to start and stop video capture.  I&#8217;ll
-try and get some of the file listing and transfer commands working with the
-GUI prior to the Hackathon, but we&#8217;re in crunch time.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_full_program">2.1.2. Full Program</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-</pre></td>
-  <td class="code"><pre>  <span class="keyword">import</span> <span class="include">pygame</span>, <span class="include">sys</span>
-  <span class="keyword">import</span> <span class="include">requests</span>
-  <span class="keyword">import</span> <span class="include">json</span>
-  <span class="keyword">from</span> <span class="include">thetaPythonTest</span> <span class="keyword">import</span> <span class="include">startSession</span>, <span class="include">takePicture</span>
-
-  WHITE = (<span class="integer">255</span>,<span class="integer">255</span>,<span class="integer">255</span>)
-  GRAY = (<span class="integer">230</span>, <span class="integer">230</span>, <span class="integer">230</span>)
-  GREEN = (<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">50</span>)
-  DARK = (<span class="integer">64</span>, <span class="integer">64</span>, <span class="integer">64</span>)
-
-  pygame.init()
-  SCREENSIZE = (<span class="integer">800</span>, <span class="integer">600</span>)
-  SCREEN = pygame.display.set_mode(SCREENSIZE)
-
-  button = pygame.Rect(<span class="integer">100</span>, <span class="integer">120</span>, <span class="integer">140</span>, <span class="integer">80</span>)
-  font = pygame.font.Font(<span class="string"><span class="delimiter">&quot;</span><span class="content">fnt/Lato-Thin.ttf</span><span class="delimiter">&quot;</span></span>, <span class="integer">20</span>)
-  button_text = font.render(<span class="string"><span class="delimiter">&quot;</span><span class="content">Take Picture</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">True</span>, DARK)
-  text_box = (button.left + <span class="integer">15</span>, button.top + <span class="integer">23</span>)
-
-  theta = pygame.image.load(<span class="string"><span class="delimiter">&quot;</span><span class="content">img/ricoh-theta-s.png</span><span class="delimiter">&quot;</span></span>)
-  theta_rect = theta.get_rect()
-  theta_rect.right = SCREENSIZE[<span class="integer">0</span>] - <span class="integer">50</span>
-  theta_rect.top = <span class="integer">60</span>
-
-  developers_logo = pygame.image.load(<span class="string"><span class="delimiter">&quot;</span><span class="content">img/theta_developers.png</span><span class="delimiter">&quot;</span></span>)
-
-  <span class="keyword">while</span> <span class="predefined-constant">True</span>:
-      <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():
-          <span class="keyword">if</span> event.type == pygame.QUIT:
-              pygame.quit()
-              sys.exit()
-          <span class="keyword">if</span> event.type == pygame.MOUSEBUTTONDOWN:
-              mouse_pos = pygame.mouse.get_pos()
-              <span class="keyword">if</span> button.collidepoint(mouse_pos):
-                  sid = startSession()
-                  takePicture(sid)
-
-      SCREEN.fill(WHITE)
-      pygame.draw.rect(SCREEN,GRAY, button)
-      pygame.draw.rect(SCREEN, DARK, button, <span class="integer">1</span>)
-      SCREEN.blit(button_text, text_box)
-      SCREEN.blit(theta, theta_rect)
-      SCREEN.blit(developers_logo, (<span class="integer">10</span>, <span class="integer">10</span>))
-
-      pygame.display.update()
-</pre></td>
-</tr></table></code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_code_walkthrough">2.1.3. Code Walkthrough</h4>
-<div class="paragraph">
-<p>Import the <code>pygame</code> and <code>sys</code> libraries and set up a blank window.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">import</span> <span class="include">pygame</span>, <span class="include">sys</span>
-
-  pygame.init()
-  SCREENSIZE = (<span class="integer">800</span>, <span class="integer">600</span>)
-  SCREEN = pygame.display.set_mode(SCREENSIZE)
-
-  <span class="keyword">while</span> <span class="predefined-constant">True</span>:
-      <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():
-          <span class="keyword">if</span> event.type == pygame.QUIT:
-              pygame.quit()
-              sys.exit()
-      pygame.display.update()</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Load your fonts and colors above the main <code>while</code> loop.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  WHITE = (<span class="integer">255</span>,<span class="integer">255</span>,<span class="integer">255</span>)
-  GRAY = (<span class="integer">230</span>, <span class="integer">230</span>, <span class="integer">230</span>)
-  GREEN = (<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">50</span>)
-  DARK = (<span class="integer">64</span>, <span class="integer">64</span>, <span class="integer">64</span>)
-  font = pygame.font.Font(<span class="string"><span class="delimiter">&quot;</span><span class="content">fnt/Lato-Thin.ttf</span><span class="delimiter">&quot;</span></span>, <span class="integer">20</span>)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Build the button to press to take a picture.  This code also goes above
-the main <code>while</code> loop.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  button = pygame.Rect(<span class="integer">100</span>, <span class="integer">120</span>, <span class="integer">140</span>, <span class="integer">80</span>)
-  button_text = font.render(<span class="string"><span class="delimiter">&quot;</span><span class="content">Take Picture</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">True</span>, DARK)
-  text_box = (button.left + <span class="integer">15</span>, button.top + <span class="integer">23</span>)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Import your previous functions, close to the top of your program.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">from</span> <span class="include">thetaPythonTest</span> <span class="keyword">import</span> <span class="include">startSession</span>, <span class="include">takePicture</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Draw the button inside of the main <code>while</code> loop above the <code>display.update</code>
-statement.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  SCREEN.fill(WHITE)
-  pygame.draw.rect(SCREEN,GRAY, button)
-  pygame.draw.rect(SCREEN, DARK, button, <span class="integer">1</span>)
-  SCREEN.blit(button_text, text_box)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the event queue loop, check for a button press. If there is a button
-press, then start a new camera session and take the picture. The button press is
-detected by first checking for an event <code>MOUSEBUTTONDOWN</code>.  If the mouse or
-touchscreen is down, then get the position of the mouse or finger. If the
-point of the mouse is inside of the button, then take the picture.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">if</span> event.type == pygame.MOUSEBUTTONDOWN:
-      mouse_pos = pygame.mouse.get_pos()
-      <span class="keyword">if</span> button.collidepoint(mouse_pos):
-          sid = startSession()
-          takePicture(sid)</code></pre>
-</div>
-</div>
+<p>In appendix, I included an easy example of an interface
+to access the Python library we&#8217;re building.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_thetapylib">2.2. thetapylib</h3>
-<div class="paragraph">
-<p>The sample Python library is included purely as an example of some of the
-core commands that the THETA API v2 provides.  It is not intended for
-use in applications.</p>
-</div>
-<div class="paragraph">
-<p>Documentation is included below so that you can quickly get an overview
-of using some of the
-commands before you build your own library.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>thetapylib
-/home/ricoh/Development/viewer/thetapylib.py</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example library for RICOH THETA S hacking with Python.  The new
-API is compliant with the Open Spherical Camera specification.
-This is intended to show how the THETA S API works.  It is
-not intended for use in your program.  There is no error
-checking and this example library only handles a handful
-of commands.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>There are three example programs that use this library.
-At the top of your Python script, use</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>from thetapylib import *</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>After you import the library, you can use the commands like this:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>That will return the state of the camera, which is great to
-get the sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>You can also get the sessionId when you start a new session:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>In fact, the startSession() function will return the
-sessionId.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of the library with Pygame to detect the
-button press.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if event.type == pygame.MOUSEBUTTONDOWN:
-    mouse_pos = pygame.mouse.get_pos()
-    if pictureButton.collidepoint(mouse_pos):
-        sid = startSession()
-        takePicture(sid)
-    if captureStartButton.collidepoint(mouse_pos):
-        sid = startSession()
-        startCapture(sid)
-    if captureStopButton.collidepoint(mouse_pos):
-        stopCapture(sid)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Example use of library from the command line:</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>if sys.argv[1] == "startCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py startCapture SID_000X")
-        print("Use 'state' to get sessionId")</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>    else:
-        sid = sys.argv[2]
-        response = startCapture(sid)
-        pprint.pprint(response)
-elif sys.argv[1] == "stopCapture":
-    if len(sys.argv) &lt; 3:
-        print("Usage: pyTHETA.py stopCapture SID_000X")
-        print("Use 'state' to get sessionId")
-    else:
-        sid = sys.argv[2]
-        response = stopCapture(sid)
-        pprint.pprint(response)</pre>
-</div>
-</div>
-<hr>
-<div class="literalblock">
-<div class="content">
-<pre>Functions</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>getImage(fileUri, imageType='image')
-    Transfer the file from the camera to computer and save the
-    binary data to local storage.  This works, but is clunky.
-    There are easier ways to do this. The __type parameter
-    can be set to "thumb" for a thumbnail or "image" for the
-    full-size image.  The default is "image".</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>info()
-    Get basic information ont he camera.  Note that this is a GET call
-    and not a POST.  Most of the calls are POST.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>latestFileUri()
-    This will only work if you've just taken a picture.  The state
-    will include the attribute latestFileUri.  You need this to
-    transfer the file from the camera to your computer or phone.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>listAll(entryCount=3, detail=False, sortType='newest')
-    entryCount:
-            Integer     No. of still images and video files
-                        to be acquired
-    detail:
-            Boolean     (Optional)  Whether or not file details are
-                        acquired true is acquired by default.
-                        Only values that can be acquired
-                        when false is specified are "name", "uri",
-                        "size" and "dateTime"
-    sort:
-            String      (Optional) Specify the sort order
-                        newest (dateTime descending order)/ oldest
-                        (dateTime ascending order)
-                        Default is newest</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>request(url_request)
-    Generate the URI to send to the THETA S.  The THETA IP address is
-    192.168.1.1
-    All calls start with /osc/</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startCapture(sid)
-    Begin video capture if the captureMode is _video.  If the
-    captureMode is set to image, the camera will take multiple
-    still images.  The captureMode can be set in the options.
-    Note that this will not work with streaming video using the
-    HDMI or USB cable.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>startSession()
-    Start a new session.  Grab the sessionId number and
-    return it.
-    You'll need the sessionId to take a video or image.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>state()
-    Get the state of the camera, which will include the sessionsId and also the
-    latestFileUri if you've just taken a picture.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>stopCapture(sid)
-    Stop video capture.  If in image mode, will stop
-    automatic image taking.</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>takePicture(sid)
-    Take a still image.  The sessionId is either taken from
-    startSession or from state.  You can change the mode
-    from video to image with captureMode in the options.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_python_file_transfer">2.3. Python File Transfer</h3>
-<div class="paragraph">
-<p>Here&#8217;s an example of getting the file from the camera to a computer
-or Android phone.  There&#8217;s easier ways to get the file from the camera,
-but this method works with the <code>requests</code> library.</p>
-</div>
-<div class="paragraph">
-<p>There are two main parts. First grab the latest file URI from the
-camera.  The second part is to transfer the file over and save it to
-<code>output.jpg</code></p>
-</div>
-<div class="paragraph">
-<p>Set up the URL base.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def request(url_request):
-    url_base = "http://192.168.1.1/osc/"
-    url = url_base + url_request
-    return url</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Grab the state information from the camera.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def state():
-    url = request("state")
-    req = requests.post(url)
-    response = req.json()
-    return response</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Assuming that you&#8217;ve just taken a picture, the camera will have the
-attribute <code>_latestFileUri</code>.  If you haven&#8217;t taken a picture in
-the session, take a picture now for this test.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def latestFileUri():
-    state_data = state()["state"]
-    latestFileUri = state_data["_latestFileUri"]
-    return latestFileUri</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once you know the URI, you can grab the file and write it to
-your local storage.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>def getImage(fileUri):
-    url = request("commands/execute")
-    body = json.dumps({"name": "camera.getImage",
-         "parameters": {
-            "fileUri": fileUri,
-#            "_type": "thumb"
-            "_type": "image"
-         }
-         })
-    with open('output.jpg', 'wb') as handle:
-        response = requests.post(url, data=body, stream=True)
-        for block in response.iter_content(1024):
-            handle.write(block)</pre>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_other_command_line_python_tools">2.3.1. Other Command Line Python Tools</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/theta360developers/python-download-rossgoderer">Python script downloader</a>
-from Ulrich Rossgoderer. Community.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_javascript">2.4. JavaScript</h3>
+<h3 id="_javascript">2.2. JavaScript</h3>
 <div class="paragraph">
 <p>Normally, JavaScript within a web browser will not be able to access the
-THETA due to security restrictions. However, Node.js is able to communicate
-with the camera, so that’s what I recommend using.</p>
+THETA due to security restrictions. Use Node.js to communicate
+with the camera.</p>
 </div>
 <div class="paragraph">
 <p>In addition to server-side applications,
@@ -2078,7 +1551,9 @@ below.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
+Running JavaScript in a browser directly will result in an error
+when you access the camera. You must use something like Node.js or
+another way of running the code.
 </td>
 </tr>
 </table>
@@ -2297,13 +1772,13 @@ var interval = 5000;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_other_languages">2.5. Other Languages</h3>
+<h3 id="_other_languages">2.3. Other Languages</h3>
 <div class="paragraph">
 <p>Any language with that can send HTTP commands can be used to connect
 to the THETA S.</p>
 </div>
 <div class="sect3">
-<h4 id="_scala">2.5.1. Scala</h4>
+<h4 id="_scala">2.3.1. Scala</h4>
 <div class="paragraph">
 <p><a href="https://github.com/vogon101">Freddie Poser</a> contributed this Scala library.</p>
 </div>
@@ -3774,10 +3249,548 @@ RPi touch interface built with Pygame.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_appendix">7. Appendix</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_python_desktop">7.1. Python Desktop</h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/desktop/desktop_app.png" alt="desktop app">
+</div>
+</div>
+<div class="paragraph">
+<p>This example uses the same Python code from the previous command line
+example and runs it from a GUI.  The example uses <a href="http://www.pygame.org/download.shtml">Pygame</a>
+due to the ease with which a GUI can be built. The application can
+also be <a href="https://github.com/renpytom/rapt-pygame-example">modified to run on Android phones</a>.
+The source code is available on <a href="https://github.com/codetricity/theta-s-api-tests">GitHub</a>.</p>
+</div>
+<div class="paragraph">
+<p>Modify the code in the previous example to allow running as a library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+</pre></td>
+  <td class="code"><pre>  <span class="keyword">if</span> __name__ == <span class="string"><span class="delimiter">'</span><span class="content">__main__</span><span class="delimiter">'</span></span>:
+      main()</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous code is called <code>thetaPythonTest.py</code> and is in the same directory
+as my new program.  The full program has two graphics purely for decoration.
+You don&#8217;t need those portions and can ignore them.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+I&#8217;ve changed the library name to thetapylib.py, but I have not updated
+the code example below.  Suggest you look at pyTHETA.py command line tool.
+The older test library thetaPythonTest.py should still be there and work.
+deskTHETA.py now has more examples to start and stop video capture.  I&#8217;ll
+try and get some of the file listing and transfer commands working with the
+GUI prior to the Hackathon, but we&#8217;re in crunch time.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_full_program">7.1.1. Full Program</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+</pre></td>
+  <td class="code"><pre>  <span class="keyword">import</span> <span class="include">pygame</span>, <span class="include">sys</span>
+  <span class="keyword">import</span> <span class="include">requests</span>
+  <span class="keyword">import</span> <span class="include">json</span>
+  <span class="keyword">from</span> <span class="include">thetaPythonTest</span> <span class="keyword">import</span> <span class="include">startSession</span>, <span class="include">takePicture</span>
+
+  WHITE = (<span class="integer">255</span>,<span class="integer">255</span>,<span class="integer">255</span>)
+  GRAY = (<span class="integer">230</span>, <span class="integer">230</span>, <span class="integer">230</span>)
+  GREEN = (<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">50</span>)
+  DARK = (<span class="integer">64</span>, <span class="integer">64</span>, <span class="integer">64</span>)
+
+  pygame.init()
+  SCREENSIZE = (<span class="integer">800</span>, <span class="integer">600</span>)
+  SCREEN = pygame.display.set_mode(SCREENSIZE)
+
+  button = pygame.Rect(<span class="integer">100</span>, <span class="integer">120</span>, <span class="integer">140</span>, <span class="integer">80</span>)
+  font = pygame.font.Font(<span class="string"><span class="delimiter">&quot;</span><span class="content">fnt/Lato-Thin.ttf</span><span class="delimiter">&quot;</span></span>, <span class="integer">20</span>)
+  button_text = font.render(<span class="string"><span class="delimiter">&quot;</span><span class="content">Take Picture</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">True</span>, DARK)
+  text_box = (button.left + <span class="integer">15</span>, button.top + <span class="integer">23</span>)
+
+  theta = pygame.image.load(<span class="string"><span class="delimiter">&quot;</span><span class="content">img/ricoh-theta-s.png</span><span class="delimiter">&quot;</span></span>)
+  theta_rect = theta.get_rect()
+  theta_rect.right = SCREENSIZE[<span class="integer">0</span>] - <span class="integer">50</span>
+  theta_rect.top = <span class="integer">60</span>
+
+  developers_logo = pygame.image.load(<span class="string"><span class="delimiter">&quot;</span><span class="content">img/theta_developers.png</span><span class="delimiter">&quot;</span></span>)
+
+  <span class="keyword">while</span> <span class="predefined-constant">True</span>:
+      <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():
+          <span class="keyword">if</span> event.type == pygame.QUIT:
+              pygame.quit()
+              sys.exit()
+          <span class="keyword">if</span> event.type == pygame.MOUSEBUTTONDOWN:
+              mouse_pos = pygame.mouse.get_pos()
+              <span class="keyword">if</span> button.collidepoint(mouse_pos):
+                  sid = startSession()
+                  takePicture(sid)
+
+      SCREEN.fill(WHITE)
+      pygame.draw.rect(SCREEN,GRAY, button)
+      pygame.draw.rect(SCREEN, DARK, button, <span class="integer">1</span>)
+      SCREEN.blit(button_text, text_box)
+      SCREEN.blit(theta, theta_rect)
+      SCREEN.blit(developers_logo, (<span class="integer">10</span>, <span class="integer">10</span>))
+
+      pygame.display.update()
+</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_walkthrough">7.1.2. Code Walkthrough</h4>
+<div class="paragraph">
+<p>Import the <code>pygame</code> and <code>sys</code> libraries and set up a blank window.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">import</span> <span class="include">pygame</span>, <span class="include">sys</span>
+
+  pygame.init()
+  SCREENSIZE = (<span class="integer">800</span>, <span class="integer">600</span>)
+  SCREEN = pygame.display.set_mode(SCREENSIZE)
+
+  <span class="keyword">while</span> <span class="predefined-constant">True</span>:
+      <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():
+          <span class="keyword">if</span> event.type == pygame.QUIT:
+              pygame.quit()
+              sys.exit()
+      pygame.display.update()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Load your fonts and colors above the main <code>while</code> loop.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  WHITE = (<span class="integer">255</span>,<span class="integer">255</span>,<span class="integer">255</span>)
+  GRAY = (<span class="integer">230</span>, <span class="integer">230</span>, <span class="integer">230</span>)
+  GREEN = (<span class="integer">100</span>, <span class="integer">200</span>, <span class="integer">50</span>)
+  DARK = (<span class="integer">64</span>, <span class="integer">64</span>, <span class="integer">64</span>)
+  font = pygame.font.Font(<span class="string"><span class="delimiter">&quot;</span><span class="content">fnt/Lato-Thin.ttf</span><span class="delimiter">&quot;</span></span>, <span class="integer">20</span>)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Build the button to press to take a picture.  This code also goes above
+the main <code>while</code> loop.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  button = pygame.Rect(<span class="integer">100</span>, <span class="integer">120</span>, <span class="integer">140</span>, <span class="integer">80</span>)
+  button_text = font.render(<span class="string"><span class="delimiter">&quot;</span><span class="content">Take Picture</span><span class="delimiter">&quot;</span></span>, <span class="predefined-constant">True</span>, DARK)
+  text_box = (button.left + <span class="integer">15</span>, button.top + <span class="integer">23</span>)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Import your previous functions, close to the top of your program.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">from</span> <span class="include">thetaPythonTest</span> <span class="keyword">import</span> <span class="include">startSession</span>, <span class="include">takePicture</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Draw the button inside of the main <code>while</code> loop above the <code>display.update</code>
+statement.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  SCREEN.fill(WHITE)
+  pygame.draw.rect(SCREEN,GRAY, button)
+  pygame.draw.rect(SCREEN, DARK, button, <span class="integer">1</span>)
+  SCREEN.blit(button_text, text_box)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the event queue loop, check for a button press. If there is a button
+press, then start a new camera session and take the picture. The button press is
+detected by first checking for an event <code>MOUSEBUTTONDOWN</code>.  If the mouse or
+touchscreen is down, then get the position of the mouse or finger. If the
+point of the mouse is inside of the button, then take the picture.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">if</span> event.type == pygame.MOUSEBUTTONDOWN:
+      mouse_pos = pygame.mouse.get_pos()
+      <span class="keyword">if</span> button.collidepoint(mouse_pos):
+          sid = startSession()
+          takePicture(sid)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_thetapylib">7.2. thetapylib</h3>
+<div class="paragraph">
+<p>The sample Python library is included purely as an example of some of the
+core commands that the THETA API v2 provides.  It is not intended for
+use in applications.</p>
+</div>
+<div class="paragraph">
+<p>Documentation is included below so that you can quickly get an overview
+of using some of the
+commands before you build your own library.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>thetapylib
+/home/ricoh/Development/viewer/thetapylib.py</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Example library for RICOH THETA S hacking with Python.  The new
+API is compliant with the Open Spherical Camera specification.
+This is intended to show how the THETA S API works.  It is
+not intended for use in your program.  There is no error
+checking and this example library only handles a handful
+of commands.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>There are three example programs that use this library.
+At the top of your Python script, use</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>from thetapylib import *</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>After you import the library, you can use the commands like this:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>state()</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>That will return the state of the camera, which is great to
+get the sessionId.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>You can also get the sessionId when you start a new session:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>startSession()</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>In fact, the startSession() function will return the
+sessionId.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Example use of the library with Pygame to detect the
+button press.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if event.type == pygame.MOUSEBUTTONDOWN:
+    mouse_pos = pygame.mouse.get_pos()
+    if pictureButton.collidepoint(mouse_pos):
+        sid = startSession()
+        takePicture(sid)
+    if captureStartButton.collidepoint(mouse_pos):
+        sid = startSession()
+        startCapture(sid)
+    if captureStopButton.collidepoint(mouse_pos):
+        stopCapture(sid)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Example use of library from the command line:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if sys.argv[1] == "startCapture":
+    if len(sys.argv) &lt; 3:
+        print("Usage: pyTHETA.py startCapture SID_000X")
+        print("Use 'state' to get sessionId")</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    else:
+        sid = sys.argv[2]
+        response = startCapture(sid)
+        pprint.pprint(response)
+elif sys.argv[1] == "stopCapture":
+    if len(sys.argv) &lt; 3:
+        print("Usage: pyTHETA.py stopCapture SID_000X")
+        print("Use 'state' to get sessionId")
+    else:
+        sid = sys.argv[2]
+        response = stopCapture(sid)
+        pprint.pprint(response)</pre>
+</div>
+</div>
+<hr>
+<div class="literalblock">
+<div class="content">
+<pre>Functions</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>getImage(fileUri, imageType='image')
+    Transfer the file from the camera to computer and save the
+    binary data to local storage.  This works, but is clunky.
+    There are easier ways to do this. The __type parameter
+    can be set to "thumb" for a thumbnail or "image" for the
+    full-size image.  The default is "image".</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>info()
+    Get basic information ont he camera.  Note that this is a GET call
+    and not a POST.  Most of the calls are POST.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>latestFileUri()
+    This will only work if you've just taken a picture.  The state
+    will include the attribute latestFileUri.  You need this to
+    transfer the file from the camera to your computer or phone.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>listAll(entryCount=3, detail=False, sortType='newest')
+    entryCount:
+            Integer     No. of still images and video files
+                        to be acquired
+    detail:
+            Boolean     (Optional)  Whether or not file details are
+                        acquired true is acquired by default.
+                        Only values that can be acquired
+                        when false is specified are "name", "uri",
+                        "size" and "dateTime"
+    sort:
+            String      (Optional) Specify the sort order
+                        newest (dateTime descending order)/ oldest
+                        (dateTime ascending order)
+                        Default is newest</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>request(url_request)
+    Generate the URI to send to the THETA S.  The THETA IP address is
+    192.168.1.1
+    All calls start with /osc/</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>startCapture(sid)
+    Begin video capture if the captureMode is _video.  If the
+    captureMode is set to image, the camera will take multiple
+    still images.  The captureMode can be set in the options.
+    Note that this will not work with streaming video using the
+    HDMI or USB cable.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>startSession()
+    Start a new session.  Grab the sessionId number and
+    return it.
+    You'll need the sessionId to take a video or image.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>state()
+    Get the state of the camera, which will include the sessionsId and also the
+    latestFileUri if you've just taken a picture.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stopCapture(sid)
+    Stop video capture.  If in image mode, will stop
+    automatic image taking.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>takePicture(sid)
+    Take a still image.  The sessionId is either taken from
+    startSession or from state.  You can change the mode
+    from video to image with captureMode in the options.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_python_file_transfer">7.3. Python File Transfer</h3>
+<div class="paragraph">
+<p>Here&#8217;s an example of getting the file from the camera to a computer
+or Android phone.  There&#8217;s easier ways to get the file from the camera,
+but this method works with the <code>requests</code> library.</p>
+</div>
+<div class="paragraph">
+<p>There are two main parts. First grab the latest file URI from the
+camera.  The second part is to transfer the file over and save it to
+<code>output.jpg</code></p>
+</div>
+<div class="paragraph">
+<p>Set up the URL base.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def request(url_request):
+    url_base = "http://192.168.1.1/osc/"
+    url = url_base + url_request
+    return url</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Grab the state information from the camera.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def state():
+    url = request("state")
+    req = requests.post(url)
+    response = req.json()
+    return response</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assuming that you&#8217;ve just taken a picture, the camera will have the
+attribute <code>_latestFileUri</code>.  If you haven&#8217;t taken a picture in
+the session, take a picture now for this test.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def latestFileUri():
+    state_data = state()["state"]
+    latestFileUri = state_data["_latestFileUri"]
+    return latestFileUri</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you know the URI, you can grab the file and write it to
+your local storage.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>def getImage(fileUri):
+    url = request("commands/execute")
+    body = json.dumps({"name": "camera.getImage",
+         "parameters": {
+            "fileUri": fileUri,
+#            "_type": "thumb"
+            "_type": "image"
+         }
+         })
+    with open('output.jpg', 'wb') as handle:
+        response = requests.post(url, data=body, stream=True)
+        for block in response.iter_content(1024):
+            handle.write(block)</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_other_command_line_python_tools">7.3.1. Other Command Line Python Tools</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/theta360developers/python-download-rossgoderer">Python script downloader</a>
+from Ulrich Rossgoderer. Community.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-16 19:21:05 PDT
+Last updated 2016-08-17 07:57:41 PDT
 </div>
 </div>
 </body>

@@ -127,7 +127,7 @@ of most computers.
 
 include::take_picture.adoc[]
 
-=== Test Workflow With a HTTP Browser Tool
+=== Save Tests With a HTTP Browser Tool
 
 TIP: For easier testing, save the individual commands into your testing tool.
 
@@ -143,13 +143,12 @@ Chrome browser on any computer.
 
 == Basic Apps
 
+I used Python and JavaScript with node to test the API.
+If you use JavaScript, browser code can't access the camera directly
+due to security restrictions.
+
+
 include::python_tests.adoc[]
-
-include::python_desktop.adoc[]
-
-include::thetapylib.adoc[]
-
-include::transfer.adoc[]
 
 include::javascript.adoc[]
 
@@ -178,3 +177,10 @@ include::tips.adoc[]
 === Unofficial Information
 // * https://github.com/theta360developers[GitHub listing of community repositories] - libraries and code examples from the community
 * http://theta360.guide/[THETA Unofficial Guide] - Articles, guides, and tutorials from the community
+
+== Appendix
+include::python_desktop.adoc[]
+
+include::thetapylib.adoc[]
+
+include::transfer.adoc[]

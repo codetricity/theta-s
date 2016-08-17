@@ -1,8 +1,8 @@
 === JavaScript
 
 Normally, JavaScript within a web browser will not be able to access the
-THETA due to security restrictions. However, Node.js is able to communicate
-with the camera, so that’s what I recommend using.
+THETA due to security restrictions. Use Node.js to communicate
+with the camera.
 
 In addition to server-side applications,
 people have successfully built applications using Cordova and
@@ -17,7 +17,9 @@ https://angularjs.org/[AngularJS] components in his mobile application and
 was able to take a picture and download the code using the Node.js example code
 below.
 
-WARNING: Running JavaScript in a browser directly will result in an error when you access the camera. You must use something like Node.js or another way of running the code.
+WARNING: Running JavaScript in a browser directly will result in an error
+when you access the camera. You must use something like Node.js or
+another way of running the code.
 
 Let's start with the easiest example, Node.js, from the command line.
 

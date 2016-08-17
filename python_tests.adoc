@@ -180,5 +180,5 @@ Run it and celebrate!
    u'progress': {u'completion': 0.0},
    u'state': u'inProgress'}
 
-In the next few sections, I'll show how easy it is to build
-an interface to access the Python library we're building.
+In appendix, I included an easy example of an interface
+to access the Python library we're building.
