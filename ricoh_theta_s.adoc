@@ -21,8 +21,10 @@ ga('set', 'contentGroup1', 'All RICOH');
 
 image::img/api_guide_logo.png[THETA DEVELOPERS UNOFFICIAL API GUIDE]
 
+http://lists.theta360.guide/c/theta-api-usage[Discuss, comment, and ask questions].
+You can also log in and send a private message to  http://lists.theta360.guide/users/jcasman/[jcasman].
 
-Send comments and corrections to <info@theta360.guide>
+
 
 This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
