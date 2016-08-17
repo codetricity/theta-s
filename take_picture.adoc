@@ -2,12 +2,20 @@
 
 Start the session.
 
+:WARNING: There are three versions of the API to control the camera.
+https://developers.theta360.com/en/docs/v2.0/api_reference/[API v2.0] and
+https://developers.theta360.com/en/docs/v2.1/api_reference/[API v2.1] are used with WiFi.
+
+[source, javascript]
+----
   192.168.1.1/osc/commands/execute
 
   {
     "name": "camera.startSession",
     "parameters": {}
   }
+
+----
 
 Grab the `sessionId` and take the picture.
 
