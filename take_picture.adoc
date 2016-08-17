@@ -20,14 +20,44 @@ Grab the `sessionId` and take the picture.
 
 The camera will beep.
 
-At this point, you can grab the image with the API. However,
-it will be a stream of binary data.  To convert this into
-a something like a jpg that can displayed on the screen, you'll
-need to get the stream, convert it, then display the image to your
-screen and allow user interaction with the image.
+=== Downloading the Image To Your Computer
 
 To test whether you've saved the image and to get the great
-satisfaction of seeing your image, you can also check out the
+satisfaction of seeing your image, you can grab the image with the API or with
+the mobile app.
+
+If you use the API, the image is returned as a binary stream. Depending on
+your application or testing tool, you may need to convert it into a file.
+In DHC, the binary stream image is automatically
+converted into a viewable JPEG.
+
+The first step to download the image is to get the image URI.
+
+Use the `camera._listAll` command to see a listing of files with the URI.
+
+CAUTION: There are two OSC (WiFi) API versions, v2.0 and v2.1.
+The `_listAll` command in v2.0 is being replaced with `listFiles`.
+I have not managed to get `listFiles` to work yet.
+
+  {
+      "name": "camera._listAll",
+      "parameters": {
+      	"entryCount": 3
+      }
+  }
+
+image::img/tools/listAll.png[]
+
+Use the URI in the POST parameters for `getImage`. In this example, the URI is
+`100RICOH/R0011788.JPG`.
+
+image::img/tools/getimagePost.png[]
+
+You will see the equirectangular image in the response.
+
+image::img/tools/getImageResponse.png[]
+
+You can also check out the
 image with your phone using the THETA S app.
 
 First disconnect your computer from the THETA S WiFi hotspot, then connect

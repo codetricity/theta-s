@@ -954,7 +954,7 @@ must be <code>192.168.1.1</code>.  The gateway is the THETA S.</p>
 <div class="sect2">
 <h3 id="_test_commands_from_computer_to_camera">1.2. Test Commands From Computer to Camera</h3>
 <div class="paragraph">
-<p>You can use any tool to test <code>POST</code> and <code>GET</code> commands to the camera.
+<p>You can use any HTTP tool to test <code>POST</code> and <code>GET</code> commands to the camera.
 Many people use
 <a href="http://curl.haxx.se/">curl</a>, a web browser, or
 <a href="https://www.getpostman.com/">Postman</a>.  In this example, I
@@ -962,10 +962,15 @@ am using
 <a href="https://chrome.google.com/webstore/detail/dhc-resthttp-api-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en">DHC by Restlet</a>.
 It is available for free as a Chrome Extension.</p>
 </div>
+<div class="sect3">
+<h4 id="_using_dhc_free_http_testing_tool">1.2.1. Using DHC - Free HTTP Testing Tool</h4>
 <div class="imageblock">
 <div class="content">
 <img src="img/tools/dhc_client.png" alt="dhc client">
 </div>
+</div>
+<div class="paragraph">
+<p>After you install DHC as a Chrome Extension, set up a new post command as shown below.</p>
 </div>
 <div class="paragraph">
 <p><code>POST</code> to <code><a href="http://192.168.1.1/osc/commands/execute" class="bare">http://192.168.1.1/osc/commands/execute</a></code></p>
@@ -1028,16 +1033,12 @@ It is available for free as a Chrome Extension.</p>
 </td>
 <td class="content">
 I have the camera plugged into a standalone charger capable supplying
-1.5 amps.  The camera won&#8217;t charge when plugged into the USB port
+1.5 amps.  The camera won&#8217;t connect with WiFi when plugged into the USB port
 of most computers.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Read the
-<a href="https://developers.theta360.com/en/docs/v2/api_reference/">API Reference on the RICOH</a>
-site.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1074,16 +1075,74 @@ site.</p>
 <div class="paragraph">
 <p>The camera will beep.</p>
 </div>
-<div class="paragraph">
-<p>At this point, you can grab the image with the API. However,
-it will be a stream of binary data.  To convert this into
-a something like a jpg that can displayed on the screen, you&#8217;ll
-need to get the stream, convert it, then display the image to your
-screen and allow user interaction with the image.</p>
 </div>
+<div class="sect2">
+<h3 id="_downloading_the_image_to_your_computer">1.4. Downloading the Image To Your Computer</h3>
 <div class="paragraph">
 <p>To test whether you&#8217;ve saved the image and to get the great
-satisfaction of seeing your image, you can also check out the
+satisfaction of seeing your image, you can grab the image with the API or with
+the mobile app.</p>
+</div>
+<div class="paragraph">
+<p>If you use the API, the image is returned as a binary stream. Depending on
+your application or testing tool, you may need to convert it into a file.
+In DHC, the binary stream image is automatically
+converted into a viewable JPEG.</p>
+</div>
+<div class="paragraph">
+<p>The first step to download the image is to get the image URI.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>camera._listAll</code> command to see a listing of files with the URI.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+There are two OSC (WiFi) API versions, v2.0 and v2.1.
+The <code>_listAll</code> command in v2.0 is being replaced with <code>listFiles</code>.
+I have not managed to get <code>listFiles</code> to work yet.
+</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{
+    "name": "camera._listAll",
+    "parameters": {
+    	"entryCount": 3
+    }
+}</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/tools/listAll.png" alt="listAll">
+</div>
+</div>
+<div class="paragraph">
+<p>Use the URI in the POST parameters for <code>getImage</code>. In this example, the URI is
+<code>100RICOH/R0011788.JPG</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/tools/getimagePost.png" alt="getimagePost">
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the equirectangular image in the response.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/tools/getImageResponse.png" alt="getImageResponse">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also check out the
 image with your phone using the THETA S app.</p>
 </div>
 <div class="paragraph">
@@ -1130,7 +1189,7 @@ time.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_test_workflow_with_a_http_browser_tool">1.4. Test Workflow With a HTTP Browser Tool</h3>
+<h3 id="_test_workflow_with_a_http_browser_tool">1.5. Test Workflow With a HTTP Browser Tool</h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -1138,7 +1197,7 @@ time.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For quick testing, save the individual commands into your testing tool.
+For easier testing, save the individual commands into your testing tool.
 </td>
 </tr>
 </table>
@@ -1153,22 +1212,10 @@ For quick testing, save the individual commands into your testing tool.
 </div>
 </div>
 <div class="paragraph">
-<p>With this type of tool, you can quickly test indvidual commands and see the
-results prior to running your program or test script.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-I have not been able to get a mock server running that supports the full
-RICOH THETA API v2.  In my tests, I needed to connect to the actual device.  If you
-build a functional mock server, send it to me. :-)
-</td>
-</tr>
-</table>
+<p>With this type of free tool, you can quickly test individual commands and see the
+results prior to running your program or test script. If you create a free account
+with DHC, you can save the commands in the cloud and run your tests from any
+Chrome browser on any computer.</p>
 </div>
 </div>
 </div>
@@ -3730,7 +3777,7 @@ RPi touch interface built with Pygame.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-16 15:20:50 PDT
+Last updated 2016-08-16 19:21:05 PDT
 </div>
 </div>
 </body>

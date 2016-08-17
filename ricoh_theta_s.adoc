@@ -71,7 +71,7 @@ The response:
 
 
 === Test Commands From Computer to Camera
-You can use any tool to test `POST` and `GET` commands to the camera.
+You can use any HTTP tool to test `POST` and `GET` commands to the camera.
 Many people use
 link:http://curl.haxx.se/[curl], a web browser, or
 link:https://www.getpostman.com/[Postman].  In this example, I
@@ -79,7 +79,11 @@ am using
 link:https://chrome.google.com/webstore/detail/dhc-resthttp-api-client/aejoelaoggembcahagimdiliamlcdmfm?hl=en[DHC by Restlet].
 It is available for free as a Chrome Extension.
 
+==== Using DHC - Free HTTP Testing Tool
+
 image::img/tools/dhc_client.png[]
+
+After you install DHC as a Chrome Extension, set up a new post command as shown below.
 
 `POST` to `http://192.168.1.1/osc/commands/execute`
 
@@ -117,31 +121,25 @@ Send a `POST` command to `/osc/state`.
   }
 
 TIP: I have the camera plugged into a standalone charger capable supplying
-1.5 amps.  The camera won't charge when plugged into the USB port
+1.5 amps.  The camera won't connect with WiFi when plugged into the USB port
 of most computers.
-
-Read the
-link:https://developers.theta360.com/en/docs/v2/api_reference/[API Reference on the RICOH]
-site.
 
 
 include::take_picture.adoc[]
 
 === Test Workflow With a HTTP Browser Tool
 
-TIP: For quick testing, save the individual commands into your testing tool.
+TIP: For easier testing, save the individual commands into your testing tool.
 
 In this example, I've saved it into
 link:http://restlet.com/products/dhc/[DHC by Restlet].
 
 image::img/tools/dhc_workflow.png[]
 
-With this type of tool, you can quickly test indvidual commands and see the
-results prior to running your program or test script.
-
-NOTE: I have not been able to get a mock server running that supports the full
-RICOH THETA API v2.  In my tests, I needed to connect to the actual device.  If you
-build a functional mock server, send it to me. :-)
+With this type of free tool, you can quickly test individual commands and see the
+results prior to running your program or test script. If you create a free account
+with DHC, you can save the commands in the cloud and run your tests from any
+Chrome browser on any computer.
 
 == Basic Apps
 
