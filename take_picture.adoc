@@ -19,12 +19,15 @@ https://developers.theta360.com/en/docs/v2.1/api_reference/[API v2.1] are used w
 
 Grab the `sessionId` and take the picture.
 
+[source, javascript]
+----
   {
     "name": "camera.takePicture",
     "parameters": {
     	"sessionId": "SID_0001"
     }
   }
+----
 
 The camera will beep.
 

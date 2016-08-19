@@ -28,7 +28,12 @@ This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.
 
 
-TIP: http://theta360.guide/ecosystem/[**Register for the THETA Developer Ecosystem**]
+WARNING: THETA https://developers.theta360.com/en/docs/v2.1/api_reference/[API v2.1] was recently released. This guide
+focuses on https://developers.theta360.com/en/docs/v2.0/api_reference/[API v2.0]. There are
+http://lists.theta360.guide/t/new-theta-api-version-2-1/202[significant differences]. I will
+update this guide for API v2.1. In the meantime, v2.0 still works.
+
+
 
 == Quickstart
 
@@ -61,6 +66,8 @@ After establishing a wifi connection, please open a browser and access:
 
 The response:
 
+[source, javascript]
+----
   {"manufacture":"RICOH",
     "model":"RICOH THETA S",
     "serialNumber":"00001054",
@@ -68,7 +75,7 @@ The response:
     "supportUrl":"https://theta360.com/en/support/",
     "endpoints":{
       ... THERE WILL BE MORE INFO
-
+----
 
 === Test Commands From Computer to Camera
 You can use any HTTP tool to test `POST` and `GET` commands to the camera.
@@ -95,6 +102,8 @@ image::img/start_session.png[]
 
 Results:
 
+[source, javascript]
+----
   {
     "name": "camera.startSession",
     "state": "done",
@@ -103,9 +112,12 @@ Results:
       "timeout": 180
     }
   }
+----
 
 Send a `POST` command to `/osc/state`.
 
+[source, javascript]
+----
   {
     "fingerprint": "FIG_0001",
     "state":{
@@ -119,6 +131,7 @@ Send a `POST` command to `/osc/state`.
       "_batteryState": "charged"
     }
   }
+----
 
 TIP: I have the camera plugged into a standalone charger capable supplying
 1.5 amps.  The camera won't connect with WiFi when plugged into the USB port

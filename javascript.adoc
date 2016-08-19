@@ -44,6 +44,8 @@ the command prompt again.
 
 IMPORTANT: Connect to the camera over WiFi first
 
+[source, javascript, linenum]
+----
   var fs = require('fs');
   var OscClientClass = require('osc-client').OscClient;
 
@@ -71,6 +73,7 @@ IMPORTANT: Connect to the camera over WiFi first
     fs.writeFile(filename,imgData);
     return client.closeSession(sessionId);
   });
+----
 
 If everything goes well then the program will tell the camera to
 take a picture, then save the newly created picture in the directory where
@@ -106,7 +109,8 @@ Here's a code snippet portion related to 360 video download using
 node and the THETA S API. This is from
 https://github.com/natelevine/Gauger[Nate's award-winning code]. :-)
 
-
+[source, javascript, linenum]
+----
   var fs = require('fs');
   var ThetaSOscClient = require('osc-client-theta_s').ThetaSOscClient;
 
@@ -157,3 +161,4 @@ https://github.com/natelevine/Gauger[Nate's award-winning code]. :-)
       console.log(error);
     });
   }, interval);
+----

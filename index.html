@@ -878,14 +878,17 @@ You can also log in and send a private message to  <a href="http://lists.theta36
 <p>This is an unofficial, community-generated guide to using the RICOH THETA S API.
 This is not authorized by RICOH and is based on publicly available information.</p>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<a href="http://theta360.guide/ecosystem/"><strong>Register for the THETA Developer Ecosystem</strong></a>
+THETA <a href="https://developers.theta360.com/en/docs/v2.1/api_reference/">API v2.1</a> was recently released. This guide
+focuses on <a href="https://developers.theta360.com/en/docs/v2.0/api_reference/">API v2.0</a>. There are
+<a href="http://lists.theta360.guide/t/new-theta-api-version-2-1/202">significant differences</a>. I will
+update this guide for API v2.1. In the meantime, v2.0 still works.
 </td>
 </tr>
 </table>
@@ -941,15 +944,15 @@ must be <code>192.168.1.1</code>.  The gateway is the THETA S.</p>
 <div class="paragraph">
 <p>The response:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{"manufacture":"RICOH",
-  "model":"RICOH THETA S",
-  "serialNumber":"00001054",
-  "firmwareVersion":"01.00",
-  "supportUrl":"https://theta360.com/en/support/",
-  "endpoints":{
-    ... THERE WILL BE MORE INFO</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript">  {<span class="key"><span class="delimiter">&quot;</span><span class="content">manufacture</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">RICOH</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">model</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">RICOH THETA S</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">serialNumber</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">00001054</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">firmwareVersion</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">01.00</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">supportUrl</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">https://theta360.com/en/support/</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">endpoints</span><span class="delimiter">&quot;</span></span>:{
+      ... THERE WILL BE MORE INFO</code></pre>
 </div>
 </div>
 </div>
@@ -995,36 +998,36 @@ It is available for free as a Chrome Extension.</p>
 <div class="paragraph">
 <p>Results:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{
-  "name": "camera.startSession",
-  "state": "done",
-  "results":{
-    "sessionId": "SID_0001",
-    "timeout": 180
-  }
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript">  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">camera.startSession</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">done</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">results</span><span class="delimiter">&quot;</span></span>:{
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">sessionId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SID_0001</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">timeout</span><span class="delimiter">&quot;</span></span>: <span class="integer">180</span>
+    }
+  }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Send a <code>POST</code> command to <code>/osc/state</code>.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{
-  "fingerprint": "FIG_0001",
-  "state":{
-    "sessionId": "SID_0000",
-    "batteryLevel": 1,
-    "storageChanged": false,
-    "_captureStatus": "idle",
-    "_recordedTime": 0,
-    "_recordableTime": 0,
-    "_latestFileUri": "",
-    "_batteryState": "charged"
-  }
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript">  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">fingerprint</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FIG_0001</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>:{
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">sessionId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SID_0000</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">batteryLevel</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">storageChanged</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">_captureStatus</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">idle</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">_recordedTime</span><span class="delimiter">&quot;</span></span>: <span class="integer">0</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">_recordableTime</span><span class="delimiter">&quot;</span></span>: <span class="integer">0</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">_latestFileUri</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">_batteryState</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">charged</span><span class="delimiter">&quot;</span></span>
+    }
+  }</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -1048,30 +1051,31 @@ of most computers.
 <div class="paragraph">
 <p>Start the session.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>192.168.1.1/osc/commands/execute</pre>
+<div class="paragraph">
+<p><a href="https://developers.theta360.com/en/docs/v2.0/api_reference/">API v2.0</a> and
+<a href="https://developers.theta360.com/en/docs/v2.1/api_reference/">API v2.1</a> are used with WiFi.</p>
 </div>
-</div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{
-  "name": "camera.startSession",
-  "parameters": {}
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript">  <span class="float">192.168</span><span class="float">.1</span><span class="float">.1</span>/osc/commands/execute
+
+  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">camera.startSession</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">parameters</span><span class="delimiter">&quot;</span></span>: {}
+  }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Grab the <code>sessionId</code> and take the picture.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{
-  "name": "camera.takePicture",
-  "parameters": {
-  	"sessionId": "SID_0001"
-  }
-}</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript">  {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">camera.takePicture</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">parameters</span><span class="delimiter">&quot;</span></span>: {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">sessionId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SID_0001</span><span class="delimiter">&quot;</span></span>
+    }
+  }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1511,12 +1515,12 @@ The output of to the console looks like this:
 takePicture - Testing RICOH THETA API v2</pre>
 </div>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>{u'id': u'1',
- u'name': u'camera.takePicture',
- u'progress': {u'completion': 0.0},
- u'state': u'inProgress'}</pre>
+<pre class="CodeRay highlight"><code>  {u'id': u'1',
+   u'name': u'camera.takePicture',
+   u'progress': {u'completion': 0.0},
+   u'state': u'inProgress'}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1609,47 +1613,65 @@ Connect to the camera over WiFi first
 </tr>
 </table>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>var fs = require('fs');
-var OscClientClass = require('osc-client').OscClient;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>var domain = '192.168.1.1';
-var port = '80';
-var client = new OscClientClass(domain, port);
-var sessionId;
-var filename;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>client.startSession().then(function(res){
-  sessionId = res.body.results.sessionId;
-  return client.takePicture(sessionId);
-  })</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>.then(function (res) {
-  var pictureUri = res.body.results.fileUri;
-  console.log('pictureUri :%s',pictureUri);</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>  var path = pictureUri.split('/');
-  filename = path.pop();
-  return client.getImage(pictureUri);
-})
-.then(function(res){
-  var imgData = res.body;
-  fs.writeFile(filename,imgData);
-  return client.closeSession(sessionId);
-});</pre>
+<pre class="CodeRay highlight"><code data-lang="javascript"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td>
+  <td class="code"><pre>  <span class="keyword">var</span> fs = require(<span class="string"><span class="delimiter">'</span><span class="content">fs</span><span class="delimiter">'</span></span>);
+  <span class="keyword">var</span> OscClientClass = require(<span class="string"><span class="delimiter">'</span><span class="content">osc-client</span><span class="delimiter">'</span></span>).OscClient;
+
+  <span class="keyword">var</span> domain = <span class="string"><span class="delimiter">'</span><span class="content">192.168.1.1</span><span class="delimiter">'</span></span>;
+  <span class="keyword">var</span> port = <span class="string"><span class="delimiter">'</span><span class="content">80</span><span class="delimiter">'</span></span>;
+  <span class="keyword">var</span> client = <span class="keyword">new</span> OscClientClass(domain, port);
+  <span class="keyword">var</span> sessionId;
+  <span class="keyword">var</span> filename;
+
+  client.startSession().then(<span class="keyword">function</span>(res){
+    sessionId = res.body.results.sessionId;
+    <span class="keyword">return</span> client.takePicture(sessionId);
+    })
+
+  .then(<span class="keyword">function</span> (res) {
+    <span class="keyword">var</span> pictureUri = res.body.results.fileUri;
+    console.log(<span class="string"><span class="delimiter">'</span><span class="content">pictureUri :%s</span><span class="delimiter">'</span></span>,pictureUri);
+
+    <span class="keyword">var</span> path = pictureUri.split(<span class="string"><span class="delimiter">'</span><span class="content">/</span><span class="delimiter">'</span></span>);
+    filename = path.pop();
+    <span class="keyword">return</span> client.getImage(pictureUri);
+  })
+  .then(<span class="keyword">function</span>(res){
+    <span class="keyword">var</span> imgData = res.body;
+    fs.writeFile(filename,imgData);
+    <span class="keyword">return</span> client.closeSession(sessionId);
+  });</pre></td>
+</tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1705,70 +1727,111 @@ overall out of 120 teams.</p>
 node and the THETA S API. This is from
 <a href="https://github.com/natelevine/Gauger">Nate&#8217;s award-winning code</a>. :-)</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>var fs = require('fs');
-var ThetaSOscClient = require('osc-client-theta_s').ThetaSOscClient;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>var domain = '192.168.1.1';
-var port = '80';
-var thetaClient = new ThetaSOscClient(domain, port);
-var sessionId;
-var fileName;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>thetaClient.startSession().then(function (res) {
-  //Grab the session id
-  sessionId = res.body.results.sessionId;
-  return thetaClient.setOptions(sessionId, {captureMode:"_video"})
-})
-.then(function (res) {
-  console.log('starting capture');
-  return thetaClient.startCapture(sessionId);
-})
-.catch(function (error) {
-  console.log(error);
-});</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>// Stop capturing after a certain interval in ms
-var interval = 5000;</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>setTimeout(function () {
-  console.log('stopping capture');
-  thetaClient.stopCapture(sessionId)
-  .then(function (res) {
-    console.log('stopped capture, writing file');
-    return thetaClient.listAll({entryCount:1, sort:"newest"});
+<pre class="CodeRay highlight"><code data-lang="javascript"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+</pre></td>
+  <td class="code"><pre>  <span class="keyword">var</span> fs = require(<span class="string"><span class="delimiter">'</span><span class="content">fs</span><span class="delimiter">'</span></span>);
+  <span class="keyword">var</span> ThetaSOscClient = require(<span class="string"><span class="delimiter">'</span><span class="content">osc-client-theta_s</span><span class="delimiter">'</span></span>).ThetaSOscClient;
+
+  <span class="keyword">var</span> domain = <span class="string"><span class="delimiter">'</span><span class="content">192.168.1.1</span><span class="delimiter">'</span></span>;
+  <span class="keyword">var</span> port = <span class="string"><span class="delimiter">'</span><span class="content">80</span><span class="delimiter">'</span></span>;
+  <span class="keyword">var</span> thetaClient = <span class="keyword">new</span> ThetaSOscClient(domain, port);
+  <span class="keyword">var</span> sessionId;
+  <span class="keyword">var</span> fileName;
+
+  thetaClient.startSession().then(<span class="keyword">function</span> (res) {
+    <span class="comment">//Grab the session id</span>
+    sessionId = res.body.results.sessionId;
+    <span class="keyword">return</span> thetaClient.setOptions(sessionId, {<span class="key">captureMode</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">_video</span><span class="delimiter">&quot;</span></span>})
   })
-  // Get the filename and most recently recorded video uri
-  .then(function (res) {
-    fileName = res.body.results.entries[0].name;
-    console.log(fileName);
-    return thetaClient.getVideo(res.body.results.entries[0].uri, "full");
+  .then(<span class="keyword">function</span> (res) {
+    console.log(<span class="string"><span class="delimiter">'</span><span class="content">starting capture</span><span class="delimiter">'</span></span>);
+    <span class="keyword">return</span> thetaClient.startCapture(sessionId);
   })
-  // Write to disk
-  .then(function (res) {
-    fs.writeFile(fileName, res.body);
-  })
-  .then(function (err) {
-    console.log('closing the session');
-    return thetaClient.closeSession(sessionId);
-  })
-  .catch(function (error) {
+  .<span class="keyword">catch</span>(<span class="keyword">function</span> (error) {
     console.log(error);
   });
-}, interval);</pre>
+
+  <span class="comment">// Stop capturing after a certain interval in ms</span>
+  <span class="keyword">var</span> interval = <span class="integer">5000</span>;
+
+  setTimeout(<span class="keyword">function</span> () {
+    console.log(<span class="string"><span class="delimiter">'</span><span class="content">stopping capture</span><span class="delimiter">'</span></span>);
+    thetaClient.stopCapture(sessionId)
+    .then(<span class="keyword">function</span> (res) {
+      console.log(<span class="string"><span class="delimiter">'</span><span class="content">stopped capture, writing file</span><span class="delimiter">'</span></span>);
+      <span class="keyword">return</span> thetaClient.listAll({<span class="key">entryCount</span>:<span class="integer">1</span>, <span class="key">sort</span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">newest</span><span class="delimiter">&quot;</span></span>});
+    })
+    <span class="comment">// Get the filename and most recently recorded video uri</span>
+    .then(<span class="keyword">function</span> (res) {
+      fileName = res.body.results.entries[<span class="integer">0</span>].name;
+      console.log(fileName);
+      <span class="keyword">return</span> thetaClient.getVideo(res.body.results.entries[<span class="integer">0</span>].uri, <span class="string"><span class="delimiter">&quot;</span><span class="content">full</span><span class="delimiter">&quot;</span></span>);
+    })
+    <span class="comment">// Write to disk</span>
+    .then(<span class="keyword">function</span> (res) {
+      fs.writeFile(fileName, res.body);
+    })
+    .then(<span class="keyword">function</span> (err) {
+      console.log(<span class="string"><span class="delimiter">'</span><span class="content">closing the session</span><span class="delimiter">'</span></span>);
+      <span class="keyword">return</span> thetaClient.closeSession(sessionId);
+    })
+    .<span class="keyword">catch</span>(<span class="keyword">function</span> (error) {
+      console.log(error);
+    });
+  }, interval);</pre></td>
+</tr></table></code></pre>
 </div>
 </div>
 </div>
@@ -3791,7 +3854,7 @@ from Ulrich Rossgoderer. Community.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-17 08:25:22 PDT
+Last updated 2016-08-18 17:38:58 PDT
 </div>
 </div>
 </body>

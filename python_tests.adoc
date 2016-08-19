@@ -175,10 +175,13 @@ Run it and celebrate!
   ============================================================
   takePicture - Testing RICOH THETA API v2
 
+[source]
+----
   {u'id': u'1',
    u'name': u'camera.takePicture',
    u'progress': {u'completion': 0.0},
    u'state': u'inProgress'}
+----
 
 In appendix, I included an easy example of an interface
 to access the Python library we're building.
